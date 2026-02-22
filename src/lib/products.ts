@@ -52,6 +52,20 @@ export const products: Product[] = [
     url: "https://feedback-hub.craftgarden.studio",
   },
   {
+    name: "Competitor UI Viewer",
+    descriptionEn: "Competitor UI analysis and comparison",
+    descriptionJp: "競合UIの分析・比較ビューア",
+    category: "Tool",
+    url: "https://competitor-ui-viewer.craftgarden.studio",
+  },
+  {
+    name: "Agent Skill Search",
+    descriptionEn: "Search and discover agent skills",
+    descriptionJp: "エージェントスキル検索",
+    category: "Tool",
+    url: "https://agent-skill-search.craftgarden.studio",
+  },
+  {
     name: "AI Solo Builder",
     descriptionEn: "Blog for solo builders leveraging AI",
     descriptionJp: "AI活用ソロ開発者向けブログ",
