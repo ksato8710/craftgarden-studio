@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Botanical Code — craftgarden.studio</title>
+  <meta name="description" content="Where code takes root and ideas bloom. A solo builder's product studio." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =============================================
+       Botanical Code — craftgarden.studio
+       Concept 1: "Where code takes root and ideas bloom."
+       =============================================
+       Color Palette:
+         Deep Soil    #0C1117 (background)
+         Moss Dark    #1A2B23 (cards)
+         Pale Lichen  #D4E0D7 (text)
+         New Growth   #34D399 (CTA / accent 1)
+         Pollen Gold  #FBBF24 (highlight / accent 2)
+       ============================================= */
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-deep-soil: #0C1117;
+      --bg-moss-dark: #1A2B23;
+      --bg-moss-hover: #213D30;
+      --text-lichen: #D4E0D7;
+      --text-lichen-dim: #8FA89A;
+      --text-lichen-muted: #5E7A6B;
+      --accent-growth: #34D399;
+      --accent-growth-dim: rgba(52, 211, 153, 0.15);
+      --accent-pollen: #FBBF24;
+      --accent-pollen-dim: rgba(251, 191, 36, 0.12);
+      --border-vine: rgba(52, 211, 153, 0.10);
+      --border-vine-hover: rgba(52, 211, 153, 0.35);
+
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+
+      --text-display: clamp(2.25rem, 5vw + 0.5rem, 4rem);
+      --text-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+      --text-h3: clamp(1.125rem, 1.5vw + 0.5rem, 1.375rem);
+      --text-body: clamp(0.9375rem, 0.5vw + 0.75rem, 1.0625rem);
+      --text-small: clamp(0.8125rem, 0.3vw + 0.7rem, 0.9rem);
+      --text-xs: 0.75rem;
+
+      --radius-sm: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+
+      --transition-base: 250ms ease;
+      --transition-slow: 500ms ease;
+    }
+
+    /* ---- Smooth Scroll ---- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ---- Reduced Motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ---- Base ---- */
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-deep-soil);
+      color: var(--text-lichen);
+      font-size: var(--text-body);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background-color: var(--accent-growth);
+      color: var(--bg-deep-soil);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ---- Dot Grid Background ---- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(
+        circle,
+        rgba(52, 211, 153, 0.04) 1px,
+        transparent 1px
+      );
+      background-size: 32px 32px;
+    }
+
+    /* ---- Focus Styles ---- */
+    :focus-visible {
+      outline: 2px solid var(--accent-growth);
+      outline-offset: 3px;
+    }
+
+    /* ---- Scrollbar ---- */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-deep-soil);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--text-lichen-muted);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-lichen-dim);
+    }
+
+    /* =============================================
+       NAVIGATION
+       ============================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      transition: background-color var(--transition-base),
+                  box-shadow var(--transition-base);
+    }
+    .nav.scrolled {
+      background-color: rgba(12, 17, 23, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(52, 211, 153, 0.06);
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-lichen);
+      transition: color var(--transition-base);
+    }
+    .nav-logo:hover {
+      color: var(--accent-growth);
+    }
+    .nav-logo .dot {
+      color: var(--accent-growth);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: var(--text-small);
+      font-weight: 500;
+      color: var(--text-lichen-dim);
+      letter-spacing: 0.02em;
+      transition: color var(--transition-base);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent-growth);
+      transition: width var(--transition-base);
+    }
+    .nav-links a:hover {
+      color: var(--text-lichen);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile nav hide */
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* =============================================
+       HERO
+       ============================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+
+    /* Botanical-circuit animated background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.35;
+      background:
+        /* Circuit-vein lines: horizontal */
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 120px,
+          rgba(52, 211, 153, 0.025) 120px,
+          rgba(52, 211, 153, 0.025) 121px
+        ),
+        /* Circuit-vein lines: vertical */
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 120px,
+          rgba(52, 211, 153, 0.025) 120px,
+          rgba(52, 211, 153, 0.025) 121px
+        );
+      animation: hero-grid-drift 30s linear infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(
+        ellipse 70% 50% at 50% 50%,
+        rgba(52, 211, 153, 0.04) 0%,
+        rgba(26, 43, 35, 0.03) 40%,
+        transparent 70%
+      );
+      animation: hero-pulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes hero-grid-drift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(120px, 120px); }
+    }
+
+    @keyframes hero-pulse {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Radial gradient overlay for depth */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 50% 45%,
+          rgba(12, 17, 23, 0) 0%,
+          rgba(12, 17, 23, 0.4) 60%,
+          rgba(12, 17, 23, 0.95) 100%
+        );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      animation: fade-in-up 0.8s ease-out both;
+    }
+
+    .hero-studio-label {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-lichen-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: var(--text-display);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text-lichen);
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--accent-growth), var(--accent-pollen));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline-jp {
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      color: var(--text-lichen-dim);
+      line-height: 1.6;
+    }
+
+    .hero-sub {
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      color: var(--text-lichen-muted);
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-top: 3rem;
+      padding: 0.875rem 2rem;
+      background: var(--accent-growth);
+      color: var(--bg-deep-soil);
+      font-weight: 700;
+      font-size: var(--text-small);
+      border-radius: var(--radius-lg);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      letter-spacing: 0.01em;
+    }
+    .hero-cta:hover {
+      background: #2dd48d;
+      box-shadow:
+        0 4px 24px rgba(52, 211, 153, 0.3),
+        0 0 60px rgba(52, 211, 153, 0.08);
+      transform: translateY(-2px);
+    }
+    .hero-cta .arrow {
+      transition: transform var(--transition-base);
+    }
+    .hero-cta:hover .arrow {
+      transform: translateY(2px);
+    }
+
+    /* ---- Root Line Divider ---- */
+    .root-line {
+      width: 1px;
+      height: 80px;
+      margin: 0 auto;
+      background: linear-gradient(
+        180deg,
+        var(--accent-growth),
+        rgba(52, 211, 153, 0.08)
+      );
+      position: relative;
+    }
+    .root-line::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-growth);
+      box-shadow: 0 0 8px rgba(52, 211, 153, 0.4);
+    }
+
+    /* =============================================
+       SECTION COMMON
+       ============================================= */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-growth);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: var(--text-h2);
+      font-weight: 800;
+      color: var(--text-lichen);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      margin-top: 0.75rem;
+      font-size: var(--text-body);
+      color: var(--text-lichen-dim);
+    }
+
+    /* =============================================
+       PRODUCTS
+       ============================================= */
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .product-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-moss-dark);
+      border: 1px solid var(--border-vine);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      overflow: hidden;
+      transition:
+        transform var(--transition-base),
+        border-color var(--transition-base),
+        box-shadow var(--transition-base);
+      cursor: pointer;
+    }
+
+    /* Growth rings background on cards */
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid rgba(52, 211, 153, 0.04);
+      box-shadow:
+        0 0 0 20px rgba(52, 211, 153, 0.02),
+        0 0 0 40px rgba(52, 211, 153, 0.01);
+      transition: opacity var(--transition-slow);
+      opacity: 0.5;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-vine-hover);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(52, 211, 153, 0.06),
+        inset 0 1px 0 rgba(52, 211, 153, 0.08);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      width: fit-content;
+    }
+
+    .badge-product {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--accent-growth);
+    }
+    .badge-tool {
+      background: rgba(139, 92, 246, 0.12);
+      color: #A78BFA;
+    }
+    .badge-content {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--accent-pollen);
+    }
+
+    .product-name {
+      font-size: var(--text-h3);
+      font-weight: 700;
+      color: var(--text-lichen);
+      margin-top: 1rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .product-desc {
+      margin-top: 0.5rem;
+      font-size: var(--text-small);
+      color: var(--text-lichen-dim);
+      line-height: 1.6;
+    }
+
+    .product-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      margin-top: auto;
+      padding-top: 1.5rem;
+      font-size: var(--text-small);
+      font-weight: 600;
+      color: var(--accent-growth);
+      transition: color var(--transition-base);
+    }
+    .product-link .link-arrow {
+      transition: transform var(--transition-base);
+      display: inline-block;
+    }
+    .product-card:hover .product-link {
+      color: #5EE8B5;
+    }
+    .product-card:hover .link-arrow {
+      transform: translateX(3px);
+    }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    .footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border-vine);
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-lichen);
+    }
+
+    .footer-links {
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: var(--text-small);
+      color: var(--text-lichen-muted);
+      transition: color var(--transition-base);
+    }
+    .footer-links a:hover {
+      color: var(--text-lichen);
+    }
+
+    .footer-copy {
+      margin-top: 1.5rem;
+      font-size: var(--text-xs);
+      color: var(--text-lichen-muted);
+    }
+
+    /* Decorative root lines at footer */
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: var(--accent-growth);
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
+    }
+
+    /* =============================================
+       ANIMATIONS
+       ============================================= */
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.7s ease-out both;
+    }
+
+    .animate-fade-in-up-delay-1 {
+      animation: fade-in-up 0.7s ease-out 0.15s both;
+    }
+    .animate-fade-in-up-delay-2 {
+      animation: fade-in-up 0.7s ease-out 0.3s both;
+    }
+    .animate-fade-in-up-delay-3 {
+      animation: fade-in-up 0.7s ease-out 0.45s both;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="nav" id="nav">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="#hero" class="nav-logo">
+        craftgarden<span class="dot">.</span>studio
+      </a>
+      <ul class="nav-links">
+        <li><a href="#products">Products</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#stack">Stack</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-studio-label">craftgarden.studio</p>
+      <h1>
+        Where code <span class="accent">takes root</span><br />
+        and ideas <span class="accent">bloom.</span>
+      </h1>
+      <p class="hero-tagline-jp" lang="ja">
+        コードが根を張り、アイデアが花開く場所。
+      </p>
+      <p class="hero-sub" lang="ja">
+        ひとりのビルダーが育てる、プロダクトの庭。
+      </p>
+      <a href="#products" class="hero-cta">
+        View Products
+        <span class="arrow" aria-hidden="true">&#8595;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== ROOT LINE ========== -->
+  <div class="root-line" aria-hidden="true"></div>
+
+  <!-- ========== PRODUCTS ========== -->
+  <section class="section" id="products">
+    <div class="section-header">
+      <p class="section-label">Products</p>
+      <h2 class="section-title">Grown from real needs</h2>
+      <p class="section-desc" lang="ja">つくったもの。すべて実際の課題を解くためのプロダクト。</p>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Card 1: Product -->
+      <a
+        href="https://ai-pm-service.craftgarden.studio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="product-card animate-fade-in-up-delay-1"
+      >
+        <span class="product-badge badge-product">Product</span>
+        <h3 class="product-name">AI PM Service</h3>
+        <p class="product-desc" lang="ja">AIタスク管理で個人開発を加速</p>
+        <span class="product-link">
+          Visit <span class="link-arrow" aria-hidden="true">&#8594;</span>
+        </span>
+      </a>
+
+      <!-- Card 2: Tool -->
+      <a
+        href="https://product-hub.craftgarden.studio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="product-card animate-fade-in-up-delay-2"
+      >
+        <span class="product-badge badge-tool">Tool</span>
+        <h3 class="product-name">Product Hub</h3>
+        <p class="product-desc" lang="ja">スタジオ全体のプロジェクト管理</p>
+        <span class="product-link">
+          Visit <span class="link-arrow" aria-hidden="true">&#8594;</span>
+        </span>
+      </a>
+
+      <!-- Card 3: Content -->
+      <a
+        href="https://ai-solo-builder.craftgarden.studio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="product-card animate-fade-in-up-delay-3"
+      >
+        <span class="product-badge badge-content">Content</span>
+        <h3 class="product-name">AI Solo Builder</h3>
+        <p class="product-desc" lang="ja">AI活用ソロ開発者向けブログ</p>
+        <span class="product-link">
+          Visit <span class="link-arrow" aria-hidden="true">&#8594;</span>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ========== ROOT LINE ========== -->
+  <div class="root-line" aria-hidden="true"></div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <p class="footer-logo">craftgarden<span style="color: var(--accent-growth)">.</span>studio</p>
+    <div class="footer-links">
+      <a href="https://github.com/ksato8710" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 craftgarden.studio. All rights reserved.</p>
+  </footer>
+
+  <!-- ========== SCROLL SCRIPT ========== -->
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var threshold = 60;
+
+      function onScroll() {
+        if (window.scrollY > threshold) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
+</body>
+</html>

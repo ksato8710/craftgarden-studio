@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05b Light (opacity 12%) — craftgarden.studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* Muted, natural palette */
+      --bg-cream:      #FAFAF5;
+      --bg-warm:       #F5F2EC;
+      --card-bg:       #F0EDE6;
+      --text-deep:     #2D3B2E;
+      --text-muted:    #5C7260;
+      --text-light:    #8A9E8C;
+
+      /* Botanical accent — all greens & earth tones */
+      --accent-leaf:   #6B8F71;
+      --accent-sage:   #9BB09E;
+      --accent-moss:   #4A7051;
+      --accent-bark:   #8B7355;
+      --accent-bloom:  #C4926B;
+
+      /* Category colors — softened naturals */
+      --cat-product:   #6B8F71;
+      --cat-tool:      #7E9AAB;
+      --cat-content:   #B8956A;
+
+      --radius-card:   16px;
+      --radius-btn:    999px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-deep);
+      background: var(--bg-cream);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Nunito', sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       BOTANICAL BACKGROUND PATTERN — subtle leaf scatter
+       ========================================================= */
+    .botanical-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      color: var(--accent-leaf);
+    }
+
+    .botanical-bg svg {
+      position: absolute;
+    }
+
+    /* Gentle slow drift for background plants */
+    @keyframes gentleDrift {
+      0%, 100% { transform: var(--drift-base) translateY(0); }
+      50%      { transform: var(--drift-base) translateY(-8px); }
+    }
+
+    .botanical-bg .drift {
+      animation: gentleDrift var(--drift-dur, 12s) ease-in-out infinite;
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 250, 245, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(107, 143, 113, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 2px 20px rgba(45, 59, 46, 0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      color: var(--text-deep);
+    }
+
+    .nav-logo-leaf {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-leaf);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 1px;
+      background: var(--accent-leaf);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-deep);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 180px;
+      overflow: hidden;
+    }
+
+    /* Large botanical illustration behind hero text */
+    .hero-botanical {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-botanical svg {
+      width: min(90vw, 800px);
+      height: auto;
+      opacity: 0.1;
+      color: var(--accent-moss);
+    }
+
+    /* Decorative side leaves */
+    .hero-side-leaf {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.18;
+      color: var(--accent-leaf);
+    }
+
+    .hero-side-leaf.left {
+      left: -40px;
+      bottom: 15%;
+      width: 200px;
+      transform: rotate(15deg);
+    }
+
+    .hero-side-leaf.right {
+      right: -30px;
+      top: 20%;
+      width: 160px;
+      transform: rotate(-20deg) scaleX(-1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: var(--radius-btn);
+      background: rgba(107, 143, 113, 0.08);
+      border: 1px solid rgba(107, 143, 113, 0.15);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-leaf);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .hero-badge svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--text-deep);
+      margin-bottom: 16px;
+      animation: fadeInUp 0.8s 0.1s ease-out both;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent-leaf);
+    }
+
+    .hero-tagline-jp {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s 0.2s ease-out both;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+      animation: fadeInUp 0.8s 0.3s ease-out both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: var(--radius-btn);
+      background: var(--accent-leaf);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(107, 143, 113, 0.25);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      animation: fadeInUp 0.8s 0.4s ease-out both;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(107, 143, 113, 0.3);
+      background: var(--accent-moss);
+    }
+
+    .hero-cta svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Organic divider — leaf vine */
+    .vine-divider {
+      width: 100%;
+      position: relative;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .vine-divider svg {
+      width: min(90vw, 600px);
+      height: auto;
+      color: var(--accent-sage);
+      opacity: 0.3;
+    }
+
+    /* =========================================================
+       PRODUCTS SECTION
+       ========================================================= */
+    .products {
+      position: relative;
+      z-index: 2;
+      padding: 40px 24px 100px;
+      background: var(--bg-cream);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--text-deep);
+    }
+
+    .section-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* --- Seed Card (botanical style) --- */
+    .seed-card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(107, 143, 113, 0.08);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seed-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(45, 59, 46, 0.08);
+      border-color: rgba(107, 143, 113, 0.2);
+    }
+
+    /* Top botanical strip */
+    .seed-card-strip {
+      height: 48px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .seed-card-strip.product { background: rgba(107, 143, 113, 0.1); }
+    .seed-card-strip.tool    { background: rgba(126, 154, 171, 0.1); }
+    .seed-card-strip.content { background: rgba(184, 149, 106, 0.1); }
+
+    .seed-card-strip svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+
+    .seed-card-strip .strip-leaf {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      opacity: 0.25;
+    }
+
+    .seed-card-strip .strip-leaf:nth-child(1) { left: 12%; top: 10%; transform: rotate(-30deg); }
+    .seed-card-strip .strip-leaf:nth-child(2) { left: 35%; top: 20%; transform: rotate(15deg); }
+    .seed-card-strip .strip-leaf:nth-child(3) { right: 30%; top: 5%; transform: rotate(-10deg); }
+    .seed-card-strip .strip-leaf:nth-child(4) { right: 10%; top: 15%; transform: rotate(25deg); }
+
+    .seed-card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seed-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .seed-card:hover .seed-card-icon {
+      animation: gentleSway 0.6s ease;
+    }
+
+    @keyframes gentleSway {
+      0%, 100% { transform: rotate(0deg); }
+      25%      { transform: rotate(-6deg); }
+      75%      { transform: rotate(6deg); }
+    }
+
+    .seed-card-icon.product { background: rgba(107, 143, 113, 0.12); color: var(--cat-product); }
+    .seed-card-icon.tool    { background: rgba(126, 154, 171, 0.12); color: var(--cat-tool); }
+    .seed-card-icon.content { background: rgba(184, 149, 106, 0.12); color: var(--cat-content); }
+
+    .seed-card-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .seed-card-category {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .seed-card-category.product { color: var(--cat-product); }
+    .seed-card-category.tool    { color: var(--cat-tool); }
+    .seed-card-category.content { color: var(--cat-content); }
+
+    .seed-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-deep);
+    }
+
+    .seed-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .seed-card-desc-jp {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    .seed-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.83rem;
+      color: var(--accent-leaf);
+      transition: gap 0.3s ease;
+    }
+
+    .seed-card:hover .seed-card-footer {
+      gap: 10px;
+    }
+
+    .seed-card-footer svg {
+      width: 15px;
+      height: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .seed-card:hover .seed-card-footer svg {
+      transform: translateX(3px);
+    }
+
+    /* =========================================================
+       PHILOSOPHY SECTION
+       ========================================================= */
+    .philosophy {
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px;
+      background: var(--bg-warm);
+    }
+
+    .philosophy-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .philosophy-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 24px;
+      color: var(--accent-sage);
+    }
+
+    .philosophy h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--text-deep);
+    }
+
+    .philosophy p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+
+    .philosophy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .philosophy-values {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .philosophy-value {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .philosophy-value svg {
+      width: 32px;
+      height: 32px;
+      color: var(--accent-sage);
+    }
+
+    .philosophy-value span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .footer {
+      position: relative;
+      z-index: 2;
+      background: var(--text-deep);
+      color: var(--bg-cream);
+      padding: 80px 24px 40px;
+      text-align: center;
+    }
+
+    /* Footer top vine decoration */
+    .footer-vine {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      overflow: hidden;
+      pointer-events: none;
+      transform: translateY(-99%);
+    }
+
+    .footer-vine svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .footer-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .footer-logo svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-sage);
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      opacity: 0.6;
+      margin-bottom: 6px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+    }
+
+    .footer-tagline-jp {
+      font-size: 0.82rem;
+      opacity: 0.4;
+      margin-bottom: 36px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      opacity: 0.3;
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+       ========================================================= */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .scroll-reveal.visible {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .scroll-reveal.visible.delay-1 { animation-delay: 0.1s; }
+    .scroll-reveal.visible.delay-2 { animation-delay: 0.2s; }
+    .scroll-reveal.visible.delay-3 { animation-delay: 0.3s; }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .hero { padding: 100px 20px 140px; }
+      .hero-side-leaf { display: none; }
+      .products { padding: 40px 20px 80px; }
+      .philosophy-values { gap: 20px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .scroll-reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* =========================================================
+       FOCUS VISIBLE
+       ========================================================= */
+    :focus-visible {
+      outline: 2px solid var(--accent-leaf);
+      outline-offset: 2px;
+    }
+
+    ::selection {
+      background: rgba(107, 143, 113, 0.2);
+      color: var(--text-deep);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== Botanical background: 楓 kaede / 杏 anzu / 椿 tsubaki ========== -->
+  <div class="botanical-bg" aria-hidden="true">
+
+    <!-- ===== 楓 Kaede (Japanese maple) — 5-7 pointed star leaves ===== -->
+
+    <!-- Maple leaf 1 — top left, large -->
+    <svg class="drift" style="top:5%;left:4%;width:70px;--drift-base:rotate(-20deg);--drift-dur:14s" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.6"/>
+      <path d="M50 58 L50 95" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+    </svg>
+
+    <!-- Maple leaf 2 — right side, medium -->
+    <svg class="drift" style="top:18%;right:6%;width:55px;--drift-base:rotate(25deg);--drift-dur:16s" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.5"/>
+      <path d="M50 58 L50 95" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.25"/>
+    </svg>
+
+    <!-- Maple leaf 3 — mid-left, small -->
+    <svg class="drift" style="top:48%;left:3%;width:40px;--drift-base:rotate(-35deg);--drift-dur:18s" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.45"/>
+      <path d="M50 58 L50 95" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.2"/>
+    </svg>
+
+    <!-- Maple leaf 4 — bottom right -->
+    <svg class="drift" style="top:75%;right:8%;width:50px;--drift-base:rotate(40deg);--drift-dur:15s" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.5"/>
+      <path d="M50 58 L50 95" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.25"/>
+    </svg>
+
+    <!-- ===== 杏 Anzu (Apricot blossom) — 5 rounded petals ===== -->
+
+    <!-- Apricot blossom 1 — upper center-right -->
+    <svg class="drift" style="top:12%;left:65%;width:50px;--drift-base:rotate(10deg);--drift-dur:13s" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.5"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" opacity="0.5"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)" opacity="0.5"/>
+      <circle cx="50" cy="50" r="6" opacity="0.3"/>
+    </svg>
+
+    <!-- Apricot blossom 2 — mid-right, small -->
+    <svg class="drift" style="top:38%;right:4%;width:35px;--drift-base:rotate(-15deg);--drift-dur:17s" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.4"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.35"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" opacity="0.4"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)" opacity="0.35"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)" opacity="0.4"/>
+      <circle cx="50" cy="50" r="5" opacity="0.25"/>
+    </svg>
+
+    <!-- Apricot blossom 3 — lower left -->
+    <svg class="drift" style="top:62%;left:8%;width:45px;--drift-base:rotate(20deg);--drift-dur:15s" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.5"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" opacity="0.5"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)" opacity="0.5"/>
+      <circle cx="50" cy="50" r="6" opacity="0.3"/>
+    </svg>
+
+    <!-- Apricot bud — tiny, scattered -->
+    <svg style="top:30%;left:25%;width:18px;transform:rotate(-30deg)" viewBox="0 0 40 60" fill="currentColor">
+      <ellipse cx="20" cy="18" rx="8" ry="12" opacity="0.4"/>
+      <ellipse cx="20" cy="18" rx="8" ry="12" transform="rotate(60 20 25)" opacity="0.35"/>
+      <path d="M20 30 L20 55" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+    </svg>
+
+    <!-- ===== 椿 Tsubaki (Camellia) — layered concentric petals ===== -->
+
+    <!-- Camellia 1 — center-left, large -->
+    <svg class="drift" style="top:28%;left:10%;width:65px;--drift-base:rotate(-8deg);--drift-dur:16s" viewBox="0 0 100 100" fill="currentColor">
+      <!-- Outer petals -->
+      <ellipse cx="50" cy="28" rx="16" ry="22" opacity="0.4"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" opacity="0.35"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)" opacity="0.4"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)" opacity="0.35"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)" opacity="0.4"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)" opacity="0.35"/>
+      <!-- Inner petals -->
+      <ellipse cx="50" cy="35" rx="10" ry="14" opacity="0.25"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" transform="rotate(90 50 50)" opacity="0.2"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" transform="rotate(180 50 50)" opacity="0.25"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" transform="rotate(270 50 50)" opacity="0.2"/>
+      <!-- Center stamen cluster -->
+      <circle cx="50" cy="50" r="8" opacity="0.2"/>
+      <circle cx="46" cy="46" r="2" opacity="0.35"/>
+      <circle cx="54" cy="46" r="2" opacity="0.35"/>
+      <circle cx="50" cy="42" r="2" opacity="0.35"/>
+      <circle cx="47" cy="53" r="1.5" opacity="0.3"/>
+      <circle cx="53" cy="53" r="1.5" opacity="0.3"/>
+    </svg>
+
+    <!-- Camellia 2 — bottom center-right -->
+    <svg class="drift" style="top:82%;left:55%;width:55px;--drift-base:rotate(15deg);--drift-dur:14s" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="28" rx="16" ry="22" opacity="0.45"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" opacity="0.4"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)" opacity="0.4"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)" opacity="0.4"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" opacity="0.25"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" transform="rotate(90 50 50)" opacity="0.2"/>
+      <circle cx="50" cy="50" r="8" opacity="0.2"/>
+      <circle cx="47" cy="47" r="2" opacity="0.3"/>
+      <circle cx="53" cy="47" r="2" opacity="0.3"/>
+      <circle cx="50" cy="43" r="2" opacity="0.3"/>
+    </svg>
+
+    <!-- Camellia 3 — small, top area -->
+    <svg class="drift" style="top:8%;left:38%;width:35px;--drift-base:rotate(-25deg);--drift-dur:19s" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="30" rx="14" ry="20" opacity="0.35"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(72 50 50)" opacity="0.3"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(144 50 50)" opacity="0.35"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(216 50 50)" opacity="0.3"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(288 50 50)" opacity="0.35"/>
+      <circle cx="50" cy="50" r="7" opacity="0.2"/>
+    </svg>
+
+    <!-- ===== Tsubaki leaves — thick glossy oval leaves ===== -->
+    <svg style="top:32%;left:7%;width:30px;transform:rotate(-50deg)" viewBox="0 0 40 70" fill="currentColor">
+      <ellipse cx="20" cy="30" rx="14" ry="28" opacity="0.35"/>
+      <path d="M20 5 L20 58" stroke="white" stroke-width="0.8" fill="none" opacity="0.15"/>
+    </svg>
+
+    <svg style="top:80%;left:50%;width:25px;transform:rotate(30deg)" viewBox="0 0 40 70" fill="currentColor">
+      <ellipse cx="20" cy="30" rx="14" ry="28" opacity="0.3"/>
+      <path d="M20 5 L20 58" stroke="white" stroke-width="0.8" fill="none" opacity="0.12"/>
+    </svg>
+
+    <!-- ===== Additional small maple leaves for density ===== -->
+    <svg style="top:55%;left:80%;width:30px;transform:rotate(50deg)" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.35"/>
+    </svg>
+
+    <svg style="top:90%;left:15%;width:25px;transform:rotate(-55deg)" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.3"/>
+    </svg>
+
+    <!-- Small anzu petals falling -->
+    <svg class="drift" style="top:45%;left:45%;width:20px;--drift-base:rotate(45deg);--drift-dur:20s" viewBox="0 0 30 30" fill="currentColor">
+      <ellipse cx="15" cy="8" rx="6" ry="10" opacity="0.35"/>
+    </svg>
+
+    <svg class="drift" style="top:68%;right:20%;width:16px;--drift-base:rotate(-30deg);--drift-dur:22s" viewBox="0 0 30 30" fill="currentColor">
+      <ellipse cx="15" cy="8" rx="6" ry="10" opacity="0.3"/>
+    </svg>
+
+  </div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <svg class="nav-logo-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/>
+      </svg>
+      craftgarden.studio
+    </a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+
+    <!-- Large botanical illustration: 楓の枝 + 椿 + 杏の花 -->
+    <div class="hero-botanical" aria-hidden="true">
+      <svg viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="0.8">
+
+        <!-- === Main branch (楓 maple branch) === -->
+        <path d="M400 760 C395 650 380 550 360 450 C340 350 320 280 280 200 C260 160 240 120 200 80" stroke-width="2" opacity="0.5"/>
+        <!-- Secondary branch right -->
+        <path d="M360 450 C400 400 440 350 500 300 C540 270 580 240 620 200" stroke-width="1.5" opacity="0.4"/>
+        <!-- Small twigs -->
+        <path d="M280 200 C250 170 220 160 190 170" stroke-width="1" opacity="0.3"/>
+        <path d="M280 200 C270 160 250 130 230 110" stroke-width="1" opacity="0.3"/>
+        <path d="M500 300 C530 280 560 290 580 280" stroke-width="1" opacity="0.3"/>
+        <path d="M620 200 C640 170 660 160 680 170" stroke-width="0.8" opacity="0.25"/>
+        <path d="M360 450 C330 430 300 440 280 460" stroke-width="1" opacity="0.3"/>
+
+        <!-- === 楓 Maple leaves on branch === -->
+        <!-- Leaf at branch tip (large) -->
+        <g transform="translate(185, 65) rotate(-15) scale(0.55)" fill="currentColor" opacity="0.18">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </g>
+        <!-- Leaf near fork -->
+        <g transform="translate(220, 105) rotate(20) scale(0.45)" fill="currentColor" opacity="0.15">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </g>
+        <!-- Leaf on right branch -->
+        <g transform="translate(600, 185) rotate(-10) scale(0.5)" fill="currentColor" opacity="0.16">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </g>
+        <!-- Leaf on right twig -->
+        <g transform="translate(660, 155) rotate(30) scale(0.35)" fill="currentColor" opacity="0.12">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </g>
+        <!-- Leaf near base -->
+        <g transform="translate(265, 440) rotate(-25) scale(0.4)" fill="currentColor" opacity="0.13">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </g>
+
+        <!-- === 椿 Camellia flower on branch === -->
+        <g transform="translate(480, 280) scale(0.7)">
+          <!-- Outer petals -->
+          <ellipse cx="0" cy="-20" rx="14" ry="22" fill="currentColor" opacity="0.14"/>
+          <ellipse cx="0" cy="-20" rx="14" ry="22" fill="currentColor" opacity="0.12" transform="rotate(60)"/>
+          <ellipse cx="0" cy="-20" rx="14" ry="22" fill="currentColor" opacity="0.14" transform="rotate(120)"/>
+          <ellipse cx="0" cy="-20" rx="14" ry="22" fill="currentColor" opacity="0.12" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-20" rx="14" ry="22" fill="currentColor" opacity="0.14" transform="rotate(240)"/>
+          <ellipse cx="0" cy="-20" rx="14" ry="22" fill="currentColor" opacity="0.12" transform="rotate(300)"/>
+          <!-- Stamen -->
+          <circle cx="0" cy="0" r="7" fill="currentColor" opacity="0.1"/>
+          <circle cx="-3" cy="-3" r="1.5" fill="currentColor" opacity="0.2"/>
+          <circle cx="3" cy="-3" r="1.5" fill="currentColor" opacity="0.2"/>
+          <circle cx="0" cy="2" r="1.5" fill="currentColor" opacity="0.2"/>
+        </g>
+        <!-- Camellia thick leaf -->
+        <g transform="translate(510, 310) rotate(40)">
+          <ellipse cx="0" cy="0" rx="12" ry="25" fill="currentColor" opacity="0.1"/>
+          <path d="M0 -22 L0 22" stroke="currentColor" stroke-width="0.5" opacity="0.12"/>
+        </g>
+
+        <!-- === 杏 Apricot blossoms (small clusters) === -->
+        <!-- Blossom cluster on left twig -->
+        <g transform="translate(240, 118) scale(0.5)">
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.15"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.12" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.15" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.12" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.15" transform="rotate(288)"/>
+          <circle cx="0" cy="0" r="4" fill="currentColor" opacity="0.12"/>
+        </g>
+        <!-- Blossom on right side -->
+        <g transform="translate(565, 255) scale(0.45)">
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.14"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.11" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.14" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.11" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-12" rx="8" ry="13" fill="currentColor" opacity="0.14" transform="rotate(288)"/>
+          <circle cx="0" cy="0" r="4" fill="currentColor" opacity="0.1"/>
+        </g>
+        <!-- Small buds -->
+        <circle cx="195" cy="172" r="3" fill="currentColor" opacity="0.12"/>
+        <circle cx="580" cy="285" r="2.5" fill="currentColor" opacity="0.1"/>
+        <circle cx="295" cy="455" r="3" fill="currentColor" opacity="0.1"/>
+
+      </svg>
+    </div>
+
+    <!-- Side decorative: 楓の枝 (left) -->
+    <div class="hero-side-leaf left" aria-hidden="true">
+      <svg viewBox="0 0 200 350" fill="none" stroke="currentColor" stroke-width="1">
+        <!-- Branch -->
+        <path d="M180 340 C160 280 140 220 110 160 C90 120 70 80 40 30" stroke-width="2"/>
+        <path d="M110 160 C80 150 50 160 30 185" stroke-width="1.2"/>
+        <path d="M140 230 C110 225 80 240 60 265" stroke-width="1.2"/>
+        <!-- Maple leaves -->
+        <g transform="translate(35, 25) rotate(-10) scale(0.35)" fill="currentColor">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.5"/>
+        </g>
+        <g transform="translate(22, 175) rotate(15) scale(0.3)" fill="currentColor">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.4"/>
+        </g>
+        <g transform="translate(50, 255) rotate(-20) scale(0.28)" fill="currentColor">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" opacity="0.35"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Side decorative: 杏の枝 + 椿 (right) -->
+    <div class="hero-side-leaf right" aria-hidden="true">
+      <svg viewBox="0 0 180 320" fill="none" stroke="currentColor" stroke-width="1">
+        <!-- Branch -->
+        <path d="M10 310 C30 250 60 190 90 140 C110 100 130 65 150 25" stroke-width="1.8"/>
+        <path d="M90 140 C120 130 145 145 160 170" stroke-width="1.2"/>
+        <!-- Apricot blossoms -->
+        <g transform="translate(148, 22) scale(0.3)" fill="currentColor">
+          <ellipse cx="0" cy="-10" rx="7" ry="11" opacity="0.5"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(72)" opacity="0.4"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(144)" opacity="0.5"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(216)" opacity="0.4"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(288)" opacity="0.5"/>
+          <circle cx="0" cy="0" r="3" opacity="0.3"/>
+        </g>
+        <g transform="translate(115, 95) scale(0.25)" fill="currentColor">
+          <ellipse cx="0" cy="-10" rx="7" ry="11" opacity="0.45"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(72)" opacity="0.35"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(144)" opacity="0.45"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(216)" opacity="0.35"/>
+          <ellipse cx="0" cy="-10" rx="7" ry="11" transform="rotate(288)" opacity="0.45"/>
+        </g>
+        <!-- Camellia near bottom -->
+        <g transform="translate(155, 165) scale(0.35)" fill="currentColor">
+          <ellipse cx="0" cy="-16" rx="12" ry="18" opacity="0.35"/>
+          <ellipse cx="0" cy="-16" rx="12" ry="18" transform="rotate(60)" opacity="0.3"/>
+          <ellipse cx="0" cy="-16" rx="12" ry="18" transform="rotate(120)" opacity="0.35"/>
+          <ellipse cx="0" cy="-16" rx="12" ry="18" transform="rotate(180)" opacity="0.3"/>
+          <ellipse cx="0" cy="-16" rx="12" ry="18" transform="rotate(240)" opacity="0.35"/>
+          <ellipse cx="0" cy="-16" rx="12" ry="18" transform="rotate(300)" opacity="0.3"/>
+          <circle cx="0" cy="0" r="5" opacity="0.2"/>
+        </g>
+        <!-- Camellia leaves (thick, glossy) -->
+        <g transform="translate(65, 195) rotate(-30)">
+          <ellipse cx="0" cy="0" rx="10" ry="22" fill="currentColor" opacity="0.15"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 20h10"/><path d="M12 20v-8"/>
+          <path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/>
+          <path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/>
+        </svg>
+        Solo Builder's Garden
+      </div>
+
+      <h1>
+        Plant ideas.<br />
+        <span class="highlight">Watch them grow.</span><br />
+        Have fun.
+      </h1>
+
+      <p class="hero-tagline-jp" lang="ja">
+        アイデアの種を蒔こう。育てよう。楽しもう。
+      </p>
+
+      <p class="hero-sub">
+        A one-person studio crafting tools, products, and content with curiosity and care. Every project starts as a tiny seed.
+      </p>
+
+      <a href="#products" class="hero-cta">
+        Explore the garden
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Vine divider -->
+  <div class="vine-divider" aria-hidden="true">
+    <svg viewBox="0 0 600 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+      <!-- Main vine -->
+      <path d="M0 20 C100 15 150 25 200 20 C250 15 300 25 350 20 C400 15 450 25 500 20 C550 15 580 25 600 20"/>
+      <!-- Small leaves along the vine -->
+      <path d="M100 18 C95 10 85 8 80 12" fill="currentColor" opacity="0.2" stroke="none"/>
+      <path d="M100 18 C95 26 85 28 80 24" fill="currentColor" opacity="0.15" stroke="none"/>
+      <path d="M200 20 C195 12 185 10 180 14" fill="currentColor" opacity="0.2" stroke="none"/>
+      <path d="M300 20 C305 12 315 10 320 14" fill="currentColor" opacity="0.15" stroke="none"/>
+      <path d="M300 20 C305 28 315 30 320 26" fill="currentColor" opacity="0.2" stroke="none"/>
+      <path d="M400 18 C395 10 385 8 380 12" fill="currentColor" opacity="0.15" stroke="none"/>
+      <path d="M500 20 C505 12 515 10 520 14" fill="currentColor" opacity="0.2" stroke="none"/>
+      <path d="M500 20 C505 28 515 30 520 26" fill="currentColor" opacity="0.15" stroke="none"/>
+      <!-- Small dots (buds) -->
+      <circle cx="150" cy="22" r="2.5" fill="currentColor" opacity="0.2"/>
+      <circle cx="250" cy="18" r="2" fill="currentColor" opacity="0.15"/>
+      <circle cx="350" cy="22" r="2.5" fill="currentColor" opacity="0.2"/>
+      <circle cx="450" cy="18" r="2" fill="currentColor" opacity="0.15"/>
+      <circle cx="550" cy="22" r="2" fill="currentColor" opacity="0.2"/>
+    </svg>
+  </div>
+
+  <!-- ========== PRODUCTS ========== -->
+  <section class="products" id="products">
+    <div class="section-header scroll-reveal">
+      <h2>What's growing</h2>
+      <p>Each project planted with care, nurtured with curiosity, and grown from real needs.</p>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Card 1: Product — AI PM Service -->
+      <a href="https://ai-pm-service.craftgarden.studio" class="seed-card scroll-reveal delay-1" target="_blank" rel="noopener noreferrer">
+        <div class="seed-card-strip product">
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="left:8%;top:15%;transform:rotate(-20deg);opacity:0.15"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="left:30%;top:5%;transform:rotate(15deg);opacity:0.12"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="right:25%;top:10%;transform:rotate(-5deg);opacity:0.1"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="right:8%;top:20%;transform:rotate(30deg);opacity:0.15"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+        </div>
+        <div class="seed-card-body">
+          <div class="seed-card-icon product">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 20h10"/><path d="M12 20v-8"/>
+              <path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/>
+              <path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/>
+            </svg>
+          </div>
+          <span class="seed-card-category product">Product</span>
+          <h3>AI PM Service</h3>
+          <p class="seed-card-desc">AI-powered task management for solo builders</p>
+          <p class="seed-card-desc-jp" lang="ja">AIタスク管理で個人開発を加速</p>
+          <div class="seed-card-footer">
+            Visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Tool — Product Hub -->
+      <a href="https://product-hub.craftgarden.studio" class="seed-card scroll-reveal delay-2" target="_blank" rel="noopener noreferrer">
+        <div class="seed-card-strip tool">
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="left:12%;top:10%;transform:rotate(-15deg);opacity:0.12"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="left:40%;top:15%;transform:rotate(25deg);opacity:0.15"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="right:20%;top:5%;transform:rotate(-10deg);opacity:0.1"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="right:5%;top:18%;transform:rotate(20deg);opacity:0.12"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+        </div>
+        <div class="seed-card-body">
+          <div class="seed-card-icon tool">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 4 13c0-5 7-11 8-11s8 6 8 11a7 7 0 0 1-7 7z"/>
+              <path d="M12 20V10"/>
+            </svg>
+          </div>
+          <span class="seed-card-category tool">Tool</span>
+          <h3>Product Hub</h3>
+          <p class="seed-card-desc">Project management dashboard for the studio</p>
+          <p class="seed-card-desc-jp" lang="ja">スタジオ全体のプロジェクト管理</p>
+          <div class="seed-card-footer">
+            Visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Content — AI Solo Builder -->
+      <a href="https://ai-solo-builder.craftgarden.studio" class="seed-card scroll-reveal delay-3" target="_blank" rel="noopener noreferrer">
+        <div class="seed-card-strip content">
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="left:5%;top:12%;transform:rotate(-30deg);opacity:0.15"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="left:35%;top:8%;transform:rotate(10deg);opacity:0.1"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="right:28%;top:18%;transform:rotate(-8deg);opacity:0.12"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+          <svg class="strip-leaf" viewBox="0 0 30 40" fill="currentColor" style="right:10%;top:5%;transform:rotate(22deg);opacity:0.15"><path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/></svg>
+        </div>
+        <div class="seed-card-body">
+          <div class="seed-card-icon content">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v4"/><path d="M12 18v4"/>
+              <path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/>
+              <path d="M2 12h4"/><path d="M18 12h4"/>
+              <path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </div>
+          <span class="seed-card-category content">Content</span>
+          <h3>AI Solo Builder</h3>
+          <p class="seed-card-desc">Blog for solo builders leveraging AI</p>
+          <p class="seed-card-desc-jp" lang="ja">AI活用ソロ開発者向けブログ</p>
+          <div class="seed-card-footer">
+            Visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Vine divider -->
+  <div class="vine-divider" aria-hidden="true">
+    <svg viewBox="0 0 600 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+      <path d="M0 20 C80 25 130 15 200 20 C270 25 320 15 400 20 C480 25 530 15 600 20"/>
+      <path d="M150 20 C145 12 135 10 130 14" fill="currentColor" opacity="0.2" stroke="none"/>
+      <path d="M250 22 C255 14 265 12 270 16" fill="currentColor" opacity="0.15" stroke="none"/>
+      <path d="M350 18 C345 10 335 8 330 12" fill="currentColor" opacity="0.2" stroke="none"/>
+      <path d="M450 22 C455 14 465 12 470 16" fill="currentColor" opacity="0.15" stroke="none"/>
+      <circle cx="200" cy="20" r="2" fill="currentColor" opacity="0.2"/>
+      <circle cx="400" cy="20" r="2.5" fill="currentColor" opacity="0.15"/>
+    </svg>
+  </div>
+
+  <!-- ========== PHILOSOPHY ========== -->
+  <section class="philosophy" id="philosophy">
+    <div class="philosophy-inner scroll-reveal">
+      <svg class="philosophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/>
+      </svg>
+      <h2>A garden, not a factory</h2>
+      <p lang="ja">工場ではなく、庭をつくる。</p>
+      <p>Every product here is grown, not manufactured. Ideas are planted as small seeds, watered with curiosity, and given time to take root. Some bloom quickly; others need patience.</p>
+
+      <div class="philosophy-values">
+        <div class="philosophy-value">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 20h10"/><path d="M12 20v-8"/>
+            <path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/>
+            <path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/>
+          </svg>
+          <span>Grow</span>
+        </div>
+        <div class="philosophy-value">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22a9 9 0 0 0 9-9c0-3-1.5-5.5-4-7.5C14.5 3.5 12 2 12 2s-2.5 1.5-5 3.5C4.5 7.5 3 10 3 13a9 9 0 0 0 9 9z"/>
+            <path d="M12 22V12"/>
+          </svg>
+          <span>Nurture</span>
+        </div>
+        <div class="philosophy-value">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v4"/><path d="M12 18v4"/>
+            <path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/>
+            <path d="M2 12h4"/><path d="M18 12h4"/>
+          </svg>
+          <span>Bloom</span>
+        </div>
+        <div class="philosophy-value">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>
+          </svg>
+          <span>Ship</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="footer-vine" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C240,60 480,10 720,40 C960,70 1200,10 1440,40 L1440,60 L0,60 Z" fill="#2D3B2E"/>
+      </svg>
+    </div>
+
+    <div class="footer-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/>
+      </svg>
+      craftgarden.studio
+    </div>
+
+    <p class="footer-tagline">Plant ideas. Watch them grow. Have fun.</p>
+    <p class="footer-tagline-jp" lang="ja">アイデアの種を蒔こう。育てよう。楽しもう。</p>
+
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">X / Twitter</a>
+      <a href="#">Blog</a>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 craftgarden.studio. All rights reserved.</p>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    /* --- Nav scroll shadow --- */
+    (function() {
+      var nav = document.getElementById('nav');
+      if (!nav) return;
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+    })();
+
+    /* --- Scroll reveal --- */
+    (function() {
+      var els = document.querySelectorAll('.scroll-reveal');
+      if (!els.length) return;
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(el) { el.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>

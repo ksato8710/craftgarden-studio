@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concept 5: Playful Meadow — craftgarden.studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-cream:      #FFFDF5;
+      --card-petal:    #FFF0F3;
+      --text-deep:     #1B3A2D;
+      --text-muted:    #3D6B54;
+      --accent-sun:    #FFB800;
+      --accent-lav:    #8B5CF6;
+      --cat-product:   #10B981;
+      --cat-tool:      #3B82F6;
+      --cat-content:   #F97316;
+      --radius-card:   20px;
+      --radius-btn:    999px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-deep);
+      background: var(--bg-cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Nunito', sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       SCATTERED DOTS BACKGROUND (meadow flowers)
+       ========================================================= */
+    .meadow-dots {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle 4px at 8% 12%, var(--cat-product) 100%, transparent 100%),
+        radial-gradient(circle 3px at 15% 35%, var(--accent-sun) 100%, transparent 100%),
+        radial-gradient(circle 5px at 22% 68%, var(--accent-lav) 100%, transparent 100%),
+        radial-gradient(circle 3px at 30% 15%, var(--cat-content) 100%, transparent 100%),
+        radial-gradient(circle 4px at 38% 82%, var(--cat-tool) 100%, transparent 100%),
+        radial-gradient(circle 3px at 45% 45%, var(--cat-product) 100%, transparent 100%),
+        radial-gradient(circle 5px at 52% 8%, var(--accent-sun) 100%, transparent 100%),
+        radial-gradient(circle 3px at 60% 55%, var(--accent-lav) 100%, transparent 100%),
+        radial-gradient(circle 4px at 68% 28%, var(--cat-content) 100%, transparent 100%),
+        radial-gradient(circle 3px at 75% 72%, var(--cat-tool) 100%, transparent 100%),
+        radial-gradient(circle 5px at 82% 18%, var(--cat-product) 100%, transparent 100%),
+        radial-gradient(circle 3px at 88% 60%, var(--accent-sun) 100%, transparent 100%),
+        radial-gradient(circle 4px at 93% 40%, var(--accent-lav) 100%, transparent 100%),
+        radial-gradient(circle 3px at 5% 88%, var(--cat-content) 100%, transparent 100%),
+        radial-gradient(circle 4px at 48% 92%, var(--cat-tool) 100%, transparent 100%);
+      opacity: 0.25;
+    }
+
+    /* =========================================================
+       FLOATING DOTS (animated in hero)
+       ========================================================= */
+    .floating-dots {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .floating-dot {
+      position: absolute;
+      border-radius: 50%;
+      animation: floatDot linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes floatDot {
+      0%   { transform: translateY(0) scale(1);   opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 253, 245, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid rgba(27, 58, 45, 0.06);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 4px 24px rgba(27, 58, 45, 0.08);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      color: var(--text-deep);
+    }
+
+    .nav-logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-sun);
+      display: inline-block;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1); background: var(--accent-sun); }
+      33%      { transform: scale(1.3); background: var(--accent-lav); }
+      66%      { transform: scale(1.1); background: var(--cat-product); }
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--accent-sun);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-deep);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 140px;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--radius-btn);
+      background: var(--card-petal);
+      border: 2px solid rgba(139, 92, 246, 0.15);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent-lav);
+      margin-bottom: 32px;
+      animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .hero-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-deep);
+      margin-bottom: 12px;
+      animation: bounceIn 0.8s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-sun) 0%, var(--cat-content) 50%, var(--accent-lav) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline-jp {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      animation: bounceIn 0.8s 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      animation: bounceIn 0.8s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: var(--radius-btn);
+      background: var(--accent-sun);
+      color: var(--text-deep);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #D49A00, 0 8px 24px rgba(255, 184, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: bounceIn 0.8s 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #D49A00, 0 12px 32px rgba(255, 184, 0, 0.35);
+    }
+
+    .hero-cta:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #D49A00, 0 4px 16px rgba(255, 184, 0, 0.3);
+    }
+
+    .hero-cta svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* Wavy bottom edge for hero */
+    .hero-wave {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .hero-wave svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* =========================================================
+       BOUNCE-IN ANIMATION FOR SCROLL
+       ========================================================= */
+    @keyframes bounceIn {
+      0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
+      60%  { opacity: 1; transform: translateY(-8px) scale(1.02); }
+      80%  { transform: translateY(3px) scale(0.99); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .scroll-reveal.visible {
+      animation: bounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* Stagger children */
+    .scroll-reveal.visible.delay-1 { animation-delay: 0.1s; }
+    .scroll-reveal.visible.delay-2 { animation-delay: 0.2s; }
+    .scroll-reveal.visible.delay-3 { animation-delay: 0.3s; }
+
+    /* =========================================================
+       PRODUCTS SECTION
+       ========================================================= */
+    .products {
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px 100px;
+      background: var(--bg-cream);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 .accent {
+      color: var(--accent-lav);
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* --- Seed Packet Card --- */
+    .seed-card {
+      position: relative;
+      background: var(--card-petal);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seed-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 40px rgba(27, 58, 45, 0.1);
+    }
+
+    /* Colored top band */
+    .seed-card-band {
+      height: 8px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .seed-card-band.product { background: var(--cat-product); }
+    .seed-card-band.tool    { background: var(--cat-tool); }
+    .seed-card-band.content { background: var(--cat-content); }
+
+    .seed-card-body {
+      padding: 28px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seed-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .seed-card:hover .seed-card-icon {
+      animation: iconWiggle 0.5s ease;
+    }
+
+    @keyframes iconWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20%      { transform: rotate(-12deg); }
+      40%      { transform: rotate(10deg); }
+      60%      { transform: rotate(-6deg); }
+      80%      { transform: rotate(4deg); }
+    }
+
+    .seed-card-icon.product { background: rgba(16, 185, 129, 0.15); color: var(--cat-product); }
+    .seed-card-icon.tool    { background: rgba(59, 130, 246, 0.15); color: var(--cat-tool); }
+    .seed-card-icon.content { background: rgba(249, 115, 22, 0.15); color: var(--cat-content); }
+
+    .seed-card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .seed-card-category {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .seed-card-category.product { color: var(--cat-product); }
+    .seed-card-category.tool    { color: var(--cat-tool); }
+    .seed-card-category.content { color: var(--cat-content); }
+
+    .seed-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-deep);
+    }
+
+    .seed-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .seed-card-desc-jp {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-top: 6px;
+    }
+
+    .seed-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--accent-lav);
+      transition: gap 0.3s ease;
+    }
+
+    .seed-card:hover .seed-card-footer {
+      gap: 10px;
+    }
+
+    .seed-card-footer svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .seed-card:hover .seed-card-footer svg {
+      transform: translateX(3px);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .footer {
+      position: relative;
+      z-index: 2;
+      background: var(--text-deep);
+      color: #FFFDF5;
+      padding: 80px 24px 40px;
+      text-align: center;
+    }
+
+    .footer-wave {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 100%;
+      z-index: 3;
+      transform: translateY(-98%);
+    }
+
+    .footer-wave svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .footer-logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .footer-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .footer-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: footerDotDance 3s ease-in-out infinite;
+    }
+
+    .footer-dot:nth-child(1) { background: var(--accent-sun); animation-delay: 0s; }
+    .footer-dot:nth-child(2) { background: var(--cat-product); animation-delay: 0.3s; }
+    .footer-dot:nth-child(3) { background: var(--accent-lav); animation-delay: 0.6s; }
+    .footer-dot:nth-child(4) { background: var(--cat-tool); animation-delay: 0.9s; }
+    .footer-dot:nth-child(5) { background: var(--cat-content); animation-delay: 1.2s; }
+
+    @keyframes footerDotDance {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .footer-tagline {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-bottom: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+    }
+
+    .footer-tagline-jp {
+      font-size: 0.85rem;
+      opacity: 0.5;
+      margin-bottom: 32px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      opacity: 0.35;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .hero {
+        padding: 100px 20px 120px;
+      }
+
+      .hero-cta {
+        padding: 14px 28px;
+        font-size: 0.95rem;
+      }
+
+      .products {
+        padding: 60px 20px 80px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 680px;
+      }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .floating-dot {
+        display: none;
+      }
+
+      .scroll-reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scattered meadow dots background -->
+  <div class="meadow-dots" aria-hidden="true"></div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-dot" aria-hidden="true"></span>
+      craftgarden.studio
+    </a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <!-- Floating animated dots -->
+    <div class="floating-dots" id="floatingDots" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/></svg>
+        Solo Builder's Product Studio
+      </div>
+
+      <h1>
+        Plant ideas.<br />
+        <span class="highlight">Watch them grow.</span><br />
+        Have fun.
+      </h1>
+
+      <p class="hero-tagline-jp">
+        アイデアの種を蒔こう。育てよう。楽しもう。
+      </p>
+
+      <p class="hero-sub">
+        A one-person studio crafting tools, products, and content with curiosity and care. Every project starts as a tiny seed.
+      </p>
+
+      <a href="#products" class="hero-cta">
+        Explore the garden
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Wavy bottom divider -->
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z" fill="#FFFDF5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTS ========== -->
+  <section class="products" id="products">
+    <div class="section-header scroll-reveal">
+      <h2>What's <span class="accent">growing</span></h2>
+      <p>Three seeds from the garden. Each one planted with care, watered with curiosity.</p>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Card 1: Product — AI PM Service -->
+      <a href="https://ai-pm-service.craftgarden.studio" class="seed-card scroll-reveal delay-1" target="_blank" rel="noopener noreferrer">
+        <div class="seed-card-band product"></div>
+        <div class="seed-card-body">
+          <div class="seed-card-icon product">
+            <!-- Sprout icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 20h10"/>
+              <path d="M12 20v-8"/>
+              <path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/>
+              <path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/>
+            </svg>
+          </div>
+          <span class="seed-card-category product">Product</span>
+          <h3>AI PM Service</h3>
+          <p class="seed-card-desc">AI-powered task management for solo builders</p>
+          <p class="seed-card-desc-jp">AIタスク管理で個人開発を加速</p>
+          <div class="seed-card-footer">
+            Visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Tool — Product Hub -->
+      <a href="https://product-hub.craftgarden.studio" class="seed-card scroll-reveal delay-2" target="_blank" rel="noopener noreferrer">
+        <div class="seed-card-band tool"></div>
+        <div class="seed-card-body">
+          <div class="seed-card-icon tool">
+            <!-- Leaf icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 4 13c0-5 7-11 8-11s8 6 8 11a7 7 0 0 1-7 7z"/>
+              <path d="M12 20V10"/>
+            </svg>
+          </div>
+          <span class="seed-card-category tool">Tool</span>
+          <h3>Product Hub</h3>
+          <p class="seed-card-desc">Project management dashboard for the studio</p>
+          <p class="seed-card-desc-jp">スタジオ全体のプロジェクト管理</p>
+          <div class="seed-card-footer">
+            Visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Content — AI Solo Builder -->
+      <a href="https://ai-solo-builder.craftgarden.studio" class="seed-card scroll-reveal delay-3" target="_blank" rel="noopener noreferrer">
+        <div class="seed-card-band content"></div>
+        <div class="seed-card-body">
+          <div class="seed-card-icon content">
+            <!-- Flower / Seed icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v4"/>
+              <path d="M12 18v4"/>
+              <path d="M4.93 4.93l2.83 2.83"/>
+              <path d="M16.24 16.24l2.83 2.83"/>
+              <path d="M2 12h4"/>
+              <path d="M18 12h4"/>
+              <path d="M4.93 19.07l2.83-2.83"/>
+              <path d="M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </div>
+          <span class="seed-card-category content">Content</span>
+          <h3>AI Solo Builder</h3>
+          <p class="seed-card-desc">Blog for solo builders leveraging AI</p>
+          <p class="seed-card-desc-jp">AI活用ソロ開発者向けブログ</p>
+          <div class="seed-card-footer">
+            Visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <!-- Wavy top divider -->
+    <div class="footer-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 C360,0 720,120 1080,60 C1260,30 1380,80 1440,60 L1440,120 L0,120 Z" fill="#1B3A2D"/>
+      </svg>
+    </div>
+
+    <div class="footer-logo">
+      craftgarden.studio
+    </div>
+
+    <div class="footer-dots" aria-hidden="true">
+      <div class="footer-dot"></div>
+      <div class="footer-dot"></div>
+      <div class="footer-dot"></div>
+      <div class="footer-dot"></div>
+      <div class="footer-dot"></div>
+    </div>
+
+    <p class="footer-tagline">Plant ideas. Watch them grow. Have fun.</p>
+    <p class="footer-tagline-jp">アイデアの種を蒔こう。育てよう。楽しもう。</p>
+
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">X / Twitter</a>
+      <a href="#">Blog</a>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 craftgarden.studio. All rights reserved.</p>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    /* --- Floating dots generator for hero --- */
+    (function createFloatingDots() {
+      var container = document.getElementById('floatingDots');
+      if (!container) return;
+
+      var colors = ['#FFB800', '#8B5CF6', '#10B981', '#3B82F6', '#F97316'];
+      var count = 24;
+
+      for (var i = 0; i < count; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'floating-dot';
+        var size = 4 + Math.random() * 8;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.bottom = -(Math.random() * 40) + 'px';
+        dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+        dot.style.animationDuration = (6 + Math.random() * 10) + 's';
+        dot.style.animationDelay = (Math.random() * 8) + 's';
+        container.appendChild(dot);
+      }
+    })();
+
+    /* --- Nav scroll shadow --- */
+    (function navScroll() {
+      var nav = document.getElementById('nav');
+      if (!nav) return;
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 20) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }, { passive: true });
+    })();
+
+    /* --- Scroll reveal with IntersectionObserver --- */
+    (function scrollReveal() {
+      var elements = document.querySelectorAll('.scroll-reveal');
+      if (!elements.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        elements.forEach(function(el) {
+          el.classList.add('visible');
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      elements.forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>

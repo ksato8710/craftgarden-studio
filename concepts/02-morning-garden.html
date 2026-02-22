@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>craftgarden.studio — Morning Garden Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CONCEPT 02: MORNING GARDEN
+       "Built at dawn, one product at a time."
+       ======================================== */
+
+    /* --- Reset & Base --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --morning-mist: #FAFAF7;
+      --linen: #F0EDE6;
+      --deep-bark: #2C2418;
+      --deep-bark-soft: #4A3D2E;
+      --terracotta: #C2704E;
+      --terracotta-hover: #A85E3F;
+      --sage: #7D9B76;
+      --sage-light: #9DB896;
+      --warm-shadow: rgba(44, 36, 24, 0.08);
+      --warm-shadow-hover: rgba(44, 36, 24, 0.15);
+      --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+      --content-width: 960px;
+      --section-padding: 6rem 1.5rem;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--deep-bark);
+      background-color: var(--morning-mist);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --- Subtle noise texture overlay --- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    /* --- Typography --- */
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --- Layout --- */
+    .container {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+      background-color: rgba(250, 250, 247, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+    }
+
+    .nav-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--deep-bark);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--sage);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--deep-bark-soft);
+      transition: color 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links a:hover {
+      color: var(--terracotta);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        gap: 1.25rem;
+      }
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ========================================
+       HERO
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 1.5rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Botanical silhouette decoration — top right */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -40px;
+      width: 280px;
+      height: 360px;
+      opacity: 0.06;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 300' fill='%232C2418'%3E%3Cpath d='M100 280 C100 280 100 150 100 150 C80 120 40 100 30 60 C25 40 35 20 55 15 C75 10 90 25 95 45 C95 25 100 5 120 2 C140 -1 160 15 158 40 C155 65 130 85 105 100 C105 100 105 280 105 280 Z'/%3E%3Cpath d='M95 180 C75 165 45 170 30 150 C20 135 25 115 40 110 C55 105 70 115 75 130 C75 130 95 155 95 180 Z'/%3E%3Cpath d='M105 200 C125 185 150 188 165 170 C175 155 172 135 157 128 C142 121 127 130 122 145 C122 145 105 175 105 200 Z'/%3E%3Cpath d='M90 230 C70 220 50 225 38 215 C28 205 30 190 42 185 C54 180 65 188 68 200 C68 200 88 218 90 230 Z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    /* Botanical silhouette decoration — bottom left */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 40px;
+      left: -30px;
+      width: 200px;
+      height: 260px;
+      opacity: 0.04;
+      pointer-events: none;
+      transform: scaleX(-1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 260' fill='%232C2418'%3E%3Cpath d='M80 250 C80 250 80 100 80 100 C65 80 35 65 28 35 C24 18 32 5 48 2 C64 -1 76 12 78 28 C80 10 90 -5 108 2 C126 9 130 30 125 50 C118 75 95 85 82 95 C82 95 82 250 82 250 Z'/%3E%3Cpath d='M76 160 C60 148 38 152 28 138 C20 126 24 112 36 108 C48 104 58 112 60 124 C60 124 76 145 76 160 Z'/%3E%3Cpath d='M84 190 C100 178 118 182 128 168 C136 156 134 142 122 136 C110 130 100 138 96 150 C96 150 84 175 84 190 Z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--deep-bark);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero-subtitle-jp {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--deep-bark-soft);
+      margin-bottom: 1rem;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--deep-bark-soft);
+      line-height: 2;
+      margin-bottom: 3rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fff;
+      background-color: var(--terracotta);
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-cta:hover {
+      background-color: var(--terracotta-hover);
+      transform: translateY(-1px);
+    }
+
+    .hero-cta .arrow {
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-cta:hover .arrow {
+      transform: translateY(2px);
+    }
+
+    /* --- Wavy organic divider --- */
+    .divider-wave {
+      width: 100%;
+      height: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .divider-wave svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ========================================
+       PRODUCTS
+       ======================================== */
+    .products {
+      padding: var(--section-padding);
+      background-color: var(--linen);
+      position: relative;
+    }
+
+    /* Top wavy border for products section */
+    .products::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background-color: var(--morning-mist);
+      clip-path: ellipse(55% 100% at 50% 0%);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      font-weight: 500;
+      color: var(--deep-bark);
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--deep-bark-soft);
+      margin-top: 0.75rem;
+      line-height: 1.8;
+    }
+
+    /* --- Garden bed grid lines --- */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    /* --- Product Card --- */
+    .product-card {
+      background-color: var(--morning-mist);
+      border-radius: 6px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 2px 12px var(--warm-shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(44, 36, 24, 0.04);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px var(--warm-shadow-hover);
+    }
+
+    .product-card-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 1.25rem;
+    }
+
+    .badge-product {
+      background-color: rgba(194, 112, 78, 0.1);
+      color: var(--terracotta);
+    }
+
+    .badge-tool {
+      background-color: rgba(125, 155, 118, 0.12);
+      color: var(--sage);
+    }
+
+    .badge-content {
+      background-color: rgba(44, 36, 24, 0.06);
+      color: var(--deep-bark-soft);
+    }
+
+    .product-card-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--deep-bark);
+      margin-bottom: 0.6rem;
+    }
+
+    .product-card-desc {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--deep-bark-soft);
+      line-height: 1.8;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-card-desc-jp {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--deep-bark-soft);
+      opacity: 0.7;
+      line-height: 1.7;
+    }
+
+    .product-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--terracotta);
+      margin-top: auto;
+      padding-top: 1.25rem;
+      transition: gap 0.2s ease;
+    }
+
+    .product-card:hover .product-card-link {
+      gap: 0.6rem;
+    }
+
+    .product-card-link .link-arrow {
+      font-size: 0.9rem;
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover .product-card-link .link-arrow {
+      transform: translateX(2px);
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      padding: 3.5rem 1.5rem 3rem;
+      background-color: var(--morning-mist);
+      position: relative;
+    }
+
+    /* Bottom wavy border from products */
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background-color: var(--linen);
+      clip-path: ellipse(55% 100% at 50% 0%);
+    }
+
+    .footer-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--deep-bark);
+    }
+
+    .footer-logo span {
+      color: var(--sage);
+      font-weight: 400;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--deep-bark-soft);
+      font-style: italic;
+    }
+
+    /* Botanical ornament */
+    .footer-ornament {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--sage-light);
+      opacity: 0.5;
+    }
+
+    .footer-ornament .line {
+      width: 40px;
+      height: 1px;
+      background-color: currentColor;
+    }
+
+    .footer-ornament svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--deep-bark-soft);
+      opacity: 0.5;
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 4rem 1.25rem;
+      }
+
+      .hero {
+        padding: 7rem 1.25rem 4rem;
+        min-height: 90vh;
+      }
+
+      .hero::before {
+        width: 160px;
+        height: 200px;
+        right: -20px;
+        top: 60px;
+      }
+
+      .hero::after {
+        width: 120px;
+        height: 160px;
+        bottom: 20px;
+        left: -15px;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-cta {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================
+       NAVIGATION
+       ============================ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="craftgarden.studio home">
+        craftgarden<span>.studio</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#products">Products</a></li>
+        <li><a href="https://github.com/craftgarden" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================
+       HERO
+       ============================ -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <span class="hero-label">A Solo Builder's Studio</span>
+      <h1 class="hero-title">Built at dawn,<br>one product at <em>a time</em>.</h1>
+      <p class="hero-subtitle-jp">夜明けとともにつくる、ひとつずつ。</p>
+      <p class="hero-description">
+        A quiet studio where ideas are shaped into software,
+        one careful step at a time. Small tools, honest craft,
+        and the patience of a gardener.
+      </p>
+      <a href="#products" class="hero-cta">
+        View Products <span class="arrow" aria-hidden="true">&#8595;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================
+       PRODUCTS
+       ============================ -->
+  <section class="products" id="products">
+    <div class="container">
+      <header class="section-header">
+        <span class="section-label">What We Grow</span>
+        <h2 class="section-title">Products</h2>
+        <p class="section-subtitle">Tools and platforms, cultivated with care.</p>
+      </header>
+
+      <div class="products-grid">
+
+        <!-- Card 1: AI PM Service -->
+        <article class="product-card">
+          <span class="product-card-badge badge-product">Product</span>
+          <h3 class="product-card-name">AI PM Service</h3>
+          <p class="product-card-desc">AI-powered task management for solo builders</p>
+          <p class="product-card-desc-jp">AIタスク管理で個人開発を加速</p>
+          <a href="https://ai-pm-service.craftgarden.studio" class="product-card-link" target="_blank" rel="noopener noreferrer">
+            Visit <span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </article>
+
+        <!-- Card 2: History Quiz -->
+        <article class="product-card">
+          <span class="product-card-badge badge-product">Product</span>
+          <h3 class="product-card-name">History Quiz</h3>
+          <p class="product-card-desc">Learn history through interactive quizzes</p>
+          <p class="product-card-desc-jp">インタラクティブな歴史クイズ</p>
+          <a href="https://history-quiz-app.craftgarden.studio" class="product-card-link" target="_blank" rel="noopener noreferrer">
+            Visit <span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </article>
+
+        <!-- Card 3: Product Hub -->
+        <article class="product-card">
+          <span class="product-card-badge badge-tool">Tool</span>
+          <h3 class="product-card-name">Product Hub</h3>
+          <p class="product-card-desc">Project management dashboard for the studio</p>
+          <p class="product-card-desc-jp">スタジオ全体のプロジェクト管理</p>
+          <a href="https://product-hub.craftgarden.studio" class="product-card-link" target="_blank" rel="noopener noreferrer">
+            Visit <span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       FOOTER
+       ============================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        craftgarden<span>.studio</span>
+      </div>
+      <p class="footer-tagline">"Built at dawn, one product at a time."</p>
+      <div class="footer-ornament" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22 C12 22 12 13 12 13 C9 10 5 8 4 4 C3.5 2 5 0.5 7.5 0.5 C10 0.5 11.5 2.5 12 5 C12.5 2.5 14 0.5 16.5 0.5 C19 0.5 20.5 2 20 4 C19 8 15 10 12 13"/>
+          <path d="M10 16 C8 14.5 5.5 15 4.5 13 C3.8 11.5 4.5 10 6 9.5 C7.5 9 8.5 10 9 11.5"/>
+          <path d="M14 18 C16 16.5 18.5 17 19.5 15 C20.2 13.5 19.5 12 18 11.5 C16.5 11 15.5 12 15 13.5"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+      <p class="footer-copy">&copy; 2026 craftgarden.studio</p>
+    </div>
+  </footer>
+
+</body>
+</html>

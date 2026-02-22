@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>craftgarden.studio — Wabi-Sabi Workshop</title>
+  <meta name="description" content="Imperfect, incomplete, and intentional. A solo builder's product studio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================
+       Concept 4: Wabi-Sabi Workshop
+       侘び寂びの工房
+       ========================================= */
+
+    /* --- Reset --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* --- Design Tokens --- */
+    :root {
+      /* Palette */
+      --washi: #F5F1EB;
+      --kitsune: #E8E0D4;
+      --sumi: #2D2926;
+      --sumi-light: #5C5550;
+      --bengara: #8B4B3E;
+      --wasurenagusa: #6B8FA3;
+
+      /* Typography */
+      --font-serif: 'Noto Serif JP', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+
+      /* Spacing — generous, letting emptiness speak */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+      --space-2xl: 10rem;
+      --space-3xl: 14rem;
+
+      /* Ink line */
+      --ink-line: 1px solid rgba(45, 41, 38, 0.15);
+      --ink-line-strong: 1px solid rgba(45, 41, 38, 0.3);
+    }
+
+    /* --- Base --- */
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--washi);
+      color: var(--sumi);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Links --- */
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    a:hover {
+      border-bottom-color: var(--bengara);
+    }
+
+    /* --- Page Container --- */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* =========================================
+       Navigation
+       ========================================= */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: var(--space-lg) 0 var(--space-md);
+      border-bottom: var(--ink-line);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Bengara seal mark */
+    .seal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      background-color: var(--bengara);
+      color: var(--washi);
+      font-family: var(--font-serif);
+      font-size: 0.6rem;
+      font-weight: 700;
+      border-radius: 2px;
+      letter-spacing: 0;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-md);
+      list-style: none;
+      font-size: 0.8125rem;
+      color: var(--sumi-light);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-links a {
+      color: var(--sumi-light);
+    }
+
+    .nav-links a:hover {
+      color: var(--sumi);
+      border-bottom-color: var(--bengara);
+    }
+
+    /* =========================================
+       Hero
+       ========================================= */
+    .hero {
+      padding: var(--space-3xl) 0 var(--space-2xl);
+      max-width: 720px;
+      /* Off-center: left-aligned, NOT centered */
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      color: var(--sumi);
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-tagline-jp {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 2.5vw, 1.375rem);
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--sumi-light);
+      letter-spacing: 0.12em;
+    }
+
+    .hero-description {
+      margin-top: var(--space-xl);
+      font-size: 0.9375rem;
+      color: var(--sumi-light);
+      max-width: 480px;
+      line-height: 2;
+    }
+
+    /* =========================================
+       Section shared
+       ========================================= */
+    .section-divider {
+      border: none;
+      border-top: var(--ink-line);
+      margin: 0;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      color: var(--sumi-light);
+      padding: var(--space-xl) 0 var(--space-lg);
+    }
+
+    .section-heading-jp {
+      font-size: 0.75rem;
+      margin-left: var(--space-sm);
+      letter-spacing: 0.2em;
+      color: rgba(45, 41, 38, 0.35);
+    }
+
+    /* =========================================
+       Products — Zen Garden Layout
+       ========================================= */
+    .products-section {
+      padding-bottom: var(--space-2xl);
+    }
+
+    .products-garden {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(auto, auto);
+      gap: var(--space-md);
+      row-gap: var(--space-lg);
+    }
+
+    /* Asymmetric placement — like stones in a zen garden */
+    .product-stone:nth-child(1) {
+      grid-column: 1 / 6;
+    }
+    .product-stone:nth-child(2) {
+      grid-column: 7 / 12;
+      margin-top: var(--space-xl);
+    }
+    .product-stone:nth-child(3) {
+      grid-column: 2 / 7;
+    }
+    .product-stone:nth-child(4) {
+      grid-column: 8 / 13;
+      margin-top: calc(var(--space-lg) * -1);
+    }
+    .product-stone:nth-child(5) {
+      grid-column: 1 / 5;
+    }
+    .product-stone:nth-child(6) {
+      grid-column: 6 / 11;
+      margin-top: var(--space-md);
+    }
+    .product-stone:nth-child(7) {
+      grid-column: 3 / 8;
+    }
+    .product-stone:nth-child(8) {
+      grid-column: 9 / 13;
+      margin-top: calc(var(--space-md) * -1);
+    }
+    .product-stone:nth-child(9) {
+      grid-column: 1 / 6;
+    }
+    .product-stone:nth-child(10) {
+      grid-column: 7 / 11;
+      margin-top: var(--space-lg);
+    }
+
+    .product-stone {
+      padding: var(--space-md) var(--space-md) var(--space-lg);
+      background-color: var(--kitsune);
+      border-radius: 1px;
+    }
+
+    .product-category {
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      color: var(--sumi-light);
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-xs);
+      line-height: 1.5;
+    }
+
+    .product-name a:hover {
+      border-bottom-color: var(--bengara);
+    }
+
+    .product-desc-en {
+      font-size: 0.8125rem;
+      color: var(--sumi-light);
+      line-height: 1.8;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-desc-jp {
+      font-size: 0.75rem;
+      color: rgba(45, 41, 38, 0.45);
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+    }
+
+    /* =========================================
+       Footer
+       ========================================= */
+    .footer {
+      border-top: var(--ink-line);
+      padding: var(--space-xl) 0 var(--space-3xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--sumi-light);
+    }
+
+    .footer-seal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--bengara);
+      color: var(--washi);
+      font-family: var(--font-serif);
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 2px;
+      letter-spacing: 0;
+    }
+
+    /* =========================================
+       Responsive
+       ========================================= */
+    @media (max-width: 768px) {
+      :root {
+        --space-xl: 4rem;
+        --space-2xl: 6rem;
+        --space-3xl: 8rem;
+      }
+
+      .page {
+        padding: 0 var(--space-sm);
+      }
+
+      .nav {
+        flex-direction: column;
+        gap: var(--space-sm);
+        padding: var(--space-md) 0;
+      }
+
+      .nav-links {
+        gap: var(--space-sm);
+        font-size: 0.75rem;
+      }
+
+      .hero {
+        padding: var(--space-2xl) 0 var(--space-xl);
+      }
+
+      .hero-tagline {
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+      }
+
+      /* Stack products vertically on mobile, but keep asymmetry via alternating margin */
+      .products-garden {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .product-stone {
+        margin-top: 0 !important;
+      }
+
+      .product-stone:nth-child(even) {
+        margin-left: var(--space-lg);
+      }
+
+      .product-stone:nth-child(3n) {
+        margin-left: var(--space-md);
+      }
+
+      .footer {
+        padding: var(--space-lg) 0 var(--space-2xl);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-stone:nth-child(even) {
+        margin-left: var(--space-md);
+      }
+
+      .product-stone:nth-child(3n) {
+        margin-left: var(--space-sm);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav">
+      <div class="nav-logo">
+        <span class="seal">庭</span>
+        <span>craftgarden.studio</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#products">Products</a></li>
+        <li><a href="#footer">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <h1 class="hero-tagline">Imperfect, incomplete,<br />and intentional.</h1>
+      <p class="hero-tagline-jp">不完全で、未完成で、意図的。</p>
+      <p class="hero-description">
+        A solo builder's workshop where software is shaped with care, not haste.
+        Each product begins as a rough sketch and grows toward usefulness,
+        never claiming to be finished.
+      </p>
+    </section>
+
+    <!-- ===== Products ===== -->
+    <hr class="section-divider" />
+    <section class="products-section" id="products">
+      <h2 class="section-heading">
+        Works<span class="section-heading-jp">つくったもの</span>
+      </h2>
+
+      <div class="products-garden">
+
+        <!-- Stone 1 -->
+        <article class="product-stone">
+          <p class="product-category">Product</p>
+          <h3 class="product-name"><a href="https://ai-pm-service.craftgarden.studio">AI PM Service</a></h3>
+          <p class="product-desc-en">AI-powered task management for solo builders</p>
+          <p class="product-desc-jp">AIタスク管理で個人開発を加速</p>
+        </article>
+
+        <!-- Stone 2 -->
+        <article class="product-stone">
+          <p class="product-category">Product</p>
+          <h3 class="product-name"><a href="https://history-quiz-app.craftgarden.studio">History Quiz</a></h3>
+          <p class="product-desc-en">Learn history through interactive quizzes</p>
+          <p class="product-desc-jp">インタラクティブな歴史クイズ</p>
+        </article>
+
+        <!-- Stone 3 -->
+        <article class="product-stone">
+          <p class="product-category">Tool</p>
+          <h3 class="product-name"><a href="https://product-hub.craftgarden.studio">Product Hub</a></h3>
+          <p class="product-desc-en">Project management dashboard for the studio</p>
+          <p class="product-desc-jp">スタジオ全体のプロジェクト管理</p>
+        </article>
+
+        <!-- Stone 4 -->
+        <article class="product-stone">
+          <p class="product-category">Tool</p>
+          <h3 class="product-name"><a href="https://essential-navigator.craftgarden.studio">Essential Navigator</a></h3>
+          <p class="product-desc-en">Essential discovery and navigation tool</p>
+          <p class="product-desc-jp">Essential Navigator</p>
+        </article>
+
+        <!-- Stone 5 -->
+        <article class="product-stone">
+          <p class="product-category">Tool</p>
+          <h3 class="product-name"><a href="https://content-studio.craftgarden.studio">Content Studio</a></h3>
+          <p class="product-desc-en">Content creation and management platform</p>
+          <p class="product-desc-jp">コンテンツ管理プラットフォーム</p>
+        </article>
+
+        <!-- Stone 6 -->
+        <article class="product-stone">
+          <p class="product-category">Tool</p>
+          <h3 class="product-name"><a href="https://feedback-hub.craftgarden.studio">Feedback Hub</a></h3>
+          <p class="product-desc-en">Collect and analyze user feedback</p>
+          <p class="product-desc-jp">フィードバック収集・分析</p>
+        </article>
+
+        <!-- Stone 7 -->
+        <article class="product-stone">
+          <p class="product-category">Content</p>
+          <h3 class="product-name"><a href="https://ai-solo-builder.craftgarden.studio">AI Solo Builder</a></h3>
+          <p class="product-desc-en">Blog for solo builders leveraging AI</p>
+          <p class="product-desc-jp">AI活用ソロ開発者向けブログ</p>
+        </article>
+
+        <!-- Stone 8 -->
+        <article class="product-stone">
+          <p class="product-category">Content</p>
+          <h3 class="product-name"><a href="https://conf-hub.craftgarden.studio">Conf Hub</a></h3>
+          <p class="product-desc-en">Curated tech conference listings</p>
+          <p class="product-desc-jp">技術カンファレンス一覧</p>
+        </article>
+
+        <!-- Stone 9 -->
+        <article class="product-stone">
+          <p class="product-category">Content</p>
+          <h3 class="product-name"><a href="https://orcha.craftgarden.studio">Orcha</a></h3>
+          <p class="product-desc-en">Development process comparison platform</p>
+          <p class="product-desc-jp">開発プロセス比較</p>
+        </article>
+
+        <!-- Stone 10 -->
+        <article class="product-stone">
+          <p class="product-category">Content</p>
+          <h3 class="product-name"><a href="https://api-catalog-jp.craftgarden.studio">API Catalog JP</a></h3>
+          <p class="product-desc-en">Japanese API reference catalog</p>
+          <p class="product-desc-jp">日本語APIカタログ</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer" id="footer">
+      <span class="footer-name">craftgarden.studio</span>
+      <span class="footer-seal">庭</span>
+    </footer>
+
+  </div>
+</body>
+</html>
