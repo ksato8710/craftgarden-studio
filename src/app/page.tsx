@@ -1,7 +1,21 @@
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import Products from "@/components/Products";
+import Philosophy from "@/components/Philosophy";
+import TechStack from "@/components/TechStack";
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Craftyard Studio</h1>
-    </main>
+    <>
+      <Navigation />
+      <main>
+        <Hero />
+        <Products />
+        <Philosophy />
+        <TechStack />
+      </main>
+      <Footer />
+    </>
   );
 }
