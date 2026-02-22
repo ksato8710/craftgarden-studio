@@ -1,79 +1,84 @@
-const pillars = [
+const values = [
   {
-    titleEn: "Craft",
-    titleJp: "クラフト",
-    textEn: "Build with care. Ship with pride.",
-    textJp: "丁寧につくり、誇りをもって届ける。",
+    label: "Grow",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 20h10" /><path d="M12 20v-8" />
+        <path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z" />
+        <path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z" />
+      </svg>
+    ),
   },
   {
-    titleEn: "AI-Native",
-    titleJp: "AIネイティブ",
-    textEn: "AI is woven into every layer of the process.",
-    textJp: "AIはプロセスのすべてのレイヤーに織り込まれている。",
+    label: "Nurture",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22a9 9 0 0 0 9-9c0-3-1.5-5.5-4-7.5C14.5 3.5 12 2 12 2s-2.5 1.5-5 3.5C4.5 7.5 3 10 3 13a9 9 0 0 0 9 9z" />
+        <path d="M12 22V12" />
+      </svg>
+    ),
   },
   {
-    titleEn: "Solo Scale",
-    titleJp: "ソロスケール",
-    textEn: "One person, many products. Systems make it possible.",
-    textJp: "ひとりで、多くのプロダクトを。仕組みがそれを可能にする。",
+    label: "Bloom",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2v4" /><path d="M12 18v4" />
+        <path d="M4.93 4.93l2.83 2.83" /><path d="M16.24 16.24l2.83 2.83" />
+        <path d="M2 12h4" /><path d="M18 12h4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Ship",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" />
+      </svg>
+    ),
   },
 ];
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="section">
-      <div className="text-center">
-        <h2 className="text-text-bright">Philosophy</h2>
-      </div>
-
-      <blockquote className="mx-auto mt-10 max-w-3xl text-center">
-        <p className="text-[1.25rem] leading-[1.8] text-text-primary">
-          I build products alone, but never without purpose.
-          <br />
-          Every tool in this studio exists because someone — often me — needed
-          it. AI is my collaborator, not a shortcut. It accelerates the craft,
-          but the vision is always human.
-        </p>
-        <p
-          className="mt-6 text-[1rem] leading-[1.8] text-text-secondary"
-          lang="ja"
+    <section id="philosophy" className="relative z-2 bg-bg-warm px-6 py-20">
+      <div className="mx-auto max-w-[640px] text-center">
+        <svg
+          className="mx-auto mb-6 h-12 w-12 text-accent-sage"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          ひとりでつくる。でも、目的なくつくることはない。
-          <br />
-          この工房のすべてのツールは、誰かが — 多くの場合、自分が —
-          必要としたから生まれた。
-          <br />
-          AIは協力者であり、近道ではない。
-          <br />
-          ものづくりを加速させるが、ビジョンは常に人間のもの。
+          <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z" />
+        </svg>
+
+        <h2 className="mb-5 text-h2 font-[800] tracking-[-0.02em] text-text-deep">
+          A garden, not a factory
+        </h2>
+
+        <p className="mb-3 text-body text-text-muted" lang="ja">
+          工場ではなく、庭をつくる。
         </p>
-      </blockquote>
 
-      <div className="divider mx-auto my-12 max-w-xl" />
+        <p className="text-body leading-[1.85] text-text-muted">
+          Every product here is grown, not manufactured. Ideas are planted as
+          small seeds, watered with curiosity, and given time to take root. Some
+          bloom quickly; others need patience.
+        </p>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {pillars.map((pillar) => (
-          <div
-            key={pillar.titleEn}
-            className="rounded-xl border border-border bg-bg-secondary p-6 text-center"
-          >
-            <h3 className="text-[1.125rem] font-semibold text-text-bright">
-              {pillar.titleEn}
-            </h3>
-            <p className="mt-1 text-[0.8rem] text-text-muted" lang="ja">
-              {pillar.titleJp}
-            </p>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-text-secondary">
-              {pillar.textEn}
-            </p>
-            <p
-              className="mt-2 text-[0.875rem] leading-relaxed text-text-muted"
-              lang="ja"
-            >
-              {pillar.textJp}
-            </p>
-          </div>
-        ))}
+        <div className="mt-10 flex flex-wrap justify-center gap-8">
+          {values.map((v) => (
+            <div key={v.label} className="flex flex-col items-center gap-2.5">
+              <div className="h-8 w-8 text-accent-sage">{v.icon}</div>
+              <span className="font-heading text-[0.85rem] font-bold text-text-muted">
+                {v.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

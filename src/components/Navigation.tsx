@@ -6,42 +6,52 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-bg-primary/95 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.05)]"
-          : "bg-transparent"
+      className={`fixed top-0 right-0 left-0 z-50 border-b border-accent-leaf/10 backdrop-blur-[12px] transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_2px_20px_rgba(45,59,46,0.06)]" : ""
       }`}
+      style={{ background: "rgba(250, 250, 245, 0.9)" }}
     >
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex max-w-[1120px] items-center justify-between px-4 py-4 md:px-8"
+        className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-6"
       >
         <a
           href="#hero"
-          className="font-mono text-[1.25rem] font-medium tracking-[0.08em] text-text-bright"
+          className="flex items-center gap-2.5 font-heading text-[1.15rem] font-[800] tracking-[-0.01em] text-text-deep"
         >
+          <svg
+            className="h-5 w-5 shrink-0 text-accent-leaf"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z" />
+          </svg>
           craftgarden.studio
         </a>
 
-        <ul className="hidden items-center gap-8 sm:flex">
+        <ul className="hidden items-center gap-7 sm:flex">
           {[
             { href: "#products", label: "Products" },
             { href: "#philosophy", label: "Philosophy" },
-            { href: "#stack", label: "Stack" },
           ].map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[0.85rem] font-medium tracking-[0.02em] text-text-secondary transition-colors duration-150 hover:text-text-primary"
+                className="group relative font-heading text-[0.9rem] font-semibold text-text-muted transition-colors duration-200 hover:text-text-deep"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-0.5 w-0 rounded-sm bg-accent-leaf transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}

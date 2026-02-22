@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP } from "next/font/google";
+import { DM_Sans, Nunito } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-const notoSansJP = Noto_Sans_JP({
+const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-noto-sans-jp",
+  weight: ["600", "700", "800"],
+  variable: "--font-nunito",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "craftgarden.studio — Crafting digital products with AI and passion",
+  title: "craftgarden.studio — Plant ideas. Watch them grow. Have fun.",
   description:
-    "A solo builder's studio creating digital products powered by AI. Explore tools, apps, and content platforms built with Next.js, Flutter, Claude, and more.",
+    "A solo builder's garden crafting tools, products, and content with curiosity and care. Every project starts as a tiny seed.",
   metadataBase: new URL("https://craftgarden.studio"),
   openGraph: {
     title: "craftgarden.studio",
-    description: "Crafting digital products with AI and passion.",
+    description: "Plant ideas. Watch them grow. Have fun.",
     siteName: "craftgarden.studio",
     locale: "ja_JP",
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "craftgarden.studio",
-    description: "Crafting digital products with AI and passion.",
+    description: "Plant ideas. Watch them grow. Have fun.",
   },
   alternates: {
     canonical: "https://craftgarden.studio",
@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
+    <html lang="ja" className={`${dmSans.variable} ${nunito.variable}`}>
       <body>{children}</body>
     </html>
   );
