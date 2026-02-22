@@ -8,22 +8,25 @@ type Filter = (typeof FILTERS)[number];
 
 const categoryColors: Record<
   ProductCategory,
-  { badge: string; icon: string; strip: string }
+  { badge: string; icon: string; strip: string; shiori: string }
 > = {
   Product: {
     badge: "text-cat-product",
     icon: "bg-cat-product/12 text-cat-product",
     strip: "bg-cat-product/10",
+    shiori: "shiori-product",
   },
   Tool: {
     badge: "text-cat-tool",
     icon: "bg-cat-tool/12 text-cat-tool",
     strip: "bg-cat-tool/10",
+    shiori: "shiori-tool",
   },
   Content: {
     badge: "text-cat-content",
     icon: "bg-cat-content/12 text-cat-content",
     strip: "bg-cat-content/10",
+    shiori: "shiori-content",
   },
 };
 
@@ -117,10 +120,10 @@ export default function Products() {
               href={product.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col overflow-hidden rounded-[16px] border border-accent-leaf/8 bg-bg-card transition-all duration-350 hover:-translate-y-1.5 hover:border-accent-leaf/20 hover:shadow-[0_12px_32px_rgba(45,59,46,0.08)]"
+              className={`shiori-ribbon ${colors.shiori} group relative flex flex-col rounded-[16px] border border-accent-leaf/8 bg-bg-card transition-all duration-350 hover:-translate-y-1.5 hover:border-accent-leaf/20 hover:shadow-[0_12px_32px_rgba(45,59,46,0.08)]`}
             >
               {/* Botanical strip */}
-              <div className={`relative flex h-12 w-full items-center justify-center overflow-hidden ${colors.strip}`}>
+              <div className={`relative flex h-12 w-full items-center justify-center overflow-hidden rounded-t-[16px] ${colors.strip}`}>
                 <LeafStrip />
               </div>
 

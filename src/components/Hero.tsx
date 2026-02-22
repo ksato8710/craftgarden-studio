@@ -4,6 +4,33 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-30 pb-45 text-center"
     >
+      {/* 栞 Shiori: ribbon hanging from top center */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 z-1 -translate-x-1/2"
+        aria-hidden="true"
+      >
+        <div
+          className="w-[6px] rounded-b-sm"
+          style={{
+            height: 240,
+            background: "linear-gradient(to bottom, var(--color-accent-leaf) 0%, var(--color-accent-leaf) 90%, transparent 100%)",
+            opacity: 0.22,
+          }}
+        />
+        {/* V-notch */}
+        <div
+          className="mx-auto -mt-px"
+          style={{
+            width: 0,
+            height: 0,
+            borderLeft: "3px solid transparent",
+            borderRight: "3px solid transparent",
+            borderTop: "6px solid var(--color-accent-leaf)",
+            opacity: 0.22,
+          }}
+        />
+      </div>
+
       {/* Large botanical illustration — very subtle behind text */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
         <svg

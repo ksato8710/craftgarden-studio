@@ -4,6 +4,25 @@ export default function VineDivider() {
       className="relative z-2 flex h-20 w-full items-center justify-center overflow-hidden"
       aria-hidden="true"
     >
+      {/* 栞 Shiori: bookmark icon at vine center */}
+      <svg
+        className="absolute top-1/2 left-1/2 z-3 -translate-x-1/2 -translate-y-1/2 opacity-35"
+        width="14"
+        height="22"
+        viewBox="0 0 14 22"
+        fill="none"
+      >
+        <path
+          d="M1 0.5 L1 17.5 L7 14 L13 17.5 L13 0.5 Z"
+          fill="var(--color-accent-sage)"
+        />
+        <path
+          d="M1 0.5 L13 0.5"
+          stroke="var(--color-accent-sage)"
+          strokeWidth="0.6"
+          opacity="0.4"
+        />
+      </svg>
       <svg
         className="h-auto w-[min(90vw,600px)] text-accent-sage opacity-30"
         viewBox="0 0 600 40"

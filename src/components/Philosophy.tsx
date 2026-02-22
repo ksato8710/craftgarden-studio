@@ -42,9 +42,25 @@ const values = [
 export default function Philosophy() {
   return (
     <section id="philosophy" className="relative z-2 bg-bg-warm px-6 py-20">
-      <div className="mx-auto max-w-[640px] text-center">
+      <div className="relative mx-auto max-w-[640px] text-center">
+        {/* 栞 Shiori: crossed ribbons behind the content */}
+        <div
+          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          aria-hidden="true"
+          style={{ width: 220, height: 220, opacity: 0.12 }}
+        >
+          <div
+            className="absolute top-0 left-1/2 h-full w-[3px] rounded-sm bg-accent-sage"
+            style={{ transform: "translateX(-50%) rotate(25deg)" }}
+          />
+          <div
+            className="absolute top-0 left-1/2 h-full w-[3px] rounded-sm bg-accent-sage"
+            style={{ transform: "translateX(-50%) rotate(-25deg)" }}
+          />
+        </div>
+
         <svg
-          className="mx-auto mb-6 h-12 w-12 text-accent-sage"
+          className="relative z-1 mx-auto mb-6 h-12 w-12 text-accent-sage"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -55,21 +71,21 @@ export default function Philosophy() {
           <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z" />
         </svg>
 
-        <h2 className="mb-5 text-h2 font-[800] tracking-[-0.02em] text-text-deep">
+        <h2 className="relative z-1 mb-5 text-h2 font-[800] tracking-[-0.02em] text-text-deep">
           A garden, not a factory
         </h2>
 
-        <p className="mb-3 text-body text-text-muted" lang="ja">
+        <p className="relative z-1 mb-3 text-body text-text-muted" lang="ja">
           工場ではなく、庭をつくる。
         </p>
 
-        <p className="text-body leading-[1.85] text-text-muted">
+        <p className="relative z-1 text-body leading-[1.85] text-text-muted">
           Every product here is grown, not manufactured. Ideas are planted as
           small seeds, watered with curiosity, and given time to take root. Some
           bloom quickly; others need patience.
         </p>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-8">
+        <div className="relative z-1 mt-10 flex flex-wrap justify-center gap-8">
           {values.map((v) => (
             <div key={v.label} className="flex flex-col items-center gap-2.5">
               <div className="h-8 w-8 text-accent-sage">{v.icon}</div>
