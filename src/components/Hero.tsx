@@ -10,7 +10,7 @@ export default function Hero() {
     >
       <div className="animate-fade-in-up">
         <p className="mb-8 font-mono text-[1.25rem] font-medium tracking-[0.08em] text-text-muted">
-          craftyard.studio
+          craftgarden.studio
         </p>
 
         <h1 className="mx-auto max-w-3xl text-display font-bold leading-[1.15] tracking-[-0.02em] text-text-bright">

@@ -27,7 +27,7 @@ export default function Navigation() {
           href="#hero"
           className="font-mono text-[1.25rem] font-medium tracking-[0.08em] text-text-bright"
         >
-          craftyard.studio
+          craftgarden.studio
         </a>
 
         <ul className="hidden items-center gap-8 sm:flex">

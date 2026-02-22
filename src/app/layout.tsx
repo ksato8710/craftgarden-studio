@@ -17,25 +17,25 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "craftyard.studio — Crafting digital products with AI and passion",
+  title: "craftgarden.studio — Crafting digital products with AI and passion",
   description:
     "A solo builder's studio creating digital products powered by AI. Explore tools, apps, and content platforms built with Next.js, Flutter, Claude, and more.",
-  metadataBase: new URL("https://craftyard.studio"),
+  metadataBase: new URL("https://craftgarden.studio"),
   openGraph: {
-    title: "craftyard.studio",
+    title: "craftgarden.studio",
     description: "Crafting digital products with AI and passion.",
-    siteName: "craftyard.studio",
+    siteName: "craftgarden.studio",
     locale: "ja_JP",
     type: "website",
-    url: "https://craftyard.studio",
+    url: "https://craftgarden.studio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "craftyard.studio",
+    title: "craftgarden.studio",
     description: "Crafting digital products with AI and passion.",
   },
   alternates: {
-    canonical: "https://craftyard.studio",
+    canonical: "https://craftgarden.studio",
   },
 };
 

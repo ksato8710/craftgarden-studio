@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border px-4 py-16 text-center">
       <p className="font-mono text-[1rem] font-medium tracking-[0.08em] text-text-primary">
-        craftyard.studio
+        craftgarden.studio
       </p>
 
       <div className="mt-6 flex items-center justify-center gap-6">
@@ -17,7 +17,7 @@ export default function Footer() {
       </div>
 
       <p className="mt-8 text-[0.8rem] text-text-muted">
-        &copy; 2026 craftyard.studio. All rights reserved.
+        &copy; 2026 craftgarden.studio. All rights reserved.
       </p>
     </footer>
   );
