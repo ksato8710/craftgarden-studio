@@ -1,8 +1,8 @@
-# CLAUDE.md - craftyard.studio
+# CLAUDE.md - craftgarden.studio
 
 ## 概要
 
-craftyard.studio のコーポレートサイト / ポートフォリオサイト。
+craftgarden.studio のコーポレートサイト / ポートフォリオサイト。
 プロダクトエコシステム全体の「顔」となるランディングページ。
 
 ## 技術スタック
@@ -12,12 +12,12 @@ craftyard.studio のコーポレートサイト / ポートフォリオサイト
 | フレームワーク | Next.js 15 (App Router) |
 | スタイリング | Tailwind CSS 4 (`@theme` ディレクティブ) |
 | デプロイ先 | Vercel |
-| ドメイン | `craftyard.studio`（ルートドメイン直下） |
+| ドメイン | `craftgarden.studio`（ルートドメイン直下） |
 
 ## ドメイン
 
-このリポジトリは唯一サブドメインではなく、ルートドメイン `craftyard.studio` にデプロイされる。
-他のすべてのプロダクトは `{repo-name}.craftyard.studio` のサブドメインでデプロイされる。
+このリポジトリは唯一サブドメインではなく、ルートドメイン `craftgarden.studio` にデプロイされる。
+他のすべてのプロダクトは `{repo-name}.craftgarden.studio` のサブドメインでデプロイされる。
 
 ## ファイル構成
 

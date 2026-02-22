@@ -1,4 +1,4 @@
-# craftyard.studio Site Design Document
+# craftgarden.studio Site Design Document
 
 > Last updated: 2026-02-22
 
@@ -28,10 +28,10 @@ Single-page layout. All content on one scrollable page with smooth anchor naviga
 Fixed top bar. Transparent on hero, solid on scroll. Minimal presence.
 
 ```
-[craftyard.studio]                    [Products] [Philosophy] [Stack]
+[craftgarden.studio]                    [Products] [Philosophy] [Stack]
 ```
 
-- Logo: `craftyard.studio` in monospace-like weight, lowercase
+- Logo: `craftgarden.studio` in monospace-like weight, lowercase
 - No hamburger menu on mobile (sections are few enough to keep inline or hide nav)
 - Nav becomes opaque (`rgba(10, 14, 26, 0.95)`) after scrolling past hero
 
@@ -45,7 +45,7 @@ Full-viewport section. Dark, atmospheric. The "front door" of the studio.
 ```
                     ┌─────────────────────────────────────┐
                     │                                     │
-                    │          craftyard.studio            │  ← Logo / Wordmark
+                    │          craftgarden.studio            │  ← Logo / Wordmark
                     │                                     │
                     │   Crafting digital products          │  ← Tagline (large)
                     │   with AI and passion.               │
@@ -106,17 +106,17 @@ Card grid showcasing all products. Each card links to its subdomain.
 
 | Name | Description (EN) | Description (JP) | Category | URL |
 |------|-------------------|-------------------|----------|-----|
-| AI PM Service | AI-powered task management for solo builders | AIタスク管理で個人開発を加速 | Product | ai-pm-service.craftyard.studio |
-| History Quiz | Learn history through interactive quizzes | インタラクティブな歴史クイズ | Product | history-quiz-app.craftyard.studio |
-| WealthPilot | Personal asset management and tracking | 資産管理・資産トラッキング | Product | wealth-pilot.craftyard.studio |
-| Product Hub | Project management dashboard for the studio | スタジオ全体のプロジェクト管理 | Tool | product-hub.craftyard.studio |
-| Essential Navigator | Essential discovery and navigation tool | Essential Navigator | Tool | essential-navigator.craftyard.studio |
-| Content Studio | Content creation and management platform | コンテンツ管理プラットフォーム | Tool | content-studio.craftyard.studio |
-| Feedback Hub | Collect and analyze user feedback | フィードバック収集・分析 | Tool | feedback-hub.craftyard.studio |
-| AI Solo Builder | Blog for solo builders leveraging AI | AI活用ソロ開発者向けブログ | Content | ai-solo-builder.craftyard.studio |
-| Conf Hub | Curated tech conference listings | 技術カンファレンス一覧 | Content | conf-hub.craftyard.studio |
-| Orcha | Development process comparison platform | 開発プロセス比較 | Content | orcha.craftyard.studio |
-| API Catalog JP | Japanese API reference catalog | 日本語APIカタログ | Content | api-catalog-jp.craftyard.studio |
+| AI PM Service | AI-powered task management for solo builders | AIタスク管理で個人開発を加速 | Product | ai-pm-service.craftgarden.studio |
+| History Quiz | Learn history through interactive quizzes | インタラクティブな歴史クイズ | Product | history-quiz-app.craftgarden.studio |
+| WealthPilot | Personal asset management and tracking | 資産管理・資産トラッキング | Product | wealth-pilot.craftgarden.studio |
+| Product Hub | Project management dashboard for the studio | スタジオ全体のプロジェクト管理 | Tool | product-hub.craftgarden.studio |
+| Essential Navigator | Essential discovery and navigation tool | Essential Navigator | Tool | essential-navigator.craftgarden.studio |
+| Content Studio | Content creation and management platform | コンテンツ管理プラットフォーム | Tool | content-studio.craftgarden.studio |
+| Feedback Hub | Collect and analyze user feedback | フィードバック収集・分析 | Tool | feedback-hub.craftgarden.studio |
+| AI Solo Builder | Blog for solo builders leveraging AI | AI活用ソロ開発者向けブログ | Content | ai-solo-builder.craftgarden.studio |
+| Conf Hub | Curated tech conference listings | 技術カンファレンス一覧 | Content | conf-hub.craftgarden.studio |
+| Orcha | Development process comparison platform | 開発プロセス比較 | Content | orcha.craftgarden.studio |
+| API Catalog JP | Japanese API reference catalog | 日本語APIカタログ | Content | api-catalog-jp.craftgarden.studio |
 
 **Interaction:**
 - Category filter tabs above grid: `All` / `Product` / `Tool` / `Content`
@@ -132,7 +132,7 @@ Card grid showcasing all products. Each card links to its subdomain.
 
 ### 2.4 Philosophy / About
 
-The soul of craftyard. Why this exists, who builds it, how AI fits in.
+The soul of craftgarden. Why this exists, who builds it, how AI fits in.
 
 **Section Header:**
 
@@ -222,11 +222,11 @@ Minimal. Functional. Professional.
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│   craftyard.studio                                          │
+│   craftgarden.studio                                          │
 │                                                             │
 │   [GitHub]   [Email]                                        │
 │                                                             │
-│   © 2026 craftyard.studio. All rights reserved.             │
+│   © 2026 craftgarden.studio. All rights reserved.             │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -449,13 +449,13 @@ All interactive elements: minimum `44px` height on mobile (WCAG 2.5.5).
 ## 7. SEO & Meta
 
 ```html
-<title>craftyard.studio — Crafting digital products with AI and passion</title>
+<title>craftgarden.studio — Crafting digital products with AI and passion</title>
 <meta name="description" content="A solo builder's studio creating digital products powered by AI. Explore tools, apps, and content platforms built with Next.js, Flutter, Claude, and more." />
-<meta property="og:title" content="craftyard.studio" />
+<meta property="og:title" content="craftgarden.studio" />
 <meta property="og:description" content="Crafting digital products with AI and passion." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://craftyard.studio" />
-<link rel="canonical" href="https://craftyard.studio" />
+<meta property="og:url" content="https://craftgarden.studio" />
+<link rel="canonical" href="https://craftgarden.studio" />
 ```
 
 ---
@@ -466,7 +466,7 @@ All interactive elements: minimum `44px` height on mobile (WCAG 2.5.5).
 - **Framework**: Next.js 15 (App Router) — already initialized
 - **Styling**: Tailwind CSS 4 (`@theme` directive for design tokens)
 - **Deploy**: Vercel
-- **Domain**: craftyard.studio
+- **Domain**: craftgarden.studio
 
 ### File Structure (Planned)
 ```
