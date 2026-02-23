@@ -1,7 +1,7 @@
 # craftgarden Design System
 
 > **Quiet Garden** — A design system rooted in botanical tranquility.
-> Version 1.0 | Last updated: 2026-02-23
+> Version 1.1 | Last updated: 2026-02-24
 
 This design system defines the visual language, interaction patterns, and implementation standards for craftgarden.studio and all related products. It is the single source of truth for design decisions across the ecosystem.
 
@@ -88,15 +88,20 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
 
 #### Do's
 - Use generous whitespace (`py-20`+ between sections, `p-6` inside cards)
-- Keep botanical motifs subtle (opacity 0.1–0.5, blended into backgrounds)
-- Animate at natural rhythms (0.3s–0.8s transitions, 13s–22s drifts)
-- Stay within the green gradient range (leaf → sage → moss)
+- Keep botanical motifs subtle (opacity 0.10–0.38, blended into backgrounds)
+- Animate at natural rhythms (0.3s–0.8s transitions, 8s–22s drifts/falls)
+- Use `accent-leaf` for all interactive UI elements (CTA, links, focus)
+- Use plant colors (kaede, tsubaki, anzu) for decorative illustrations only
+- Balance 3 plants equally — one should not dominate the others
+- Use `<defs>` + `<use>` pattern for repeated SVG motifs (trees, canopies)
+- Add `radial-gradient` text protection when illustrations overlap text area
 - Use rounded shapes (`rounded-[16px]` cards, `rounded-full` buttons)
 - Support `prefers-reduced-motion` always
 - Add `aria-hidden="true"` to all decorative elements
 
 #### Don'ts
-- Use neon, high-saturation, or harsh colors
+- Use plant colors (kaede, tsubaki, anzu) for UI elements (buttons, links, badges)
+- Use neon, high-saturation, or harsh colors at full opacity
 - Use instant animations (< 100ms) — they feel mechanical
 - Leave sharp corners on any element
 - Use heavy drop shadows (keep to `rgba(45,59,46, 0.06–0.08)`)
@@ -104,6 +109,8 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
 - Exceed 3-column grid on any breakpoint
 - Display Japanese text at the same size as English
 - Make decorative elements interactive (`pointer-events-none` always)
+- Use `leaf-fall` animations outside of the Hero section
+- Place more than 8 falling leaf elements in a single section
 
 ---
 
@@ -133,6 +140,41 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
 | `--color-accent-moss` | `#4A7051` | CTA hover state. Deeper green |
 | `--color-accent-bark` | `#8B7355` | Earth tone (extension) |
 | `--color-accent-bloom` | `#C4926B` | Warm amber (extension) |
+
+#### Plant-Specific Colors (花の彩り)
+
+craftgarden の三花 — 杏(あんず)・椿(つばき)・楓(かえで) — は庭の個性を象徴する固有色。v1.1 で追加。
+
+| Token | HEX | Plant | Usage |
+|-------|-----|-------|-------|
+| `--color-anzu` | `#F08C28` | 杏 Apricot | 標準。花びら、ブロッサム、装飾 |
+| `--color-anzu-hot` | `#FF9A1F` | 杏 Apricot | 強調。ホバー、アクティブ、グラデーション端 |
+| `--color-tsubaki` | `#E05577` | 椿 Camellia | 標準。花弁、装飾、カードストリップ |
+| `--color-tsubaki-hot` | `#F0487A` | 椿 Camellia | 強調。ホバー、グラデーション端 |
+| `--color-kaede` | `#D63E2F` | 楓 Maple | 標準。葉、装飾、カードストリップ |
+| `--color-kaede-hot` | `#E8442E` | 楓 Maple | 強調。ホバー、グラデーション端 |
+| `--color-bark` | `#7A5E3A` | 幹 Bark | 樹木の幹・枝（主線） |
+| `--color-bark-dark` | `#5C4428` | 幹 Bark | 幹の影・副線 |
+| `--color-leaf-dark` | `#3D6B45` | 葉 Foliage | 常緑の葉。椿の葉、緑葉散り |
+
+**植物色の利用ルール：**
+
+| Rule | Description |
+|------|-------------|
+| **装飾専用** | 植物色は UI 操作要素（ボタン、リンク等）に使わない。`accent-leaf` が UI の主色 |
+| **低〜中オパシティ** | SVG fill には `0.10–0.38` の範囲で使用。直接べた塗りはしない |
+| **3色バランス** | 一つの植物が突出しないよう、3種を均等に配置する |
+| **交互使用** | 同一植物の `標準` と `hot` を交互に使い、単調さを避ける |
+| **グラデーション方向** | `楓 → 椿 → 杏 → leaf` の順序を維持（暖色→寒色へ） |
+| **テキスト保護** | 植物装飾がテキスト領域に重なる場合、必ず `radial-gradient` の保護オーバーレイを配置 |
+
+**植物色のコントラスト（bg-cream上）：**
+
+| Color | Ratio | Note |
+|-------|:-----:|------|
+| `--color-kaede` on bg-cream | **4.8:1** | Large text OK. 装飾のみに使用 |
+| `--color-tsubaki` on bg-cream | **3.8:1** | 装飾のみ。テキストには使用不可 |
+| `--color-anzu` on bg-cream | **2.5:1** | 装飾のみ。最も低コントラスト |
 
 #### Category
 | Token | HEX | Usage |
@@ -169,6 +211,17 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
   --color-accent-bark: #8B7355;
   --color-accent-bloom: #C4926B;
 
+  /* Plant-Specific Colors — 杏・椿・楓 (v1.1) */
+  --color-anzu: #F08C28;
+  --color-anzu-hot: #FF9A1F;
+  --color-tsubaki: #E05577;
+  --color-tsubaki-hot: #F0487A;
+  --color-kaede: #D63E2F;
+  --color-kaede-hot: #E8442E;
+  --color-bark: #7A5E3A;
+  --color-bark-dark: #5C4428;
+  --color-leaf-dark: #3D6B45;
+
   /* Category */
   --color-cat-product: #6B8F71;
   --color-cat-tool: #7E9AAB;
@@ -196,12 +249,15 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
 #### Decorative SVG Opacity
 | Range | Usage |
 |-------|-------|
-| `0.10–0.18` | Flower/leaf fill (most subtle) |
-| `0.22` | Hero shiori ribbon |
-| `0.25–0.35` | Branch decorative strokes |
-| `0.30` | Side decorative branches |
-| `0.40–0.50` | Main branch strokes |
+| `0.08–0.12` | Philosophy section decorative flowers |
+| `0.10–0.18` | Scattered petals / buds in hero background |
+| `0.16–0.22` | Hero tree trunk strokes (`--color-bark`) |
+| `0.22` | BotanicalBackground (page-wide, global opacity) |
+| `0.25–0.38` | Hero tree leaves and flowers (tsubaki, kaede) |
+| `0.25–0.32` | Hero anzu canopy blossoms |
 | `0.82` | Shiori ribbon (cards) default |
+| `0.85` | Hero tree container opacity |
+| `0.90` | Hero anzu canopy container opacity |
 | `0.95` | Shiori ribbon hover |
 
 #### Footer Text Opacity
@@ -215,14 +271,23 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
 
 ### 2.4 Category Color Application Pattern
 
-Each category color is applied consistently in 4 variations:
+Each category color is applied consistently in 5 variations:
 
 | Variant | Pattern | Example (Product) |
 |---------|---------|-------------------|
 | Badge text | `text-cat-{name}` | `text-cat-product` |
 | Icon container | `bg-cat-{name}/12 text-cat-{name}` | `bg-cat-product/12 text-cat-product` |
-| Strip background | `bg-cat-{name}/10` | `bg-cat-product/10` |
+| Strip background | `bg-gradient-to-br from-cat-{name}/8 to-{plant}/6` | `from-cat-product/8 to-kaede/6` |
+| Strip decoration | Plant-specific SVG component | `<KaedeStrip />` |
 | Shiori ribbon | `.shiori-{name}` | `.shiori-product` |
+
+#### Category × Plant Mapping
+
+| Category | Plant | Strip SVG | Strip Gradient |
+|----------|-------|-----------|----------------|
+| Product | 楓 Kaede | Maple leaves + green leaf | `from-cat-product/8 to-kaede/6` |
+| Tool | 椿 Tsubaki | Camellia flower | `from-cat-tool/8 to-tsubaki/6` |
+| Content | 杏 Anzu | Apricot blossoms | `from-cat-content/8 to-anzu/6` |
 
 ### 2.5 Shadow System
 
@@ -763,12 +828,18 @@ Values: mt-10, flex gap-8
 
 ```
 Container: h-20, flex center, overflow-hidden, aria-hidden
-SVG: w-[min(90vw, 600px)], text-accent-sage, opacity-30
+SVG: w-[min(90vw, 600px)], opacity-45
+
 Structure:
-  - Wave path (strokeWidth 1.2, strokeLinecap round)
-  - 8 leaf shapes (fill, alternating above/below, opacity 0.15-0.2)
-  - 5 berry dots (circle r 2-2.5, opacity 0.15-0.2)
-  - Central bookmark icon (14x22, fill sage, opacity 0.35)
+  - Gradient vine path (strokeWidth 1.8, strokeLinecap round)
+    stroke: linearGradient(kaede → tsubaki → anzu → accent-leaf)
+  - 4 colored berry dots:
+    • cx=120, r=5, fill=kaede, opacity=0.5
+    • cx=250, r=6, fill=tsubaki, opacity=0.45
+    • cx=380, r=5, fill=anzu, opacity=0.5
+    • cx=500, r=4, fill=accent-leaf, opacity=0.45
+
+Gradient direction: left=kaede(0%) → tsubaki(35%) → anzu(70%) → leaf(100%)
 ```
 
 ### 5.7 Footer
@@ -840,20 +911,110 @@ Color: bg-accent-sage, opacity 0.12
 Width: 220x220px container
 ```
 
-### 5.9 Botanical Background
+### 5.9 Botanical Background (Page-Wide)
 
 ```
 Position: fixed inset-0, z-0, pointer-events-none
-Color: text-accent-leaf, opacity-22 (global)
+Opacity: 0.22 (global container, no text-color class)
 
-Elements (18 total):
-  Kaede (maple): 6 instances, 25-70px, opacity 0.3-0.6
-  Anzu (apricot): 3 blossoms + 2 petals, 16-50px, opacity 0.3-0.5
-  Tsubaki (camellia): 3 flowers + 2 leaves + 1 bud, 18-65px, opacity 0.3-0.45
+Elements (18 total) — each with its own plant-specific fill color:
+  Kaede (maple): 6 instances, 25-70px
+    fill: var(--color-kaede) / var(--color-kaede-hot), alternating
+    stem stroke: matching kaede color
+  Anzu (apricot): 3 blossoms + 2 petals + 1 bud, 16-50px
+    fill: var(--color-anzu) / var(--color-anzu-hot)
+  Tsubaki (camellia): 3 flowers + 2 thick leaves, 25-65px
+    fill: var(--color-tsubaki) / var(--color-tsubaki-hot)
+    thick leaf fill: var(--color-leaf-dark), vein stroke: var(--color-bg-cream)
+  Falling petals: 2 single ellipses, 16-20px
+    fill: var(--color-tsubaki) and var(--color-anzu)
 
 Animation: gentle-drift, 13s-22s each, ease-in-out, infinite
 Placement: edges of viewport, avoiding center content area
-Mobile: Side decoratives hidden (max-md:hidden)
+Mobile: All elements render (no breakpoint hiding)
+```
+
+### 5.10 Hero Tree Composition (Blooming Garden)
+
+ヒーローセクションの庭園構図。3本の庭木がテキストの両脇と上部を囲み、庭園のアーチを形成する。
+
+```
+Structure (front to back):
+  z-2: Hero text content (max-w-680)
+  z-1: Text protection gradient (radial-gradient overlay)
+  z-0: Falling leaf animations (8 animated SVG groups)
+  z-0: Scattered botanical background (25 elements in 1000x800 viewBox)
+  z-0: Anzu canopy (top, 25 blossoms on 3 arching branches)
+  z-0: Tsubaki tree (left, green leaves + pink flowers)
+  z-0: Kaede tree (right, red star-shaped leaves)
+```
+
+#### Tsubaki Tree (Left)
+```
+Position: absolute, left: -8%, bottom: 0
+Size: width: min(48vw, 520px), height: 68%
+Opacity: 0.85
+SVG viewBox: 0 0 500 700, preserveAspectRatio: xMidYMax meet
+Contents:
+  - Trunk: 2 paths (bark + bark-dark), strokeWidth 7/5
+  - Branches: 3 paths (bark), strokeWidth 4-4.5
+  - Leaves: ~25 ellipses, fill=leaf-dark, opacity 0.15-0.22
+  - Flowers: 15 <use href="#tf">, fill=tsubaki, opacity 0.30-0.38
+Mobile: max-md:hidden
+```
+
+#### Kaede Tree (Right)
+```
+Position: absolute, right: -8%, bottom: 0
+Size: width: min(48vw, 520px), height: 68%
+Opacity: 0.85
+SVG viewBox: 0 0 500 700, preserveAspectRatio: xMidYMax meet
+Contents:
+  - Trunk: 2 paths (mirrored), strokeWidth 7/5
+  - Branches: 3 paths (bark), strokeWidth 4-4.5
+  - Leaves: ~40 <use href="#kl">, fill=kaede/kaede-hot alternating
+    opacity 0.25-0.30, scale 0.30-0.55
+Mobile: max-md:hidden
+```
+
+#### Anzu Canopy (Top)
+```
+Position: absolute, top: 0, left: 10%, right: 10%
+Height: 35%
+Opacity: 0.9
+SVG viewBox: 0 0 800 280, preserveAspectRatio: xMidYMin meet
+Contents:
+  - Arching branches: 3 paths (bark), strokeWidth 2-3
+  - Blossoms: 25 <use href="#af">, fill=anzu, opacity 0.25-0.32
+    scale 0.36-0.55, spread across 3 branch lines
+Mobile: left: 2%, right: 2% (wider spread)
+```
+
+#### Text Protection Gradient
+```
+Position: absolute inset-0, z-1, pointer-events-none
+Background: radial-gradient(
+  ellipse 62% 60% at 50% 48%,
+  #FAFAF5 0%,             ← solid center
+  rgba(250,250,245,1) 25%,
+  rgba(250,250,245,.92) 40%,
+  rgba(250,250,245,.5) 55%,
+  rgba(250,250,245,.15) 68%,
+  transparent 80%          ← fade to transparent at edges
+)
+Purpose: テキストの可読性を保証しながら、周辺の植物装飾を透過させる
+```
+
+#### Scattered Botanical Background
+```
+SVG viewBox: 0 0 1000 800, preserveAspectRatio: xMidYMid slice
+Elements (25 total):
+  - Kaede leaves: 5, fill=kaede/kaede-hot, opacity 0.14-0.18
+  - Tsubaki petals: 6, fill=tsubaki, opacity 0.12-0.16
+  - Anzu petals: 7, fill=anzu, opacity 0.12-0.15
+  - Green leaves: 4, fill=leaf-dark, opacity 0.11-0.14
+  - Anzu buds: 3, fill=anzu, opacity 0.10-0.12
+Placement: viewport全域に均等散布。中央は避ける（テキスト保護と重複するため）
 ```
 
 ---
@@ -881,6 +1042,7 @@ Mobile: Side decoratives hidden (max-md:hidden)
 | `patient` | `400ms` | Icon sway, card lift | Branch returning |
 | `entrance` | `800ms` | Content appearance | Seedling emerging |
 | `drift` | `13s–22s` | Background botanicals | Garden in the wind |
+| `falling` | `8s–12s` | Falling leaf/petal animations | Autumn scatter |
 
 ### 6.3 Easing Functions
 
@@ -924,7 +1086,94 @@ Mobile: Side decoratives hidden (max-md:hidden)
 /* Usage: 0.6s ease, triggered on group-hover */
 ```
 
-### 6.5 Transition Map
+#### `leaf-fall` — Autumn Scatter (3 variants)
+
+落ち葉が風に舞いながら降りてくるアニメーション。3つのバリアントを組み合わせて自然な散り方を表現する。
+
+```css
+@keyframes leaf-fall {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.28; }
+  25%  { transform: translate(-15px, 40px) rotate(45deg); opacity: 0.24; }
+  50%  { transform: translate(5px, 90px) rotate(90deg); opacity: 0.20; }
+  75%  { transform: translate(-10px, 150px) rotate(135deg); opacity: 0.14; }
+  100% { transform: translate(8px, 220px) rotate(180deg); opacity: 0; }
+}
+
+@keyframes leaf-fall-2 {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.25; }
+  25%  { transform: translate(12px, 50px) rotate(-40deg); opacity: 0.22; }
+  50%  { transform: translate(-8px, 110px) rotate(-80deg); opacity: 0.16; }
+  75%  { transform: translate(15px, 170px) rotate(-120deg); opacity: 0.10; }
+  100% { transform: translate(-5px, 240px) rotate(-160deg); opacity: 0; }
+}
+
+@keyframes leaf-fall-3 {
+  0%   { transform: translate(0, 0) rotate(10deg); opacity: 0.22; }
+  30%  { transform: translate(-20px, 60px) rotate(60deg); opacity: 0.18; }
+  60%  { transform: translate(10px, 130px) rotate(110deg); opacity: 0.12; }
+  100% { transform: translate(-12px, 200px) rotate(170deg); opacity: 0; }
+}
+```
+
+**Falling Leaf 利用ルール：**
+
+| Rule | Description |
+|------|-------------|
+| **8 要素が上限** | 1セクションあたり最大8つの落ち葉アニメーション要素を配置 |
+| **3 バリアントを混合** | `leaf-fall`, `leaf-fall-2`, `leaf-fall-3` を均等に割り当てる |
+| **duration は 8s–12s** | 早すぎず遅すぎない自然なペース |
+| **delay でずらす** | 各要素に 0s–7s の delay を設定し、同時発生を避ける |
+| **3 植物 + 緑を混合** | kaede, tsubaki, anzu, leaf-dark の4種を含める |
+| **opacity は 0.20–0.28** | 開始時の最大 opacity。終了時は必ず 0 にフェードアウト |
+| **translate は ±20px, +220px** | 水平の揺れは ±20px 以内。垂直の移動は 200–240px |
+| **rotate は ±180deg** | 1サイクルでほぼ半回転。自然な回転に見える |
+
+**配置の具体例（Hero）：**
+
+| # | Animation | Duration | Delay | Plant | Position |
+|---|-----------|:--------:|:-----:|-------|----------|
+| 1 | leaf-fall | 8s | 0s | kaede | (200, 350) |
+| 2 | leaf-fall-2 | 10s | 2s | kaede-hot | (750, 300) |
+| 3 | leaf-fall-3 | 12s | 4s | tsubaki | (150, 200) |
+| 4 | leaf-fall | 9s | 6s | tsubaki | (800, 250) |
+| 5 | leaf-fall-2 | 11s | 1s | anzu | (350, 100) |
+| 6 | leaf-fall-3 | 10s | 3s | anzu | (600, 80) |
+| 7 | leaf-fall | 11s | 5s | leaf-dark | (450, 400) |
+| 8 | leaf-fall-2 | 9s | 7s | tsubaki | (280, 150) |
+
+### 6.5 Animation Policy (アニメーション方針)
+
+#### 許可されるアニメーション
+
+| Type | Where | Duration | Trigger |
+|------|-------|:--------:|---------|
+| `fade-in-up` | コンテンツ要素の初回表示 | 800ms | ページロード |
+| `gentle-drift` | BotanicalBackground の浮遊 | 13s–22s | 常時（infinite） |
+| `gentle-sway` | カードアイコンの揺れ | 600ms | hover |
+| `leaf-fall` 系 | ヒーローの落ち葉 | 8s–12s | 常時（infinite） |
+| CSS transition | ホバー、フォーカスの状態変化 | 150ms–400ms | hover/focus |
+
+#### 禁止されるアニメーション
+
+| Type | Reason |
+|------|--------|
+| バウンス / スプリング（強い弾性） | 機械的で庭の静謐さに合わない |
+| パーティクルシステム | 過度な動き。パフォーマンス負荷 |
+| スクロールトリガーの視差効果 | 複雑さを増し、アクセシビリティの懸念 |
+| 3D トランスフォーム | フラットな庭の世界観を壊す |
+| SMIL アニメーション | CSS で代替。ブラウザ互換性の問題 |
+| 点滅 / フラッシュ | WCAG 2.3.1 違反の恐れ |
+
+#### `prefers-reduced-motion` 対応
+
+**全アニメーションは `prefers-reduced-motion: reduce` で無効化される。** 例外なし。
+
+- `leaf-fall` 系 → 最終フレーム（opacity: 0）で静止 → 実質非表示
+- `gentle-drift` → 初期位置で静止
+- `fade-in-up` → 最終位置で即座に表示
+- CSS transitions → 0.01ms に短縮（イベント発火のため完全 0ms にはしない）
+
+### 6.6 Transition Map
 
 | Component | Property | Duration | Easing |
 |-----------|----------|:--------:|--------|
@@ -940,7 +1189,7 @@ Mobile: Side decoratives hidden (max-md:hidden)
 | Filter | all | 150ms | ease |
 | Footer link | opacity | 200ms | ease |
 
-### 6.6 Reduced Motion
+### 6.7 Reduced Motion
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -996,61 +1245,149 @@ Mobile: Side decoratives hidden (max-md:hidden)
 
 **Rules:** Min 16px. No rotation/stretching. No animation. accent-leaf or accent-sage only.
 
-### 7.3 Botanical Motifs
+### 7.3 Botanical Motifs — 三花の定義
 
-#### Kaede (楓 Japanese Maple)
+craftgarden の三花は **楓(kaede)・椿(tsubaki)・杏(anzu)** の3つ。すべて SVG の `fill` ベースで描画し、各植物固有の色トークンを使用する。
+
+#### Kaede (楓 Japanese Maple Leaf)
+
 ```
-SVG: star-shaped 7-point leaf (fill-based)
-Path: M50 8 L55 30 L72 18 L60 38...Z (viewBox 0 0 100 100)
-Size: 25–70px | Opacity: 0.13–0.6
-Always slightly rotated. Large ones get gentle-drift animation.
-Placement: viewport edges, avoid center.
+Type: star-shaped 7-point leaf (fill-based)
+viewBox: 0 0 100 100
+Reusable ID: #kl
+Path: M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65
+      L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48
+      L20 35 L40 38 L28 18 L45 30 Z
+
+Fill colors: var(--color-kaede) / var(--color-kaede-hot), alternating
+Size range: 16–70px
+Opacity range:
+  - BotanicalBackground (page): 0.30–0.60 (within 0.22 global container)
+  - Hero scattered: 0.14–0.18
+  - Hero tree (right): 0.25–0.30, scale 0.30–0.55
+  - Card strip: 0.15–0.25
+  - Philosophy decoration: 0.08
+
+Always slightly rotated (±5°–±40°).
+Large instances (>= 40px) get gentle-drift animation.
+```
+
+#### Tsubaki (椿 Camellia Flower)
+
+```
+Type: 6-petal flower (60° rotation ellipses) + 3 stamens
+Reusable ID: #tf
+Structure:
+  <g id="tf">
+    6 × <ellipse cx="0" cy="-15" rx="10" ry="16" transform="rotate(N×60)"/>
+    3 × <circle r="1.5" fill="var(--color-anzu)" opacity="0.5"/>  ← stamens
+  </g>
+
+Fill colors: var(--color-tsubaki) / var(--color-tsubaki-hot)
+Stamen color: var(--color-anzu) opacity 0.5 (cross-plant reference)
+Size range: 25–65px
+Opacity range:
+  - BotanicalBackground: 0.20–0.45 (within 0.22 container)
+  - Hero tree (left): 0.30–0.38, scale 0.30–0.45
+  - Card strip: 0.22
+  - Philosophy decoration: 0.12
+
+Leaf variant: ellipse (rx 14, ry 28), fill=leaf-dark + optional midrib stroke
+Most complex motif — use sparingly. Max 15 per tree.
 ```
 
 #### Anzu (杏 Apricot Blossom)
+
 ```
-SVG: 5-petal flower (72° rotation ellipses + center circle)
-Size: 35–50px | Opacity: 0.35–0.5
-Alternate petal opacity (odd/even). Place between kaede leaves.
+Type: 5-petal flower (72° rotation ellipses) + center circle
+Reusable ID: #af
+Structure:
+  <g id="af">
+    5 × <ellipse cx="0" cy="-10" rx="7" ry="12" transform="rotate(N×72)"/>
+    1 × <circle cx="0" cy="0" r="3" opacity="0.4"/>  ← pistil
+  </g>
+
+Fill color: var(--color-anzu) only (hot variant はグラデーション端で使用)
+Size range: 20–50px
+Opacity range:
+  - BotanicalBackground: 0.35–0.50 (within 0.22 container)
+  - Hero canopy: 0.25–0.32, scale 0.36–0.55
+  - Hero scattered: 0.10–0.15
+  - Card strip: 0.16–0.24
+  - Philosophy decoration: 0.12
+
+Placed in clusters along arching branches (canopy pattern).
+Max 25 blossoms per canopy.
 ```
 
-#### Tsubaki (椿 Camellia)
+#### Tree Trunk & Branches (幹と枝)
+
 ```
-SVG: 6-petal flower (60° rotation) + inner petals + stamens
-Size: 35–65px | Opacity: 0.2–0.45
-Largest and most complex motif. Use sparingly.
-Optional thick leaf variant (ellipse + white midrib).
+Type: stroke-based paths (no fill)
+Colors:
+  - Main trunk: var(--color-bark), strokeWidth 5–7, opacity 0.20–0.24
+  - Shadow trunk: var(--color-bark-dark), strokeWidth 4–5, opacity 0.18–0.20
+  - Branches: var(--color-bark), strokeWidth 2–4.5, opacity 0.18–0.22
+
+Structure:
+  - Trunk: 2 parallel curves (main + shadow) from bottom to crown
+  - Branches: 3 per tree, diverging from trunk at different heights
+  - Canopy branches: thinner (2–3px), arching curves from top edge
+
+strokeLinecap: round (always)
+No fill on trunk/branch paths.
 ```
 
-#### Falling Petals
-```
-SVG: single ellipse (viewBox 0 0 30 30)
-Size: 16–20px | Opacity: 0.3–0.35
-Slowest drift (20s–22s). Accent for spatial density.
+### 7.4 SVG Reuse Pattern (`<defs>` + `<use>`)
+
+ヒーローの木を描画する際、同じ花/葉の形状を大量に繰り返すため、SVG `<defs>` + `<use href>` パターンで冗長性を排除する。
+
+```jsx
+{/* Hidden SVG defs — render once, reference many times */}
+<svg style={{ display: "none" }} aria-hidden="true">
+  <defs>
+    <path id="kl" d="M50 8 L55 30 L72 18..." />       {/* kaede leaf */}
+    <g id="tf">...</g>                                   {/* tsubaki flower */}
+    <g id="af">...</g>                                   {/* anzu blossom */}
+  </defs>
+</svg>
+
+{/* Usage — fill and opacity per instance */}
+<g transform="translate(280 280) scale(.55) rotate(10)">
+  <use href="#kl" fill="var(--color-kaede)" opacity=".30" />
+</g>
 ```
 
-### 7.4 SVG Implementation Guidelines
+**ルール：**
+- `<defs>` は使用するコンポーネント内に1回だけ配置する（グローバルではない）
+- `id` は短く: `kl` (kaede leaf), `tf` (tsubaki flower), `af` (anzu flower)
+- `<use>` ごとに `fill`, `opacity`, `transform` を個別指定
+- `transform` には `translate`, `scale`, `rotate` をスペース区切りで記述
+
+### 7.5 SVG Implementation Guidelines
 
 - **Inline SVG only** (no external files)
-- **`currentColor`** for fill/stroke (inherit from parent)
-- **`viewBox` required**, size controlled by CSS classes
+- **Plant-specific colors**: 装飾 SVG には `currentColor` ではなく `var(--color-{plant})` を直接指定
+- **UI icons**: `currentColor` を使用（親要素の text color を継承）
+- **`viewBox` required**, size controlled by CSS classes or inline style
 - **`aria-hidden="true"`** on all decorative SVGs
 - **No filters, clipPath, mask, or SMIL** — use CSS for animation
+- **`<defs>` + `<use>`** for repeated motifs (trees, canopies)
 - **Integer coordinates** where possible
 - **Decorative elements**: always `pointer-events-none`
+- **`preserveAspectRatio`**: Trees use `xMidYMax meet` (bottom-anchored), canopy uses `xMidYMin meet` (top-anchored)
 
-### 7.5 Decorative Opacity Guide
+### 7.6 Decorative Opacity Guide
 
 | Range | Character | Usage |
 |-------|-----------|-------|
-| 0.06–0.10 | Nearly invisible | Hero background art, borders |
-| 0.10–0.20 | Barely visible | LeafStrip, crossed ribbons |
-| 0.20–0.35 | Presence felt | BotanicalBackground, VineDivider |
-| 0.35–0.50 | Clearly visible | Individual botanical fills |
-| 0.50–0.60 | Prominent | Kaede leaf max opacity |
+| 0.06–0.10 | Nearly invisible | Philosophy section flowers, buds |
+| 0.10–0.18 | Barely visible | Scattered petals, card strip SVGs |
+| 0.20–0.30 | Presence felt | Tree leaves, canopy blossoms |
+| 0.30–0.38 | Clearly visible | Tsubaki flowers on tree, kaede leaves |
 | 0.82–0.95 | Semi-opaque | Shiori ribbons |
 
-**Rule:** Decorative elements stay below 0.5. Content readability is never compromised.
+**Rule:** 植物装飾は個々の要素で 0.38 を超えない。コンテナ opacity (0.85–0.90) と組み合わせても **実効 opacity は 0.32 以下** になるよう設計する。テキストの可読性は常に最優先。
 
 ---
 
