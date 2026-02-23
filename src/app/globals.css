@@ -26,6 +26,17 @@
   --color-accent-bark: #8B7355;
   --color-accent-bloom: #C4926B;
 
+  /* Plant-specific colors — 杏(anzu)・椿(tsubaki)・楓(kaede) */
+  --color-anzu: #F08C28;
+  --color-anzu-hot: #FF9A1F;
+  --color-tsubaki: #E05577;
+  --color-tsubaki-hot: #F0487A;
+  --color-kaede: #D63E2F;
+  --color-kaede-hot: #E8442E;
+  --color-bark: #7A5E3A;
+  --color-bark-dark: #5C4428;
+  --color-leaf-dark: #3D6B45;
+
   /* Category colors */
   --color-cat-product: #6B8F71;
   --color-cat-tool: #7E9AAB;
@@ -75,6 +86,29 @@
   0%, 100% { transform: rotate(0deg); }
   25%      { transform: rotate(-6deg); }
   75%      { transform: rotate(6deg); }
+}
+
+@keyframes leaf-fall {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.28; }
+  25%  { transform: translate(-15px, 40px) rotate(45deg); opacity: 0.24; }
+  50%  { transform: translate(5px, 90px) rotate(90deg); opacity: 0.20; }
+  75%  { transform: translate(-10px, 150px) rotate(135deg); opacity: 0.14; }
+  100% { transform: translate(8px, 220px) rotate(180deg); opacity: 0; }
+}
+
+@keyframes leaf-fall-2 {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.25; }
+  25%  { transform: translate(12px, 50px) rotate(-40deg); opacity: 0.22; }
+  50%  { transform: translate(-8px, 110px) rotate(-80deg); opacity: 0.16; }
+  75%  { transform: translate(15px, 170px) rotate(-120deg); opacity: 0.10; }
+  100% { transform: translate(-5px, 240px) rotate(-160deg); opacity: 0; }
+}
+
+@keyframes leaf-fall-3 {
+  0%   { transform: translate(0, 0) rotate(10deg); opacity: 0.22; }
+  30%  { transform: translate(-20px, 60px) rotate(60deg); opacity: 0.18; }
+  60%  { transform: translate(10px, 130px) rotate(110deg); opacity: 0.12; }
+  100% { transform: translate(-12px, 200px) rotate(170deg); opacity: 0; }
 }
 
 /* --- Base Styles --- */

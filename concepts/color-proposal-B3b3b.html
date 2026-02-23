@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal B3b3b — Mixed Forest（三樹の杜）</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@600;700;800&display=swap');
+
+  :root {
+    --bg-cream: #FAFAF5;
+    --bg-warm: #F5F2EC;
+    --bg-card: #F0EDE6;
+    --text-deep: #2D3B2E;
+    --text-muted: #5C7260;
+    --text-light: #8A9E8C;
+    --accent-leaf: #6B8F71;
+    --accent-sage: #9BB09E;
+    --accent-moss: #4A7051;
+    --anzu: #F08C28;
+    --anzu-hot: #FF9A1F;
+    --tsubaki: #E05577;
+    --tsubaki-hot: #F0487A;
+    --kaede: #D63E2F;
+    --kaede-hot: #E8442E;
+    --bark: #7A5E3A;
+    --bark-dark: #5C4428;
+    --leaf-dark: #3D6B45;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg-cream); color: var(--text-deep); overflow-x: hidden; }
+  h1, h2, h3 { font-family: 'Nunito', sans-serif; }
+
+  .proposal-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: linear-gradient(135deg, var(--kaede-hot), var(--tsubaki-hot), var(--anzu-hot));
+    color: white; padding: 8px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(250,250,245,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107,143,113,0.1);
+  }
+  nav .inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px; }
+  nav .logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--text-deep); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a { font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 120px 24px 180px;
+    position: relative; overflow: hidden;
+  }
+  .botanical-bg { position: absolute; inset: 0; pointer-events: none; }
+  .botanical-bg svg { position: absolute; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 18px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    border: 1px solid rgba(107,143,113,0.15); background: rgba(107,143,113,0.08);
+    color: var(--accent-leaf); margin-bottom: 32px;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 6.5vw, 4rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; position: relative; z-index: 2; }
+  .hero h1 .green { color: var(--accent-leaf); }
+  .hero .sub-jp { margin-top: 16px; font-family: 'Nunito', sans-serif; font-size: clamp(0.95rem, 2.2vw, 1.2rem); font-weight: 600; color: var(--text-muted); }
+  .hero .desc { margin-top: 20px; max-width: 500px; font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.75; color: var(--text-light); }
+  .hero .cta {
+    margin-top: 40px; display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px; border-radius: 999px; background: var(--accent-leaf);
+    color: white; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
+    text-decoration: none; box-shadow: 0 4px 16px rgba(107,143,113,0.25);
+  }
+
+  .hero-forest { position: absolute; inset: 0; pointer-events: none; }
+
+  .vine-divider { height: 80px; display: flex; align-items: center; justify-content: center; }
+
+  .products { padding: 40px 24px 100px; }
+  .products h2 { text-align: center; font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
+  .products .sub { text-align: center; margin-top: 10px; color: var(--text-muted); max-width: 440px; margin-left: auto; margin-right: auto; }
+  .filters { display: flex; justify-content: center; gap: 8px; margin: 40px 0; flex-wrap: wrap; }
+  .filters button {
+    padding: 8px 20px; border-radius: 999px; border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 600;
+    background: rgba(107,143,113,0.08); color: var(--text-muted);
+  }
+  .filters button.active { background: var(--accent-leaf); color: white; }
+  .card-grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card {
+    position: relative; border-radius: 16px; border: 1px solid rgba(107,143,113,0.08);
+    background: var(--bg-card); overflow: visible; transition: all 0.35s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(45,59,46,0.08); }
+  .card::before {
+    content: ''; position: absolute; top: -12px; right: 22px; width: 8px; height: 58px;
+    z-index: 10; border-radius: 0 0 1.5px 1.5px; opacity: 0.82;
+  }
+  .card::after {
+    content: ''; position: absolute; top: 45px; right: 22px;
+    width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top-width: 7px; border-top-style: solid; z-index: 10; opacity: 0.82;
+  }
+  .card.product::before { background: var(--accent-leaf); }
+  .card.product::after { border-top-color: var(--accent-leaf); }
+  .card.tool::before { background: #7E9AAB; }
+  .card.tool::after { border-top-color: #7E9AAB; }
+  .card.content::before { background: #B8956A; }
+  .card.content::after { border-top-color: #B8956A; }
+  .card-strip {
+    height: 56px; border-radius: 16px 16px 0 0; position: relative; overflow: hidden;
+  }
+  .card.product .card-strip { background: linear-gradient(135deg, rgba(107,143,113,0.08), rgba(214,62,47,0.06)); }
+  .card.tool .card-strip { background: linear-gradient(135deg, rgba(126,154,171,0.08), rgba(224,85,119,0.06)); }
+  .card.content .card-strip { background: linear-gradient(135deg, rgba(184,149,106,0.08), rgba(240,140,40,0.06)); }
+  .card-body { padding: 24px; }
+  .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .card.product .card-icon { background: rgba(107,143,113,0.12); color: var(--accent-leaf); }
+  .card.tool .card-icon { background: rgba(126,154,171,0.12); color: #7E9AAB; }
+  .card.content .card-icon { background: rgba(184,149,106,0.12); color: #B8956A; }
+  .card-icon svg { width: 22px; height: 22px; }
+  .card-cat { font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .card.product .card-cat { color: var(--accent-leaf); }
+  .card.tool .card-cat { color: #7E9AAB; }
+  .card.content .card-cat { color: #B8956A; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+  .card .desc-en { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+  .card .desc-jp { font-size: 0.8rem; color: var(--text-light); margin-top: 6px; }
+  .card .visit { display: flex; align-items: center; gap: 6px; margin-top: 18px; font-family: 'Nunito', sans-serif; font-size: 0.83rem; font-weight: 600; color: var(--accent-leaf); }
+
+  .philosophy { background: var(--bg-warm); padding: 80px 24px; text-align: center; position: relative; overflow: hidden; }
+  .philosophy h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
+  .philosophy .sub-jp { margin-top: 8px; color: var(--text-muted); }
+  .philosophy .desc { margin-top: 12px; max-width: 640px; margin-left: auto; margin-right: auto; color: var(--text-muted); line-height: 1.85; }
+  .values { display: flex; justify-content: center; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
+  .value-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .value-item svg { width: 32px; height: 32px; }
+  .value-item:nth-child(1) svg { color: var(--accent-sage); }
+  .value-item:nth-child(2) svg { color: var(--tsubaki); opacity: 0.7; }
+  .value-item:nth-child(3) svg { color: var(--anzu); opacity: 0.7; }
+  .value-item:nth-child(4) svg { color: var(--accent-sage); }
+  .value-item span { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+  .gradient-line {
+    height: 3px; border-radius: 2px; max-width: 200px; margin: 0 auto;
+    background: linear-gradient(90deg, var(--kaede), var(--tsubaki), var(--anzu));
+    opacity: 0.4;
+  }
+
+  footer {
+    background: var(--text-deep); color: var(--bg-cream); padding: 80px 24px 40px;
+    text-align: center; position: relative;
+  }
+  footer .wave { position: absolute; top: 0; left: 0; width: 100%; height: 60px; transform: translateY(-99%); overflow: hidden; }
+  footer .wave svg { width: 100%; height: 100%; }
+  footer .logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  footer .tagline { margin-top: 8px; font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 600; opacity: 0.6; }
+  footer .copy { margin-top: 40px; font-size: 0.78rem; opacity: 0.3; }
+
+  @keyframes leaf-fall {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.28; }
+    25% { transform: translate(-15px, 40px) rotate(45deg); opacity: 0.24; }
+    50% { transform: translate(5px, 90px) rotate(90deg); opacity: 0.20; }
+    75% { transform: translate(-10px, 150px) rotate(135deg); opacity: 0.14; }
+    100% { transform: translate(8px, 220px) rotate(180deg); opacity: 0; }
+  }
+  @keyframes leaf-fall-2 {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.25; }
+    25% { transform: translate(12px, 50px) rotate(-40deg); opacity: 0.22; }
+    50% { transform: translate(-8px, 110px) rotate(-80deg); opacity: 0.16; }
+    75% { transform: translate(15px, 170px) rotate(-120deg); opacity: 0.10; }
+    100% { transform: translate(-5px, 240px) rotate(-160deg); opacity: 0; }
+  }
+  @keyframes leaf-fall-3 {
+    0% { transform: translate(0, 0) rotate(10deg); opacity: 0.22; }
+    30% { transform: translate(-20px, 60px) rotate(60deg); opacity: 0.18; }
+    60% { transform: translate(10px, 130px) rotate(110deg); opacity: 0.12; }
+    100% { transform: translate(-12px, 200px) rotate(170deg); opacity: 0; }
+  }
+  .falling-leaf-1 { animation: leaf-fall 8s ease-in-out infinite; }
+  .falling-leaf-2 { animation: leaf-fall-2 10s ease-in-out 2s infinite; }
+  .falling-leaf-3 { animation: leaf-fall-3 12s ease-in-out 4s infinite; }
+  .falling-leaf-4 { animation: leaf-fall 9s ease-in-out 6s infinite; }
+  .falling-leaf-5 { animation: leaf-fall-2 11s ease-in-out 1s infinite; }
+  .falling-leaf-6 { animation: leaf-fall-3 10s ease-in-out 3s infinite; }
+
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .hero-forest svg { transform: scale(0.7); }
+  }
+</style>
+</head>
+<body>
+
+<div class="proposal-badge">B3b3b — Mixed Forest（三樹の杜）</div>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-leaf)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/></svg>
+      craftgarden.studio
+    </a>
+    <div class="links"><a href="#">Products</a><a href="#">Philosophy</a></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <!-- Minimal botanical-bg: just 2 tiny petals -->
+  <div class="botanical-bg">
+    <svg style="top:8%;left:6%;width:18px;transform:rotate(-25deg);color:var(--tsubaki);opacity:0.14" viewBox="0 0 30 40" fill="currentColor"><ellipse cx="15" cy="15" rx="10" ry="16" opacity="0.55"/></svg>
+    <svg style="top:82%;left:88%;width:14px;transform:rotate(30deg);color:var(--anzu);opacity:0.12" viewBox="0 0 30 30" fill="currentColor"><ellipse cx="15" cy="10" rx="8" ry="12" opacity="0.50"/></svg>
+  </div>
+
+  <!-- Mixed Forest: 5 trees at varying depths -->
+  <div class="hero-forest">
+
+    <!-- ====== LAYER 1 — FAR BACK (smallest, lowest opacity) ====== -->
+
+    <!-- Far kaede (top-right, ~150px) -->
+    <svg style="position:absolute;top:8%;right:12%;width:150px;opacity:0.5" viewBox="0 0 200 280" fill="none">
+      <g opacity="0.14">
+        <path d="M100 280 C99 250 97 220 98 190 C99 165 100 140 102 120" stroke="var(--bark)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M102 140 C90 125 75 118 58 115" stroke="var(--bark)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M100 130 C112 118 128 112 145 110" stroke="var(--bark)" stroke-width="2" stroke-linecap="round"/>
+        <!-- 15 small red leaves -->
+        <g fill="var(--kaede)"><g transform="translate(85,70) scale(0.28)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(105,65) rotate(15) scale(0.26)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(68,80) rotate(-20) scale(0.24)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(120,75) rotate(25) scale(0.25)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(95,55) rotate(-10) scale(0.30)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(50,100) rotate(-35) scale(0.22)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(135,95) rotate(30) scale(0.22)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(75,60) rotate(40) scale(0.23)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(112,90) rotate(-5) scale(0.20)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        </g>
+        <g fill="var(--kaede-hot)"><g transform="translate(60,90) rotate(18) scale(0.24)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(130,80) rotate(-22) scale(0.23)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(92,45) rotate(8) scale(0.27)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(78,110) rotate(-15) scale(0.20)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(118,105) rotate(12) scale(0.21)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        <g transform="translate(100,100) rotate(-28) scale(0.19)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g>
+        </g>
+      </g>
+    </svg>
+
+    <!-- Far anzu (top-center-left, ~130px) -->
+    <svg style="position:absolute;top:5%;left:22%;width:130px;opacity:0.45" viewBox="0 0 180 260" fill="none">
+      <g opacity="0.15">
+        <path d="M90 260 C89 230 88 200 89 175 C90 150 91 130 92 110" stroke="var(--bark)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M91 135 C78 120 62 112 45 110" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M91 125 C105 115 120 108 138 108" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- 12 orange blossoms -->
+        <g fill="var(--anzu)">
+          <g transform="translate(72,65) scale(0.22)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(95,58) rotate(20) scale(0.20)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(55,80) rotate(-15) scale(0.18)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(110,72) rotate(30) scale(0.19)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(82,50) rotate(-8) scale(0.22)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(40,95) rotate(25) scale(0.17)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(125,90) rotate(-12) scale(0.17)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(65,100) rotate(18) scale(0.16)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(100,95) rotate(-25) scale(0.16)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(78,42) rotate(10) scale(0.21)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(115,55) rotate(-5) scale(0.18)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+          <g transform="translate(50,75) rotate(35) scale(0.17)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5"/></g>
+        </g>
+      </g>
+    </svg>
+
+    <!-- ====== LAYER 2 — MID GROUND ====== -->
+
+    <!-- Mid tsubaki (left side, ~300px wide, 55% height) -->
+    <svg style="position:absolute;bottom:0;left:2%;width:300px;height:55%;opacity:0.75" viewBox="0 0 360 550" fill="none" preserveAspectRatio="xMidYMax meet">
+      <g opacity="0.22">
+        <!-- Trunk + 2 branches -->
+        <path d="M180 550 C179 510 177 470 176 430 C175 390 176 350 178 310 C180 280 182 250 185 220" stroke="var(--bark)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M180 300 C155 275 125 260 90 250" stroke="var(--bark)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M183 265 C210 245 240 235 275 230" stroke="var(--bark)" stroke-width="4" stroke-linecap="round"/>
+        <!-- 20 tsubaki leaves (thick ovals) -->
+        <g fill="var(--leaf-dark)">
+          <ellipse cx="160" cy="185" rx="18" ry="30" transform="rotate(-20 160 185)"/>
+          <ellipse cx="200" cy="180" rx="16" ry="28" transform="rotate(15 200 180)"/>
+          <ellipse cx="140" cy="210" rx="17" ry="28" transform="rotate(-35 140 210)"/>
+          <ellipse cx="220" cy="200" rx="15" ry="26" transform="rotate(25 220 200)"/>
+          <ellipse cx="175" cy="170" rx="18" ry="30" transform="rotate(5 175 170)"/>
+          <ellipse cx="120" cy="235" rx="14" ry="24" transform="rotate(-40 120 235)"/>
+          <ellipse cx="245" cy="220" rx="14" ry="24" transform="rotate(35 245 220)"/>
+          <ellipse cx="100" cy="248" rx="13" ry="22" transform="rotate(-25 100 248)"/>
+          <ellipse cx="265" cy="228" rx="13" ry="22" transform="rotate(20 265 228)"/>
+          <ellipse cx="155" cy="155" rx="16" ry="27" transform="rotate(-10 155 155)"/>
+          <ellipse cx="195" cy="150" rx="15" ry="26" transform="rotate(20 195 150)"/>
+          <ellipse cx="130" cy="195" rx="14" ry="24" transform="rotate(-30 130 195)"/>
+          <ellipse cx="210" cy="165" rx="14" ry="24" transform="rotate(30 210 165)"/>
+          <ellipse cx="170" cy="140" rx="16" ry="28" transform="rotate(0 170 140)"/>
+          <ellipse cx="235" cy="210" rx="12" ry="22" transform="rotate(15 235 210)"/>
+          <ellipse cx="110" cy="260" rx="12" ry="20" transform="rotate(-15 110 260)"/>
+          <ellipse cx="190" cy="195" rx="13" ry="22" transform="rotate(-8 190 195)"/>
+          <ellipse cx="150" cy="230" rx="12" ry="20" transform="rotate(25 150 230)"/>
+          <ellipse cx="215" cy="240" rx="11" ry="20" transform="rotate(-20 215 240)"/>
+          <ellipse cx="180" cy="200" rx="14" ry="25" transform="rotate(10 180 200)"/>
+        </g>
+        <!-- 10 tsubaki flowers (6 rotated ellipses + center) -->
+        <g fill="var(--tsubaki)">
+          <g transform="translate(150,170) scale(0.28)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/><circle cx="47" cy="47" r="2" fill="var(--anzu-hot)" opacity="0.5"/><circle cx="53" cy="47" r="2" fill="var(--anzu-hot)" opacity="0.5"/></g>
+          <g transform="translate(200,160) rotate(20) scale(0.25)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(115,225) rotate(-15) scale(0.23)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(240,215) rotate(25) scale(0.22)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(170,145) rotate(10) scale(0.26)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/><circle cx="47" cy="47" r="2" fill="var(--anzu-hot)" opacity="0.5"/><circle cx="53" cy="47" r="2" fill="var(--anzu-hot)" opacity="0.5"/></g>
+          <g transform="translate(90,245) rotate(-30) scale(0.20)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(260,200) rotate(15) scale(0.20)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(135,250) rotate(8) scale(0.19)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(185,135) rotate(-5) scale(0.24)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+          <g transform="translate(220,185) rotate(35) scale(0.21)"><ellipse cx="50" cy="28" rx="14" ry="20"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="6" fill="var(--anzu)" opacity="0.6"/></g>
+        </g>
+      </g>
+    </svg>
+
+    <!-- Mid anzu (right-center, ~250px wide, 45% height) -->
+    <svg style="position:absolute;bottom:0;right:18%;width:250px;height:45%;opacity:0.7" viewBox="0 0 300 450" fill="none" preserveAspectRatio="xMidYMax meet">
+      <g opacity="0.22">
+        <path d="M150 450 C149 410 148 370 148 330 C148 290 150 255 152 220 C154 190 156 165 160 140" stroke="var(--bark)" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M152 230 C130 210 105 200 75 195" stroke="var(--bark)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M156 195 C178 175 205 165 235 160" stroke="var(--bark)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M155 260 C175 248 200 240 228 238" stroke="var(--bark)" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- 18 anzu blossoms -->
+        <g fill="var(--anzu)">
+          <g transform="translate(120,110) scale(0.28)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(155,100) rotate(15) scale(0.26)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(90,130) rotate(-10) scale(0.24)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(190,115) rotate(25) scale(0.24)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(140,90) rotate(-5) scale(0.30)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(65,155) rotate(-20) scale(0.22)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(220,135) rotate(30) scale(0.22)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(110,145) rotate(12) scale(0.23)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(175,140) rotate(-18) scale(0.23)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(135,78) rotate(8) scale(0.25)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(80,170) rotate(22) scale(0.20)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(205,155) rotate(-8) scale(0.20)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(160,165) rotate(18) scale(0.21)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(240,150) rotate(-28) scale(0.19)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(55,180) rotate(15) scale(0.19)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(215,175) rotate(-12) scale(0.19)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(100,165) rotate(28) scale(0.20)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+          <g transform="translate(168,125) rotate(-22) scale(0.25)"><ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="5" opacity="0.5"/></g>
+        </g>
+        <!-- Few leaves among blossoms -->
+        <g fill="var(--leaf-dark)" opacity="0.6">
+          <ellipse cx="130" cy="125" rx="10" ry="18" transform="rotate(-15 130 125)"/>
+          <ellipse cx="185" cy="130" rx="9" ry="16" transform="rotate(20 185 130)"/>
+          <ellipse cx="100" cy="160" rx="9" ry="16" transform="rotate(-25 100 160)"/>
+          <ellipse cx="210" cy="150" rx="8" ry="15" transform="rotate(10 210 150)"/>
+        </g>
+      </g>
+    </svg>
+
+    <!-- ====== LAYER 3 — FOREGROUND (large kaede, right side) ====== -->
+
+    <svg style="position:absolute;bottom:0;right:-1%;width:min(40vw,450px);height:70%;opacity:1" viewBox="0 0 455 555" fill="none" preserveAspectRatio="xMidYMax meet">
+      <!-- Trunk -->
+      <path d="M234 555 C233 527 231 500 228 475 C225 448 222 422 218 396 C215 370 213 345 215 318 C217 293 221 267 227 242 C231 221 235 202 240 182" stroke="var(--bark)" stroke-width="6" stroke-linecap="round" opacity="0.24"/>
+      <path d="M234 555 C236 527 237 500 239 475 C241 448 243 422 242 396 C241 370 238 345 235 318 C232 293 229 267 228 242 C228 221 230 202 240 182" stroke="var(--bark-dark)" stroke-width="4.5" stroke-linecap="round" opacity="0.20"/>
+      <!-- 4 branches -->
+      <path d="M222 255 C208 234 188 221 163 208 C146 200 130 196 110 195" stroke="var(--bark)" stroke-width="3.6" stroke-linecap="round" opacity="0.22"/>
+      <path d="M240 202 C260 182 285 165 315 150 C335 142 355 138 375 137" stroke="var(--bark)" stroke-width="3.6" stroke-linecap="round" opacity="0.22"/>
+      <path d="M233 280 C258 267 285 258 310 254 C330 251 348 252 365 255" stroke="var(--bark)" stroke-width="3.2" stroke-linecap="round" opacity="0.20"/>
+      <path d="M226 222 C212 202 192 189 169 179 C155 174 140 172 124 174" stroke="var(--bark)" stroke-width="3" stroke-linecap="round" opacity="0.20"/>
+      <!-- Twigs -->
+      <path d="M163 208 C153 198 140 194 124 192" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.16"/>
+      <path d="M315 150 C330 140 348 135 368 132" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.16"/>
+      <path d="M285 258 C300 268 310 280 315 295" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" opacity="0.14"/>
+      <path d="M169 179 C155 170 138 166 118 168" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" opacity="0.14"/>
+
+      <!-- 45 red maple leaves -->
+      <!-- Top crown -->
+      <g fill="var(--kaede)" opacity="0.30"><g transform="translate(210,115) rotate(-10) scale(0.42)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.28"><g transform="translate(245,112) rotate(12) scale(0.39)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.28"><g transform="translate(183,122) rotate(-25) scale(0.36)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.26"><g transform="translate(275,122) rotate(20) scale(0.36)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.32"><g transform="translate(240,100) rotate(-5) scale(0.45)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <!-- Perimeter -->
+      <g fill="var(--kaede)" opacity="0.28"><g transform="translate(130,160) rotate(-35) scale(0.39)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.26"><g transform="translate(102,178) rotate(-50) scale(0.36)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.28"><g transform="translate(345,128) rotate(15) scale(0.38)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.25"><g transform="translate(368,137) rotate(30) scale(0.33)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.26"><g transform="translate(360,232) rotate(25) scale(0.36)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#E06830" opacity="0.24"><g transform="translate(355,195) rotate(8) scale(0.34)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.24"><g transform="translate(115,225) rotate(-40) scale(0.34)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#C85A28" opacity="0.22"><g transform="translate(138,242) rotate(-20) scale(0.33)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.24"><g transform="translate(335,268) rotate(35) scale(0.33)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#C85A28" opacity="0.22"><g transform="translate(315,280) rotate(18) scale(0.31)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.22"><g transform="translate(195,275) rotate(-8) scale(0.31)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#E06830" opacity="0.22"><g transform="translate(250,278) rotate(15) scale(0.29)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <!-- Branch clusters -->
+      <g fill="var(--kaede)" opacity="0.30"><g transform="translate(103,185) rotate(-20) scale(0.31)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.28"><g transform="translate(118,190) rotate(15) scale(0.27)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.26"><g transform="translate(95,200) rotate(-45) scale(0.23)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.30"><g transform="translate(348,120) rotate(10) scale(0.34)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.28"><g transform="translate(362,130) rotate(-25) scale(0.29)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.27"><g transform="translate(333,140) rotate(30) scale(0.26)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <!-- Crown center dense -->
+      <g fill="var(--kaede)" opacity="0.28"><g transform="translate(210,175) rotate(-5) scale(0.29)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.30"><g transform="translate(238,165) rotate(18) scale(0.33)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.27"><g transform="translate(258,182) rotate(-30) scale(0.26)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.25"><g transform="translate(222,198) rotate(25) scale(0.24)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.23"><g transform="translate(195,208) rotate(-12) scale(0.22)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#E06830" opacity="0.23"><g transform="translate(268,210) rotate(40) scale(0.21)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.22"><g transform="translate(182,218) rotate(8) scale(0.20)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <!-- Inner tiny depth leaves -->
+      <g fill="var(--kaede)" opacity="0.20"><g transform="translate(222,142) scale(0.14)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.20"><g transform="translate(255,155) rotate(-15) scale(0.16)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.18"><g transform="translate(195,170) rotate(20) scale(0.14)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#E06830" opacity="0.18"><g transform="translate(275,195) rotate(-25) scale(0.16)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.18"><g transform="translate(228,225) rotate(10) scale(0.15)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.18"><g transform="translate(175,192) rotate(-35) scale(0.14)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <!-- Gap-filling along mid-branches -->
+      <g fill="var(--kaede)" opacity="0.24"><g transform="translate(262,240) rotate(20) scale(0.25)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede-hot)" opacity="0.23"><g transform="translate(170,222) rotate(-35) scale(0.22)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.22"><g transform="translate(290,220) rotate(30) scale(0.20)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="#C85A28" opacity="0.20"><g transform="translate(215,255) rotate(-5) scale(0.21)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <g fill="var(--kaede)" opacity="0.20"><g transform="translate(245,260) rotate(15) scale(0.18)"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></g></g>
+      <!-- Green tsubaki-style leaves mixed in -->
+      <g fill="var(--leaf-dark)" opacity="0.22"><ellipse cx="190" cy="148" rx="8" ry="17" transform="rotate(-30 190 148)"/></g>
+      <g fill="var(--leaf-dark)" opacity="0.20"><ellipse cx="280" cy="170" rx="7" ry="16" transform="rotate(20 280 170)"/></g>
+      <g fill="var(--leaf-dark)" opacity="0.22"><ellipse cx="230" cy="130" rx="7" ry="15" transform="rotate(-15 230 130)"/></g>
+      <g fill="var(--leaf-dark)" opacity="0.18"><ellipse cx="325" cy="202" rx="7" ry="15" transform="rotate(35 325 202)"/></g>
+      <g fill="var(--leaf-dark)" opacity="0.20"><ellipse cx="128" cy="192" rx="8" ry="17" transform="rotate(-45 128 192)"/></g>
+      <g fill="var(--leaf-dark)" opacity="0.18"><ellipse cx="250" cy="205" rx="6" ry="14" transform="rotate(10 250 205)"/></g>
+    </svg>
+
+    <!-- ====== FALLING PETALS — 6 mixed types ====== -->
+    <!-- Kaede leaves -->
+    <svg class="falling-leaf-1" style="position:absolute;top:55%;right:15%;width:20px" viewBox="0 0 100 100" fill="var(--kaede)" opacity="0.28"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></svg>
+    <svg class="falling-leaf-2" style="position:absolute;top:48%;left:18%;width:18px" viewBox="0 0 100 100" fill="var(--kaede-hot)" opacity="0.25"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></svg>
+    <!-- Tsubaki petal -->
+    <svg class="falling-leaf-3" style="position:absolute;top:42%;left:10%;width:14px" viewBox="0 0 30 40" fill="var(--tsubaki)" opacity="0.22"><ellipse cx="15" cy="15" rx="10" ry="16" opacity="0.6"/></svg>
+    <!-- Anzu petal -->
+    <svg class="falling-leaf-4" style="position:absolute;top:60%;right:28%;width:15px" viewBox="0 0 30 30" fill="var(--anzu)" opacity="0.24"><ellipse cx="15" cy="10" rx="8" ry="12" opacity="0.6"/></svg>
+    <!-- Kaede small -->
+    <svg class="falling-leaf-5" style="position:absolute;top:35%;right:22%;width:16px" viewBox="0 0 100 100" fill="#E06830" opacity="0.22"><path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/></svg>
+    <!-- Anzu blossom petal -->
+    <svg class="falling-leaf-6" style="position:absolute;top:52%;left:25%;width:13px" viewBox="0 0 30 30" fill="var(--anzu)" opacity="0.20"><ellipse cx="15" cy="10" rx="8" ry="12" opacity="0.55"/></svg>
+
+    <!-- Text protection -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 48%, #FAFAF5 0%, rgba(250,250,245,0.97) 35%, rgba(250,250,245,0.6) 55%, transparent 80%);"></div>
+  </div>
+
+  <div style="position:relative;z-index:2;max-width:680px;">
+    <div class="hero-badge">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/><path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/></svg>
+      Solo Builder's Garden
+    </div>
+    <h1>Plant ideas.<br><span class="green">Watch them grow.</span><br>Have fun.</h1>
+    <p class="sub-jp">アイデアの種を蒔こう。育てよう。楽しもう。</p>
+    <p class="desc">A one-person studio crafting tools, products, and content with curiosity and care.</p>
+    <a href="#" class="cta">Explore the garden →</a>
+  </div>
+</section>
+
+<div class="vine-divider">
+  <svg width="min(90vw,600px)" height="40" viewBox="0 0 600 40" fill="none" stroke-linecap="round" opacity="0.45">
+    <defs>
+      <linearGradient id="vine-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="var(--kaede)"/>
+        <stop offset="35%" stop-color="var(--tsubaki)"/>
+        <stop offset="70%" stop-color="var(--anzu)"/>
+        <stop offset="100%" stop-color="var(--accent-leaf)"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 20 C100 15 150 25 200 20 C250 15 300 25 350 20 C400 15 450 25 500 20 C550 15 580 25 600 20" stroke="url(#vine-grad)" stroke-width="1.8"/>
+    <circle cx="120" cy="17" r="5" fill="var(--kaede)" opacity="0.5"/>
+    <circle cx="250" cy="23" r="6" fill="var(--tsubaki)" opacity="0.45"/>
+    <circle cx="380" cy="17" r="5" fill="var(--anzu)" opacity="0.5"/>
+    <circle cx="500" cy="21" r="4" fill="var(--accent-leaf)" opacity="0.45"/>
+  </svg>
+</div>
+
+<section class="products">
+  <h2>What's growing</h2>
+  <p class="sub">Each project planted with care, nurtured with curiosity.</p>
+  <div class="filters">
+    <button class="active">All</button><button>Product</button><button>Tool</button><button>Content</button>
+  </div>
+  <div class="card-grid">
+    <div class="card product">
+      <div class="card-strip">
+        <svg style="position:absolute;left:5%;top:5%;width:30px;transform:rotate(-20deg);opacity:0.25" viewBox="0 0 100 100" fill="var(--kaede)">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </svg>
+        <svg style="position:absolute;right:10%;top:8%;width:22px;transform:rotate(15deg);opacity:0.20" viewBox="0 0 30 40" fill="var(--accent-leaf)">
+          <path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/>
+        </svg>
+        <svg style="position:absolute;left:40%;top:12%;width:16px;transform:rotate(30deg);opacity:0.15" viewBox="0 0 100 100" fill="var(--kaede)">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/><path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/></svg></div>
+        <div class="card-cat">Product</div>
+        <h3>AI PM Service</h3>
+        <p class="desc-en">AI-powered task management for solo builders</p>
+        <p class="desc-jp">AIタスク管理で個人開発を加速</p>
+        <div class="visit">Visit →</div>
+      </div>
+    </div>
+    <div class="card tool">
+      <div class="card-strip">
+        <svg style="position:absolute;left:8%;top:3%;width:32px;transform:rotate(-8deg);opacity:0.22" viewBox="0 0 100 100" fill="var(--tsubaki)">
+          <ellipse cx="50" cy="28" rx="16" ry="22"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)"/>
+          <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)"/>
+          <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)"/>
+          <circle cx="50" cy="50" r="6" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-5 7-11 8-11s8 6 8 11a7 7 0 0 1-7 7z"/><path d="M12 20V10"/></svg></div>
+        <div class="card-cat">Tool</div>
+        <h3>Product Hub</h3>
+        <p class="desc-en">Project management dashboard</p>
+        <p class="desc-jp">スタジオ全体のプロジェクト管理</p>
+        <div class="visit">Visit →</div>
+      </div>
+    </div>
+    <div class="card content">
+      <div class="card-strip">
+        <svg style="position:absolute;left:8%;top:6%;width:28px;transform:rotate(10deg);opacity:0.24" viewBox="0 0 100 100" fill="var(--anzu)">
+          <ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/>
+          <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/>
+          <circle cx="50" cy="50" r="5" opacity="0.35"/>
+        </svg>
+        <svg style="position:absolute;right:15%;top:15%;width:18px;transform:rotate(-20deg);opacity:0.16" viewBox="0 0 100 100" fill="var(--anzu)">
+          <ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/></svg></div>
+        <div class="card-cat">Content</div>
+        <h3>AI Solo Builder</h3>
+        <p class="desc-en">Blog for solo builders leveraging AI</p>
+        <p class="desc-jp">AI活用ソロ開発者向けブログ</p>
+        <div class="visit">Visit →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <svg style="position:absolute;top:8%;left:3%;width:80px;transform:rotate(-15deg);opacity:0.12;pointer-events:none" viewBox="0 0 100 100" fill="var(--tsubaki)">
+    <ellipse cx="50" cy="28" rx="16" ry="22"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)"/>
+    <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)"/>
+    <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)"/>
+  </svg>
+  <svg style="position:absolute;bottom:8%;right:3%;width:65px;transform:rotate(20deg);opacity:0.12;pointer-events:none" viewBox="0 0 100 100" fill="var(--anzu)">
+    <ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/>
+    <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/>
+    <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/>
+  </svg>
+  <svg style="position:absolute;top:50%;right:8%;width:50px;transform:rotate(-30deg);opacity:0.08;pointer-events:none" viewBox="0 0 100 100" fill="var(--kaede)">
+    <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+  </svg>
+  <div class="gradient-line" style="margin-bottom: 40px;"></div>
+  <div style="position:relative;z-index:1;">
+    <h2>A garden, not a factory</h2>
+    <p class="sub-jp">工場ではなく、庭をつくる。</p>
+    <p class="desc">Every product here is grown, not manufactured. Ideas are planted as small seeds, watered with curiosity, and given time to take root.</p>
+    <div class="values">
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/><path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/></svg><span>Grow</span></div>
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22a9 9 0 0 0 9-9c0-3-1.5-5.5-4-7.5C14.5 3.5 12 2 12 2s-2.5 1.5-5 3.5C4.5 7.5 3 10 3 13a9 9 0 0 0 9 9z"/><path d="M12 22V12"/></svg><span>Nurture</span></div>
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/></svg><span>Bloom</span></div>
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg><span>Ship</span></div>
+    </div>
+  </div>
+  <div class="gradient-line" style="margin-top: 40px;"></div>
+</section>
+
+<footer>
+  <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,40 C240,60 480,10 720,40 C960,70 1200,10 1440,40 L1440,60 L0,60 Z" fill="#2D3B2E"/></svg></div>
+  <div class="logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sage)" stroke-width="2"><path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/></svg>
+    craftgarden.studio
+  </div>
+  <p class="tagline">Plant ideas. Watch them grow. Have fun.</p>
+  <p class="copy">&copy; 2026 craftgarden.studio</p>
+</footer>
+</body>
+</html>

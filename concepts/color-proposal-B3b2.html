@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal B3b2 — Lush Tree（茂る楓）</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@600;700;800&display=swap');
+
+  :root {
+    --bg-cream: #FAFAF5;
+    --bg-warm: #F5F2EC;
+    --bg-card: #F0EDE6;
+    --text-deep: #2D3B2E;
+    --text-muted: #5C7260;
+    --text-light: #8A9E8C;
+    --accent-leaf: #6B8F71;
+    --accent-sage: #9BB09E;
+    --accent-moss: #4A7051;
+
+    /* BOLD colors — most vivid version */
+    --anzu: #F08C28;
+    --anzu-hot: #FF9A1F;
+    --tsubaki: #E05577;
+    --tsubaki-hot: #F0487A;
+    --kaede: #D63E2F;
+    --kaede-hot: #E8442E;
+    --bark: #7A5E3A;
+    --bark-dark: #5C4428;
+    --leaf-dark: #3D6B45;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg-cream); color: var(--text-deep); overflow-x: hidden; }
+  h1, h2, h3 { font-family: 'Nunito', sans-serif; }
+
+  .proposal-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: linear-gradient(135deg, var(--kaede-hot), var(--tsubaki-hot), var(--anzu-hot));
+    color: white; padding: 8px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(250,250,245,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107,143,113,0.1);
+  }
+  nav .inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px; }
+  nav .logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--text-deep); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a { font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; padding: 120px 24px 180px;
+    position: relative; overflow: hidden;
+  }
+  .botanical-bg { position: absolute; inset: 0; pointer-events: none; }
+  .botanical-bg svg { position: absolute; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 18px; border-radius: 999px; font-size: 0.82rem; font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    border: 1px solid rgba(107,143,113,0.15); background: rgba(107,143,113,0.08);
+    color: var(--accent-leaf); margin-bottom: 32px;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 6.5vw, 4rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; position: relative; z-index: 2; }
+  .hero h1 .green { color: var(--accent-leaf); }
+  .hero .sub-jp { margin-top: 16px; font-family: 'Nunito', sans-serif; font-size: clamp(0.95rem, 2.2vw, 1.2rem); font-weight: 600; color: var(--text-muted); }
+  .hero .desc { margin-top: 20px; max-width: 500px; font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.75; color: var(--text-light); }
+  .hero .cta {
+    margin-top: 40px; display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px; border-radius: 999px; background: var(--accent-leaf);
+    color: white; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
+    text-decoration: none; box-shadow: 0 4px 16px rgba(107,143,113,0.25);
+  }
+
+  /* Standing tree container — positioned further right to avoid text */
+  .hero-tree {
+    position: absolute; inset: 0; pointer-events: none;
+    display: flex; align-items: flex-end; justify-content: flex-end;
+  }
+  .hero-tree svg {
+    width: min(60vw, 700px);
+    height: 75%;
+    position: absolute;
+    bottom: 0;
+    right: -2%;
+  }
+
+  /* Accent botanicals floating around the tree */
+  .hero-accents {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .hero-accents svg { position: absolute; }
+
+  .vine-divider { height: 80px; display: flex; align-items: center; justify-content: center; }
+
+  .products { padding: 40px 24px 100px; }
+  .products h2 { text-align: center; font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
+  .products .sub { text-align: center; margin-top: 10px; color: var(--text-muted); max-width: 440px; margin-left: auto; margin-right: auto; }
+  .filters { display: flex; justify-content: center; gap: 8px; margin: 40px 0; flex-wrap: wrap; }
+  .filters button {
+    padding: 8px 20px; border-radius: 999px; border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 600;
+    background: rgba(107,143,113,0.08); color: var(--text-muted);
+  }
+  .filters button.active { background: var(--accent-leaf); color: white; }
+  .card-grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card {
+    position: relative; border-radius: 16px; border: 1px solid rgba(107,143,113,0.08);
+    background: var(--bg-card); overflow: visible; transition: all 0.35s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(45,59,46,0.08); }
+  .card::before {
+    content: ''; position: absolute; top: -12px; right: 22px; width: 8px; height: 58px;
+    z-index: 10; border-radius: 0 0 1.5px 1.5px; opacity: 0.82;
+  }
+  .card::after {
+    content: ''; position: absolute; top: 45px; right: 22px;
+    width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top-width: 7px; border-top-style: solid; z-index: 10; opacity: 0.82;
+  }
+  .card.product::before { background: var(--accent-leaf); }
+  .card.product::after { border-top-color: var(--accent-leaf); }
+  .card.tool::before { background: #7E9AAB; }
+  .card.tool::after { border-top-color: #7E9AAB; }
+  .card.content::before { background: #B8956A; }
+  .card.content::after { border-top-color: #B8956A; }
+  .card-strip {
+    height: 56px; border-radius: 16px 16px 0 0; position: relative; overflow: hidden;
+  }
+  .card.product .card-strip { background: linear-gradient(135deg, rgba(107,143,113,0.08), rgba(214,62,47,0.06)); }
+  .card.tool .card-strip { background: linear-gradient(135deg, rgba(126,154,171,0.08), rgba(224,85,119,0.06)); }
+  .card.content .card-strip { background: linear-gradient(135deg, rgba(184,149,106,0.08), rgba(240,140,40,0.06)); }
+  .card-body { padding: 24px; }
+  .card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .card.product .card-icon { background: rgba(107,143,113,0.12); color: var(--accent-leaf); }
+  .card.tool .card-icon { background: rgba(126,154,171,0.12); color: #7E9AAB; }
+  .card.content .card-icon { background: rgba(184,149,106,0.12); color: #B8956A; }
+  .card-icon svg { width: 22px; height: 22px; }
+  .card-cat { font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .card.product .card-cat { color: var(--accent-leaf); }
+  .card.tool .card-cat { color: #7E9AAB; }
+  .card.content .card-cat { color: #B8956A; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+  .card .desc-en { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+  .card .desc-jp { font-size: 0.8rem; color: var(--text-light); margin-top: 6px; }
+  .card .visit { display: flex; align-items: center; gap: 6px; margin-top: 18px; font-family: 'Nunito', sans-serif; font-size: 0.83rem; font-weight: 600; color: var(--accent-leaf); }
+
+  .philosophy { background: var(--bg-warm); padding: 80px 24px; text-align: center; position: relative; overflow: hidden; }
+  .philosophy h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; }
+  .philosophy .sub-jp { margin-top: 8px; color: var(--text-muted); }
+  .philosophy .desc { margin-top: 12px; max-width: 640px; margin-left: auto; margin-right: auto; color: var(--text-muted); line-height: 1.85; }
+  .values { display: flex; justify-content: center; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
+  .value-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .value-item svg { width: 32px; height: 32px; }
+  .value-item:nth-child(1) svg { color: var(--accent-sage); }
+  .value-item:nth-child(2) svg { color: var(--tsubaki); opacity: 0.7; }
+  .value-item:nth-child(3) svg { color: var(--anzu); opacity: 0.7; }
+  .value-item:nth-child(4) svg { color: var(--accent-sage); }
+  .value-item span { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+  .gradient-line {
+    height: 3px; border-radius: 2px; max-width: 200px; margin: 0 auto;
+    background: linear-gradient(90deg, var(--kaede), var(--tsubaki), var(--anzu));
+    opacity: 0.4;
+  }
+
+  footer {
+    background: var(--text-deep); color: var(--bg-cream); padding: 80px 24px 40px;
+    text-align: center; position: relative;
+  }
+  footer .wave { position: absolute; top: 0; left: 0; width: 100%; height: 60px; transform: translateY(-99%); overflow: hidden; }
+  footer .wave svg { width: 100%; height: 100%; }
+  footer .logo { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  footer .tagline { margin-top: 8px; font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 600; opacity: 0.6; }
+  footer .copy { margin-top: 40px; font-size: 0.78rem; opacity: 0.3; }
+
+  /* Falling leaf animation */
+  @keyframes leaf-fall {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.28; }
+    25% { transform: translate(-15px, 40px) rotate(45deg); opacity: 0.24; }
+    50% { transform: translate(5px, 90px) rotate(90deg); opacity: 0.20; }
+    75% { transform: translate(-10px, 150px) rotate(135deg); opacity: 0.14; }
+    100% { transform: translate(8px, 220px) rotate(180deg); opacity: 0; }
+  }
+  @keyframes leaf-fall-2 {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.25; }
+    25% { transform: translate(12px, 50px) rotate(-40deg); opacity: 0.22; }
+    50% { transform: translate(-8px, 110px) rotate(-80deg); opacity: 0.16; }
+    75% { transform: translate(15px, 170px) rotate(-120deg); opacity: 0.10; }
+    100% { transform: translate(-5px, 240px) rotate(-160deg); opacity: 0; }
+  }
+  @keyframes leaf-fall-3 {
+    0% { transform: translate(0, 0) rotate(10deg); opacity: 0.22; }
+    30% { transform: translate(-20px, 60px) rotate(60deg); opacity: 0.18; }
+    60% { transform: translate(10px, 130px) rotate(110deg); opacity: 0.12; }
+    100% { transform: translate(-12px, 200px) rotate(170deg); opacity: 0; }
+  }
+  .falling-leaf-1 { animation: leaf-fall 8s ease-in-out infinite; }
+  .falling-leaf-2 { animation: leaf-fall-2 10s ease-in-out 2s infinite; }
+  .falling-leaf-3 { animation: leaf-fall-3 12s ease-in-out 4s infinite; }
+  .falling-leaf-4 { animation: leaf-fall 9s ease-in-out 6s infinite; }
+  .falling-leaf-5 { animation: leaf-fall-2 11s ease-in-out 1s infinite; }
+
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .hero-tree svg { right: -10%; width: 70vw; }
+  }
+</style>
+</head>
+<body>
+
+<div class="proposal-badge">B3b2 — Lush Tree（茂る楓）</div>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-leaf)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/></svg>
+      craftgarden.studio
+    </a>
+    <div class="links"><a href="#">Products</a><a href="#">Philosophy</a></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <!-- B3b2: Scattered tsubaki, anzu, and green leaves in background (positioned left to complement tree on right) -->
+  <div class="botanical-bg">
+    <!-- Tsubaki PINK — positioned left side to complement tree on right -->
+    <svg style="top:18%;left:3%;width:110px;transform:rotate(-8deg);color:var(--tsubaki);opacity:0.28" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="28" rx="16" ry="22" opacity="0.65"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" opacity="0.60"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)" opacity="0.65"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)" opacity="0.60"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)" opacity="0.65"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)" opacity="0.60"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" opacity="0.35"/>
+      <ellipse cx="50" cy="35" rx="10" ry="14" transform="rotate(90 50 50)" opacity="0.30"/>
+      <circle cx="50" cy="50" r="8" opacity="0.30"/>
+      <circle cx="46" cy="46" r="2.5" opacity="0.55"/>
+      <circle cx="54" cy="46" r="2.5" opacity="0.55"/>
+      <circle cx="50" cy="42" r="2.5" opacity="0.55"/>
+    </svg>
+    <svg style="top:72%;left:8%;width:65px;transform:rotate(20deg);color:var(--tsubaki);opacity:0.22" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="28" rx="16" ry="22" opacity="0.55"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" opacity="0.50"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)" opacity="0.55"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)" opacity="0.50"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)" opacity="0.55"/>
+      <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)" opacity="0.50"/>
+      <circle cx="50" cy="50" r="6" opacity="0.25"/>
+    </svg>
+    <svg style="top:4%;left:28%;width:45px;transform:rotate(-25deg);color:var(--tsubaki);opacity:0.18" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="30" rx="14" ry="20" opacity="0.50"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(72 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(144 50 50)" opacity="0.50"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(216 50 50)" opacity="0.45"/>
+      <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(288 50 50)" opacity="0.50"/>
+    </svg>
+
+    <!-- Anzu ORANGE blossoms — scattered left and upper areas -->
+    <svg style="top:6%;left:55%;width:75px;transform:rotate(10deg);color:var(--anzu);opacity:0.26" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.70"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.65"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" opacity="0.70"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)" opacity="0.65"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)" opacity="0.70"/>
+      <circle cx="50" cy="50" r="6" opacity="0.45"/>
+    </svg>
+    <svg style="top:50%;left:2%;width:55px;transform:rotate(25deg);color:var(--anzu);opacity:0.22" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.65"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.60"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" opacity="0.65"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)" opacity="0.60"/>
+      <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)" opacity="0.65"/>
+    </svg>
+    <!-- Falling anzu petals -->
+    <svg style="top:38%;left:18%;width:22px;transform:rotate(45deg);color:var(--anzu);opacity:0.20" viewBox="0 0 30 30" fill="currentColor"><ellipse cx="15" cy="8" rx="6" ry="10" opacity="0.60"/></svg>
+    <svg style="top:62%;left:22%;width:18px;transform:rotate(-30deg);color:var(--anzu);opacity:0.16" viewBox="0 0 30 30" fill="currentColor"><ellipse cx="15" cy="8" rx="6" ry="10" opacity="0.55"/></svg>
+
+    <!-- Green leaves -->
+    <svg style="top:24%;left:4%;width:36px;transform:rotate(-50deg);color:var(--leaf-dark);opacity:0.22" viewBox="0 0 40 70" fill="currentColor">
+      <ellipse cx="20" cy="30" rx="14" ry="28" opacity="0.6"/>
+      <path d="M20 5 L20 58" stroke="white" stroke-width="0.8" fill="none" opacity="0.15"/>
+    </svg>
+    <svg style="top:68%;left:15%;width:28px;transform:rotate(30deg);color:var(--leaf-dark);opacity:0.18" viewBox="0 0 40 70" fill="currentColor">
+      <ellipse cx="20" cy="30" rx="14" ry="28" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- B3b2: LUSH Standing maple tree — the main hero illustration, pushed right -->
+  <div class="hero-tree">
+    <svg viewBox="0 0 700 850" fill="none" preserveAspectRatio="xMidYMax meet">
+
+      <!-- === TRUNK === -->
+      <!-- Main trunk: thick at base, tapering upward, slight natural curve -->
+      <path d="M360 850 C358 810 355 770 350 730 C345 690 340 650 335 610 C330 570 328 530 330 490 C332 450 336 410 342 370 C346 340 350 310 355 280"
+            stroke="var(--bark)" stroke-width="9" stroke-linecap="round" opacity="0.24"/>
+      <path d="M360 850 C362 810 365 770 368 730 C372 690 374 650 372 610 C370 570 366 530 362 490 C358 450 354 410 352 370 C350 340 350 310 355 280"
+            stroke="var(--bark-dark)" stroke-width="7" stroke-linecap="round" opacity="0.20"/>
+      <!-- Trunk texture lines -->
+      <path d="M355 750 C356 710 354 670 352 630" stroke="var(--bark-dark)" stroke-width="1.2" opacity="0.10"/>
+      <path d="M362 770 C361 730 360 690 358 650" stroke="var(--bark)" stroke-width="1" opacity="0.08"/>
+      <path d="M358 680 C357 650 356 620 354 590" stroke="var(--bark-dark)" stroke-width="0.8" opacity="0.07"/>
+
+      <!-- === PRIMARY BRANCHES === -->
+      <!-- Branch 1: sweeping left -->
+      <path d="M342 390 C320 360 290 340 250 320 C225 308 200 302 170 300"
+            stroke="var(--bark)" stroke-width="5.5" stroke-linecap="round" opacity="0.22"/>
+      <!-- Branch 2: sweeping upper-right -->
+      <path d="M355 310 C380 280 415 250 460 230 C490 218 520 212 550 210"
+            stroke="var(--bark)" stroke-width="5.5" stroke-linecap="round" opacity="0.22"/>
+      <!-- Branch 3: mid-right -->
+      <path d="M358 430 C390 410 430 395 470 390 C498 386 525 388 550 392"
+            stroke="var(--bark)" stroke-width="5" stroke-linecap="round" opacity="0.20"/>
+      <!-- Branch 4: upper-left -->
+      <path d="M348 340 C325 310 295 290 260 275 C238 268 215 265 190 268"
+            stroke="var(--bark)" stroke-width="4.5" stroke-linecap="round" opacity="0.20"/>
+      <!-- Branch 5 (NEW): upper-center-right — shorter branch -->
+      <path d="M352 295 C370 265 395 245 425 235 C445 228 460 226 478 228"
+            stroke="var(--bark)" stroke-width="4" stroke-linecap="round" opacity="0.18"/>
+
+      <!-- === SECONDARY BRANCHES (twigs) === -->
+      <!-- From Branch 1 -->
+      <path d="M250 320 C235 305 215 298 190 295" stroke="var(--bark)" stroke-width="2.8" stroke-linecap="round" opacity="0.16"/>
+      <path d="M280 335 C268 318 250 310 228 308" stroke="var(--bark)" stroke-width="2.2" stroke-linecap="round" opacity="0.15"/>
+      <path d="M220 310 C205 295 188 290 165 292" stroke="var(--bark)" stroke-width="2" stroke-linecap="round" opacity="0.13"/>
+      <path d="M250 320 C242 340 238 360 240 380" stroke="var(--bark)" stroke-width="2.2" stroke-linecap="round" opacity="0.14"/>
+      <!-- NEW twig from Branch 1 -->
+      <path d="M200 305 C188 318 180 335 178 355" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.12"/>
+      <path d="M260 325 C248 340 242 358 245 378" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" opacity="0.11"/>
+
+      <!-- From Branch 2 -->
+      <path d="M460 230 C480 215 505 205 530 200" stroke="var(--bark)" stroke-width="2.8" stroke-linecap="round" opacity="0.16"/>
+      <path d="M420 245 C435 225 455 215 480 208" stroke="var(--bark)" stroke-width="2.2" stroke-linecap="round" opacity="0.15"/>
+      <path d="M500 220 C518 205 538 198 560 195" stroke="var(--bark)" stroke-width="2" stroke-linecap="round" opacity="0.13"/>
+      <path d="M460 230 C465 250 468 272 465 295" stroke="var(--bark)" stroke-width="2.2" stroke-linecap="round" opacity="0.14"/>
+      <!-- NEW twig from Branch 2 -->
+      <path d="M490 215 C510 228 525 248 530 270" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.12"/>
+      <path d="M440 238 C445 258 442 278 435 298" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" opacity="0.11"/>
+
+      <!-- From Branch 3 -->
+      <path d="M470 390 C495 375 518 370 540 368" stroke="var(--bark)" stroke-width="2.5" stroke-linecap="round" opacity="0.15"/>
+      <path d="M430 395 C445 380 465 372 490 368" stroke="var(--bark)" stroke-width="2" stroke-linecap="round" opacity="0.13"/>
+      <path d="M500 388 C518 398 532 410 540 428" stroke="var(--bark)" stroke-width="2" stroke-linecap="round" opacity="0.13"/>
+      <!-- NEW twig from Branch 3 -->
+      <path d="M455 393 C460 412 458 432 450 450" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.12"/>
+
+      <!-- From Branch 4 -->
+      <path d="M260 275 C245 260 225 255 202 258" stroke="var(--bark)" stroke-width="2.5" stroke-linecap="round" opacity="0.15"/>
+      <path d="M295 290 C278 272 258 265 235 265" stroke="var(--bark)" stroke-width="2" stroke-linecap="round" opacity="0.13"/>
+      <path d="M225 270 C208 258 188 255 165 260" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.11"/>
+      <!-- NEW twig from Branch 4 -->
+      <path d="M240 278 C228 295 222 315 225 338" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" opacity="0.11"/>
+
+      <!-- From Branch 5 (new branch) -->
+      <path d="M425 235 C440 218 458 210 478 205" stroke="var(--bark)" stroke-width="2" stroke-linecap="round" opacity="0.14"/>
+      <path d="M400 240 C412 225 428 218 448 215" stroke="var(--bark)" stroke-width="1.8" stroke-linecap="round" opacity="0.12"/>
+      <path d="M445 230 C455 245 460 262 458 280" stroke="var(--bark)" stroke-width="1.6" stroke-linecap="round" opacity="0.11"/>
+
+
+      <!-- ================================================================ -->
+      <!-- === LEAF CLUSTERS — LUSH CANOPY (~120 leaves) === -->
+      <!-- ================================================================ -->
+
+      <!-- ── OUTER CANOPY PERIMETER (large leaves creating rounded silhouette) ── -->
+      <!-- Top crown -->
+      <g transform="translate(320, 175) rotate(-10) scale(0.65)" fill="var(--kaede)" opacity="0.30">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(370, 170) rotate(12) scale(0.60)" fill="var(--kaede-hot)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(280, 185) rotate(-25) scale(0.55)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(420, 185) rotate(20) scale(0.55)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Upper-left perimeter -->
+      <g transform="translate(195, 245) rotate(-35) scale(0.60)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(155, 270) rotate(-50) scale(0.55)" fill="var(--kaede-hot)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Upper-right perimeter -->
+      <g transform="translate(520, 195) rotate(15) scale(0.58)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(555, 210) rotate(30) scale(0.50)" fill="var(--kaede-hot)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Right perimeter -->
+      <g transform="translate(548, 355) rotate(25) scale(0.55)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(540, 300) rotate(8) scale(0.52)" fill="#E06830" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Lower-left perimeter -->
+      <g transform="translate(175, 345) rotate(-40) scale(0.52)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(210, 370) rotate(-20) scale(0.50)" fill="#C85A28" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Lower-right perimeter -->
+      <g transform="translate(510, 410) rotate(35) scale(0.50)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(480, 430) rotate(18) scale(0.48)" fill="#C85A28" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Bottom perimeter near trunk -->
+      <g transform="translate(300, 420) rotate(-8) scale(0.48)" fill="var(--kaede)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(380, 425) rotate(15) scale(0.45)" fill="#E06830" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── Cluster at Branch 1 tip (left side) ── -->
+      <g transform="translate(158, 280) rotate(-20) scale(0.48)" fill="var(--kaede)" opacity="0.30">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(180, 288) rotate(15) scale(0.42)" fill="var(--kaede-hot)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(145, 298) rotate(-45) scale(0.35)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(195, 272) rotate(35) scale(0.38)" fill="var(--kaede)" opacity="0.27">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(168, 310) rotate(5) scale(0.32)" fill="var(--kaede-hot)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(205, 302) rotate(-10) scale(0.30)" fill="#E06830" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Branch 1 secondary twig leaves -->
+      <g transform="translate(218, 300) rotate(25) scale(0.42)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(228, 320) rotate(-15) scale(0.32)" fill="var(--kaede-hot)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(235, 355) rotate(40) scale(0.37)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- NEW leaves on new Branch 1 twigs -->
+      <g transform="translate(178, 340) rotate(10) scale(0.30)" fill="var(--kaede)" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(175, 358) rotate(-18) scale(0.25)" fill="#C85A28" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(242, 375) rotate(28) scale(0.30)" fill="var(--kaede-hot)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── Cluster at Branch 2 tip (upper-right) ── -->
+      <g transform="translate(528, 182) rotate(10) scale(0.52)" fill="var(--kaede)" opacity="0.30">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(550, 190) rotate(-25) scale(0.45)" fill="var(--kaede-hot)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(510, 198) rotate(30) scale(0.40)" fill="var(--kaede)" opacity="0.27">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(570, 198) rotate(-5) scale(0.38)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(538, 208) rotate(50) scale(0.33)" fill="var(--kaede-hot)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(490, 215) rotate(-30) scale(0.30)" fill="#E06830" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(475, 195) rotate(20) scale(0.36)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Branch 2 secondary twig leaves -->
+      <g transform="translate(455, 240) rotate(-15) scale(0.42)" fill="var(--kaede)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(448, 272) rotate(35) scale(0.37)" fill="var(--kaede-hot)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(470, 285) rotate(-8) scale(0.32)" fill="var(--kaede)" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- NEW: extra density on new Branch 2 twigs -->
+      <g transform="translate(520, 258) rotate(22) scale(0.33)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(530, 275) rotate(-12) scale(0.28)" fill="#C85A28" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(435, 295) rotate(15) scale(0.30)" fill="var(--kaede-hot)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── Cluster at Branch 3 (mid-right) ── -->
+      <g transform="translate(528, 360) rotate(-12) scale(0.48)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(548, 368) rotate(22) scale(0.40)" fill="var(--kaede-hot)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(510, 378) rotate(-40) scale(0.35)" fill="var(--kaede)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(540, 390) rotate(8) scale(0.37)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(525, 405) rotate(45) scale(0.30)" fill="#E06830" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(495, 400) rotate(-20) scale(0.32)" fill="var(--kaede-hot)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Branch 3 secondary twig leaves -->
+      <g transform="translate(530, 418) rotate(15) scale(0.34)" fill="var(--kaede)" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(540, 435) rotate(-8) scale(0.28)" fill="#C85A28" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- NEW: leaves on new Branch 3 twig -->
+      <g transform="translate(450, 440) rotate(25) scale(0.32)" fill="var(--kaede)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(445, 455) rotate(-5) scale(0.25)" fill="var(--kaede-hot)" opacity="0.20">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── Cluster at Branch 4 (upper-left) ── -->
+      <g transform="translate(180, 245) rotate(-18) scale(0.45)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(198, 255) rotate(28) scale(0.38)" fill="var(--kaede-hot)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(160, 250) rotate(-38) scale(0.33)" fill="var(--kaede)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(210, 262) rotate(12) scale(0.30)" fill="#E06830" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(170, 265) rotate(42) scale(0.35)" fill="var(--kaede-hot)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Branch 4 secondary twig leaves -->
+      <g transform="translate(225, 280) rotate(-10) scale(0.32)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(235, 295) rotate(18) scale(0.28)" fill="var(--kaede-hot)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- NEW: leaves on new Branch 4 twig -->
+      <g transform="translate(222, 325) rotate(-22) scale(0.28)" fill="var(--kaede)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(225, 340) rotate(8) scale(0.25)" fill="#C85A28" opacity="0.20">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── Cluster at Branch 5 (upper-center-right, NEW) ── -->
+      <g transform="translate(465, 215) rotate(5) scale(0.42)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(480, 200) rotate(-18) scale(0.38)" fill="var(--kaede-hot)" opacity="0.26">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(448, 208) rotate(30) scale(0.35)" fill="var(--kaede)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(495, 218) rotate(-35) scale(0.30)" fill="#E06830" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Branch 5 twig leaves -->
+      <g transform="translate(455, 270) rotate(12) scale(0.30)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(460, 255) rotate(-8) scale(0.26)" fill="var(--kaede-hot)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── Crown center leaves (between trunk top and branches, DENSE interior) ── -->
+      <g transform="translate(320, 270) rotate(-5) scale(0.45)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(360, 250) rotate(18) scale(0.50)" fill="var(--kaede-hot)" opacity="0.30">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(390, 280) rotate(-30) scale(0.40)" fill="var(--kaede)" opacity="0.27">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(340, 300) rotate(25) scale(0.37)" fill="var(--kaede-hot)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(300, 315) rotate(-12) scale(0.34)" fill="var(--kaede)" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(405, 320) rotate(40) scale(0.32)" fill="#E06830" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(280, 330) rotate(8) scale(0.30)" fill="var(--kaede)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <!-- Extra crown top density -->
+      <g transform="translate(370, 225) rotate(-22) scale(0.58)" fill="var(--kaede)" opacity="0.32">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(310, 240) rotate(15) scale(0.48)" fill="var(--kaede-hot)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(420, 250) rotate(-8) scale(0.42)" fill="var(--kaede)" opacity="0.27">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+      <!-- ── INNER DENSITY (tiny leaves for depth) ── -->
+      <g transform="translate(340, 215) rotate(5) scale(0.22)" fill="var(--kaede)" opacity="0.20">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(390, 240) rotate(-15) scale(0.24)" fill="var(--kaede-hot)" opacity="0.20">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(300, 260) rotate(20) scale(0.22)" fill="var(--kaede)" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(420, 295) rotate(-25) scale(0.25)" fill="#E06830" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(350, 340) rotate(10) scale(0.23)" fill="var(--kaede)" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(270, 290) rotate(-35) scale(0.22)" fill="var(--kaede-hot)" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(480, 330) rotate(30) scale(0.24)" fill="var(--kaede)" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(200, 310) rotate(-12) scale(0.22)" fill="#C85A28" opacity="0.17">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(500, 345) rotate(18) scale(0.23)" fill="var(--kaede)" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(255, 250) rotate(22) scale(0.20)" fill="var(--kaede-hot)" opacity="0.17">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(445, 350) rotate(-28) scale(0.22)" fill="var(--kaede)" opacity="0.18">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+      <!-- Additional gap-filling leaves along mid-branches -->
+      <g transform="translate(400, 370) rotate(20) scale(0.38)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(260, 340) rotate(-35) scale(0.34)" fill="var(--kaede-hot)" opacity="0.23">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(440, 340) rotate(30) scale(0.30)" fill="var(--kaede)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(330, 390) rotate(-5) scale(0.32)" fill="#C85A28" opacity="0.20">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g transform="translate(375, 400) rotate(15) scale(0.28)" fill="var(--kaede)" opacity="0.20">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+
+
+      <!-- ── GREEN TSUBAKI-STYLE LEAVES (dark green, thick oval shape) ── -->
+      <!-- 10 green leaves scattered among the red maple canopy -->
+      <g transform="translate(290, 225) rotate(-30) scale(0.40)" fill="var(--leaf-dark)" opacity="0.22">
+        <ellipse cx="20" cy="35" rx="12" ry="26"/>
+        <path d="M20 12 L20 58" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" fill="none"/>
+      </g>
+      <g transform="translate(430, 260) rotate(20) scale(0.38)" fill="var(--leaf-dark)" opacity="0.20">
+        <ellipse cx="20" cy="35" rx="12" ry="26"/>
+        <path d="M20 12 L20 58" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" fill="none"/>
+      </g>
+      <g transform="translate(350, 195) rotate(-15) scale(0.35)" fill="var(--leaf-dark)" opacity="0.22">
+        <ellipse cx="20" cy="35" rx="11" ry="24"/>
+        <path d="M20 14 L20 56" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+      </g>
+      <g transform="translate(500, 310) rotate(35) scale(0.33)" fill="var(--leaf-dark)" opacity="0.18">
+        <ellipse cx="20" cy="35" rx="11" ry="24"/>
+        <path d="M20 14 L20 56" stroke="rgba(255,255,255,0.10)" stroke-width="1" fill="none"/>
+      </g>
+      <g transform="translate(195, 290) rotate(-45) scale(0.35)" fill="var(--leaf-dark)" opacity="0.20">
+        <ellipse cx="20" cy="35" rx="12" ry="26"/>
+        <path d="M20 12 L20 58" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" fill="none"/>
+      </g>
+      <g transform="translate(380, 310) rotate(10) scale(0.30)" fill="var(--leaf-dark)" opacity="0.18">
+        <ellipse cx="20" cy="35" rx="10" ry="22"/>
+        <path d="M20 15 L20 55" stroke="rgba(255,255,255,0.10)" stroke-width="1" fill="none"/>
+      </g>
+      <g transform="translate(470, 225) rotate(-22) scale(0.32)" fill="var(--leaf-dark)" opacity="0.20">
+        <ellipse cx="20" cy="35" rx="11" ry="24"/>
+        <path d="M20 14 L20 56" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+      </g>
+      <g transform="translate(240, 355) rotate(40) scale(0.28)" fill="var(--leaf-dark)" opacity="0.18">
+        <ellipse cx="20" cy="35" rx="10" ry="22"/>
+        <path d="M20 15 L20 55" stroke="rgba(255,255,255,0.10)" stroke-width="1" fill="none"/>
+      </g>
+      <g transform="translate(540, 250) rotate(-10) scale(0.30)" fill="var(--leaf-dark)" opacity="0.18">
+        <ellipse cx="20" cy="35" rx="10" ry="22"/>
+        <path d="M20 15 L20 55" stroke="rgba(255,255,255,0.10)" stroke-width="1" fill="none"/>
+      </g>
+      <g transform="translate(315, 360) rotate(25) scale(0.28)" fill="var(--leaf-dark)" opacity="0.16">
+        <ellipse cx="20" cy="35" rx="10" ry="22"/>
+        <path d="M20 15 L20 55" stroke="rgba(255,255,255,0.10)" stroke-width="1" fill="none"/>
+      </g>
+
+
+      <!-- === FALLING LEAVES (drifting from canopy, repositioned for new tree) === -->
+      <g class="falling-leaf-1" transform="translate(430, 410) scale(0.27)" fill="var(--kaede)" opacity="0.28">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g class="falling-leaf-2" transform="translate(290, 360) scale(0.30)" fill="var(--kaede-hot)" opacity="0.25">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g class="falling-leaf-3" transform="translate(500, 330) scale(0.24)" fill="#E06830" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g class="falling-leaf-4" transform="translate(230, 320) scale(0.27)" fill="var(--kaede)" opacity="0.24">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+      <g class="falling-leaf-5" transform="translate(390, 390) scale(0.22)" fill="var(--kaede-hot)" opacity="0.22">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+      </g>
+    </svg>
+
+    <!-- B3b2: STRONGER text protection gradients — two layers -->
+    <!-- Primary text protection: large cream area covering center-left -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 60% at 30% 50%, #FAFAF5 0%, rgba(250,250,245,0.95) 40%, rgba(250,250,245,0.5) 65%, transparent 80%);"></div>
+    <!-- Secondary: subtle top/bottom fade for badge and CTA -->
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(250,250,245,0.6) 0%, transparent 15%, transparent 85%, rgba(250,250,245,0.4) 100%);"></div>
+  </div>
+
+  <!-- B3b2: Simplified center accents — just a few tsubaki flowers and anzu blossoms floating -->
+  <div class="hero-accents">
+    <!-- Small tsubaki flower accent, left of center -->
+    <svg style="top:30%;left:15%;width:55px;transform:rotate(-12deg);opacity:0.20" viewBox="0 0 100 100" fill="var(--tsubaki)">
+      <ellipse cx="50" cy="28" rx="14" ry="20" opacity="0.55"/>
+      <ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(60 50 50)" opacity="0.50"/>
+      <ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(120 50 50)" opacity="0.55"/>
+      <ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(180 50 50)" opacity="0.50"/>
+      <ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(240 50 50)" opacity="0.55"/>
+      <ellipse cx="50" cy="28" rx="14" ry="20" transform="rotate(300 50 50)" opacity="0.50"/>
+      <circle cx="50" cy="50" r="6" opacity="0.30"/>
+      <circle cx="47" cy="47" r="2" opacity="0.45"/>
+      <circle cx="53" cy="47" r="2" opacity="0.45"/>
+    </svg>
+    <!-- Small anzu blossom accent, upper area -->
+    <svg style="top:12%;left:42%;width:40px;transform:rotate(18deg);opacity:0.18" viewBox="0 0 100 100" fill="var(--anzu)">
+      <ellipse cx="50" cy="25" rx="10" ry="15" opacity="0.60"/>
+      <ellipse cx="50" cy="25" rx="10" ry="15" transform="rotate(72 50 50)" opacity="0.55"/>
+      <ellipse cx="50" cy="25" rx="10" ry="15" transform="rotate(144 50 50)" opacity="0.60"/>
+      <ellipse cx="50" cy="25" rx="10" ry="15" transform="rotate(216 50 50)" opacity="0.55"/>
+      <ellipse cx="50" cy="25" rx="10" ry="15" transform="rotate(288 50 50)" opacity="0.60"/>
+      <circle cx="50" cy="50" r="4" opacity="0.35"/>
+    </svg>
+    <!-- Small floating tsubaki petal -->
+    <svg style="top:60%;left:12%;width:20px;transform:rotate(55deg);opacity:0.14" viewBox="0 0 30 40" fill="var(--tsubaki)">
+      <ellipse cx="15" cy="15" rx="10" ry="16" opacity="0.55"/>
+    </svg>
+    <!-- Small floating anzu petal -->
+    <svg style="top:80%;left:30%;width:16px;transform:rotate(-25deg);opacity:0.12" viewBox="0 0 30 30" fill="var(--anzu)">
+      <ellipse cx="15" cy="10" rx="8" ry="12" opacity="0.50"/>
+    </svg>
+  </div>
+
+  <div style="position:relative;z-index:2;max-width:680px;">
+    <div class="hero-badge">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/><path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/></svg>
+      Solo Builder's Garden
+    </div>
+    <h1>Plant ideas.<br><span class="green">Watch them grow.</span><br>Have fun.</h1>
+    <p class="sub-jp">アイデアの種を蒔こう。育てよう。楽しもう。</p>
+    <p class="desc">A one-person studio crafting tools, products, and content with curiosity and care.</p>
+    <a href="#" class="cta">Explore the garden →</a>
+  </div>
+</section>
+
+<div class="vine-divider">
+  <svg width="min(90vw,600px)" height="40" viewBox="0 0 600 40" fill="none" stroke-linecap="round" opacity="0.45">
+    <defs>
+      <linearGradient id="vine-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="var(--kaede)"/>
+        <stop offset="35%" stop-color="var(--tsubaki)"/>
+        <stop offset="70%" stop-color="var(--anzu)"/>
+        <stop offset="100%" stop-color="var(--accent-leaf)"/>
+      </linearGradient>
+    </defs>
+    <path d="M0 20 C100 15 150 25 200 20 C250 15 300 25 350 20 C400 15 450 25 500 20 C550 15 580 25 600 20" stroke="url(#vine-grad)" stroke-width="1.8"/>
+    <circle cx="120" cy="17" r="5" fill="var(--kaede)" opacity="0.5"/>
+    <circle cx="250" cy="23" r="6" fill="var(--tsubaki)" opacity="0.45"/>
+    <circle cx="380" cy="17" r="5" fill="var(--anzu)" opacity="0.5"/>
+    <circle cx="500" cy="21" r="4" fill="var(--accent-leaf)" opacity="0.45"/>
+  </svg>
+</div>
+
+<section class="products">
+  <h2>What's growing</h2>
+  <p class="sub">Each project planted with care, nurtured with curiosity.</p>
+  <div class="filters">
+    <button class="active">All</button><button>Product</button><button>Tool</button><button>Content</button>
+  </div>
+  <div class="card-grid">
+    <div class="card product">
+      <div class="card-strip">
+        <svg style="position:absolute;left:5%;top:5%;width:30px;transform:rotate(-20deg);opacity:0.25" viewBox="0 0 100 100" fill="var(--kaede)">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </svg>
+        <svg style="position:absolute;right:10%;top:8%;width:22px;transform:rotate(15deg);opacity:0.20" viewBox="0 0 30 40" fill="var(--accent-leaf)">
+          <path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z"/>
+        </svg>
+        <svg style="position:absolute;left:40%;top:12%;width:16px;transform:rotate(30deg);opacity:0.15" viewBox="0 0 100 100" fill="var(--kaede)">
+          <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/><path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/></svg></div>
+        <div class="card-cat">Product</div>
+        <h3>AI PM Service</h3>
+        <p class="desc-en">AI-powered task management for solo builders</p>
+        <p class="desc-jp">AIタスク管理で個人開発を加速</p>
+        <div class="visit">Visit →</div>
+      </div>
+    </div>
+    <div class="card tool">
+      <div class="card-strip">
+        <svg style="position:absolute;left:8%;top:3%;width:32px;transform:rotate(-8deg);opacity:0.22" viewBox="0 0 100 100" fill="var(--tsubaki)">
+          <ellipse cx="50" cy="28" rx="16" ry="22"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)"/>
+          <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)"/>
+          <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)"/>
+          <circle cx="50" cy="50" r="6" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-5 7-11 8-11s8 6 8 11a7 7 0 0 1-7 7z"/><path d="M12 20V10"/></svg></div>
+        <div class="card-cat">Tool</div>
+        <h3>Product Hub</h3>
+        <p class="desc-en">Project management dashboard</p>
+        <p class="desc-jp">スタジオ全体のプロジェクト管理</p>
+        <div class="visit">Visit →</div>
+      </div>
+    </div>
+    <div class="card content">
+      <div class="card-strip">
+        <svg style="position:absolute;left:8%;top:6%;width:28px;transform:rotate(10deg);opacity:0.24" viewBox="0 0 100 100" fill="var(--anzu)">
+          <ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/>
+          <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/>
+          <circle cx="50" cy="50" r="5" opacity="0.35"/>
+        </svg>
+        <svg style="position:absolute;right:15%;top:15%;width:18px;transform:rotate(-20deg);opacity:0.16" viewBox="0 0 100 100" fill="var(--anzu)">
+          <ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/></svg></div>
+        <div class="card-cat">Content</div>
+        <h3>AI Solo Builder</h3>
+        <p class="desc-en">Blog for solo builders leveraging AI</p>
+        <p class="desc-jp">AI活用ソロ開発者向けブログ</p>
+        <div class="visit">Visit →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <svg style="position:absolute;top:8%;left:3%;width:80px;transform:rotate(-15deg);opacity:0.12;pointer-events:none" viewBox="0 0 100 100" fill="var(--tsubaki)">
+    <ellipse cx="50" cy="28" rx="16" ry="22"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)"/>
+    <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)"/>
+    <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)"/><ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)"/>
+  </svg>
+  <svg style="position:absolute;bottom:8%;right:3%;width:65px;transform:rotate(20deg);opacity:0.12;pointer-events:none" viewBox="0 0 100 100" fill="var(--anzu)">
+    <ellipse cx="50" cy="25" rx="12" ry="18"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)"/>
+    <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)"/><ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)"/>
+    <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)"/>
+  </svg>
+  <svg style="position:absolute;top:50%;right:8%;width:50px;transform:rotate(-30deg);opacity:0.08;pointer-events:none" viewBox="0 0 100 100" fill="var(--kaede)">
+    <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"/>
+  </svg>
+  <div class="gradient-line" style="margin-bottom: 40px;"></div>
+  <div style="position:relative;z-index:1;">
+    <h2>A garden, not a factory</h2>
+    <p class="sub-jp">工場ではなく、庭をつくる。</p>
+    <p class="desc">Every product here is grown, not manufactured. Ideas are planted as small seeds, watered with curiosity, and given time to take root.</p>
+    <div class="values">
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z"/><path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z"/></svg><span>Grow</span></div>
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22a9 9 0 0 0 9-9c0-3-1.5-5.5-4-7.5C14.5 3.5 12 2 12 2s-2.5 1.5-5 3.5C4.5 7.5 3 10 3 13a9 9 0 0 0 9 9z"/><path d="M12 22V12"/></svg><span>Nurture</span></div>
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/></svg><span>Bloom</span></div>
+      <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg><span>Ship</span></div>
+    </div>
+  </div>
+  <div class="gradient-line" style="margin-top: 40px;"></div>
+</section>
+
+<footer>
+  <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,40 C240,60 480,10 720,40 C960,70 1200,10 1440,40 L1440,60 L0,60 Z" fill="#2D3B2E"/></svg></div>
+  <div class="logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-sage)" stroke-width="2"><path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/></svg>
+    craftgarden.studio
+  </div>
+  <p class="tagline">Plant ideas. Watch them grow. Have fun.</p>
+  <p class="copy">&copy; 2026 craftgarden.studio</p>
+</footer>
+</body>
+</html>

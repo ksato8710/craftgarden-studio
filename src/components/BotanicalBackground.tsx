@@ -1,7 +1,7 @@
 export default function BotanicalBackground() {
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-0 text-accent-leaf opacity-22"
+      className="pointer-events-none fixed inset-0 z-0 opacity-22"
       aria-hidden="true"
     >
       {/* === Kaede (Japanese maple) leaves === */}
@@ -16,13 +16,13 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-kaede)"
       >
         <path
           d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"
           opacity="0.6"
         />
-        <path d="M50 58 L50 95" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.3" />
+        <path d="M50 58 L50 95" stroke="var(--color-kaede)" strokeWidth="1.5" fill="none" opacity="0.3" />
       </svg>
 
       <svg
@@ -36,13 +36,13 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-kaede-hot)"
       >
         <path
           d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"
           opacity="0.5"
         />
-        <path d="M50 58 L50 95" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.25" />
+        <path d="M50 58 L50 95" stroke="var(--color-kaede-hot)" strokeWidth="1.5" fill="none" opacity="0.25" />
       </svg>
 
       <svg
@@ -56,7 +56,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-kaede)"
       >
         <path
           d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"
@@ -75,7 +75,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-kaede-hot)"
       >
         <path
           d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"
@@ -88,7 +88,7 @@ export default function BotanicalBackground() {
         className="absolute"
         style={{ top: "55%", left: "80%", width: 30, transform: "rotate(50deg)" }}
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-kaede)"
       >
         <path
           d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"
@@ -100,7 +100,7 @@ export default function BotanicalBackground() {
         className="absolute"
         style={{ top: "90%", left: "15%", width: 25, transform: "rotate(-55deg)" }}
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-kaede-hot)"
       >
         <path
           d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z"
@@ -120,7 +120,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-anzu)"
       >
         <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.5" />
         <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.45" />
@@ -141,7 +141,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-anzu-hot)"
       >
         <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.4" />
         <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.35" />
@@ -162,7 +162,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-anzu)"
       >
         <ellipse cx="50" cy="25" rx="12" ry="18" opacity="0.5" />
         <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" opacity="0.45" />
@@ -184,7 +184,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 30 30"
-        fill="currentColor"
+        fill="var(--color-tsubaki)"
       >
         <ellipse cx="15" cy="8" rx="6" ry="10" opacity="0.35" />
       </svg>
@@ -200,7 +200,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 30 30"
-        fill="currentColor"
+        fill="var(--color-anzu)"
       >
         <ellipse cx="15" cy="8" rx="6" ry="10" opacity="0.3" />
       </svg>
@@ -217,7 +217,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-tsubaki)"
       >
         <ellipse cx="50" cy="28" rx="16" ry="22" opacity="0.4" />
         <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" opacity="0.35" />
@@ -244,7 +244,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-tsubaki-hot)"
       >
         <ellipse cx="50" cy="28" rx="16" ry="22" opacity="0.45" />
         <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" opacity="0.4" />
@@ -268,7 +268,7 @@ export default function BotanicalBackground() {
           } as React.CSSProperties
         }
         viewBox="0 0 100 100"
-        fill="currentColor"
+        fill="var(--color-tsubaki)"
       >
         <ellipse cx="50" cy="30" rx="14" ry="20" opacity="0.35" />
         <ellipse cx="50" cy="30" rx="14" ry="20" transform="rotate(72 50 50)" opacity="0.3" />
@@ -283,17 +283,17 @@ export default function BotanicalBackground() {
         className="absolute"
         style={{ top: "32%", left: "7%", width: 30, transform: "rotate(-50deg)" }}
         viewBox="0 0 40 70"
-        fill="currentColor"
+        fill="var(--color-leaf-dark)"
       >
         <ellipse cx="20" cy="30" rx="14" ry="28" opacity="0.35" />
-        <path d="M20 5 L20 58" stroke="white" strokeWidth="0.8" fill="none" opacity="0.15" />
+        <path d="M20 5 L20 58" stroke="var(--color-bg-cream)" strokeWidth="0.8" fill="none" opacity="0.15" />
       </svg>
 
       <svg
         className="absolute"
         style={{ top: "80%", left: "50%", width: 25, transform: "rotate(30deg)" }}
         viewBox="0 0 40 70"
-        fill="currentColor"
+        fill="var(--color-leaf-dark)"
       >
         <ellipse cx="20" cy="30" rx="14" ry="28" opacity="0.3" />
       </svg>
@@ -303,11 +303,11 @@ export default function BotanicalBackground() {
         className="absolute"
         style={{ top: "30%", left: "25%", width: 18, transform: "rotate(-30deg)" }}
         viewBox="0 0 40 60"
-        fill="currentColor"
+        fill="var(--color-anzu)"
       >
         <ellipse cx="20" cy="18" rx="8" ry="12" opacity="0.4" />
         <ellipse cx="20" cy="18" rx="8" ry="12" transform="rotate(60 20 25)" opacity="0.35" />
-        <path d="M20 30 L20 55" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.3" />
+        <path d="M20 30 L20 55" stroke="var(--color-anzu)" strokeWidth="1.5" fill="none" opacity="0.3" />
       </svg>
     </div>
   );

@@ -13,19 +13,19 @@ const categoryColors: Record<
   Product: {
     badge: "text-cat-product",
     icon: "bg-cat-product/12 text-cat-product",
-    strip: "bg-cat-product/10",
+    strip: "bg-gradient-to-br from-cat-product/8 to-kaede/6",
     shiori: "shiori-product",
   },
   Tool: {
     badge: "text-cat-tool",
     icon: "bg-cat-tool/12 text-cat-tool",
-    strip: "bg-cat-tool/10",
+    strip: "bg-gradient-to-br from-cat-tool/8 to-tsubaki/6",
     shiori: "shiori-tool",
   },
   Content: {
     badge: "text-cat-content",
     icon: "bg-cat-content/12 text-cat-content",
-    strip: "bg-cat-content/10",
+    strip: "bg-gradient-to-br from-cat-content/8 to-anzu/6",
     shiori: "shiori-content",
   },
 };
@@ -55,24 +55,64 @@ const categoryIcons: Record<ProductCategory, React.ReactNode> = {
   ),
 };
 
-function LeafStrip() {
+/* Plant-specific card strip decorations */
+function KaedeStrip() {
   return (
     <>
-      <svg className="absolute" style={{ left: "8%", top: "15%", width: 28, height: 28, transform: "rotate(-20deg)", opacity: 0.15 }} viewBox="0 0 30 40" fill="currentColor">
+      <svg className="absolute" style={{ left: "5%", top: "5%", width: 30, transform: "rotate(-20deg)", opacity: 0.25 }} viewBox="0 0 100 100" fill="var(--color-kaede)">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" />
+      </svg>
+      <svg className="absolute" style={{ right: "10%", top: "8%", width: 22, transform: "rotate(15deg)", opacity: 0.20 }} viewBox="0 0 30 40" fill="var(--color-accent-leaf)">
         <path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z" />
       </svg>
-      <svg className="absolute" style={{ left: "35%", top: "5%", width: 28, height: 28, transform: "rotate(15deg)", opacity: 0.12 }} viewBox="0 0 30 40" fill="currentColor">
-        <path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z" />
-      </svg>
-      <svg className="absolute" style={{ right: "25%", top: "10%", width: 28, height: 28, transform: "rotate(-5deg)", opacity: 0.1 }} viewBox="0 0 30 40" fill="currentColor">
-        <path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z" />
-      </svg>
-      <svg className="absolute" style={{ right: "8%", top: "20%", width: 28, height: 28, transform: "rotate(25deg)", opacity: 0.15 }} viewBox="0 0 30 40" fill="currentColor">
-        <path d="M15 0C15 0 0 15 0 25C0 33 7 40 15 40C23 40 30 33 30 25C30 15 15 0 15 0Z" />
+      <svg className="absolute" style={{ left: "40%", top: "12%", width: 16, transform: "rotate(30deg)", opacity: 0.15 }} viewBox="0 0 100 100" fill="var(--color-kaede)">
+        <path d="M50 8 L55 30 L72 18 L60 38 L80 35 L58 48 L75 65 L55 55 L58 78 L50 58 L42 78 L45 55 L25 65 L42 48 L20 35 L40 38 L28 18 L45 30 Z" />
       </svg>
     </>
   );
 }
+
+function TsubakiStrip() {
+  return (
+    <>
+      <svg className="absolute" style={{ left: "8%", top: "3%", width: 32, transform: "rotate(-8deg)", opacity: 0.22 }} viewBox="0 0 100 100" fill="var(--color-tsubaki)">
+        <ellipse cx="50" cy="28" rx="16" ry="22" />
+        <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(60 50 50)" />
+        <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(120 50 50)" />
+        <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(180 50 50)" />
+        <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(240 50 50)" />
+        <ellipse cx="50" cy="28" rx="16" ry="22" transform="rotate(300 50 50)" />
+        <circle cx="50" cy="50" r="6" opacity="0.4" />
+      </svg>
+    </>
+  );
+}
+
+function AnzuStrip() {
+  return (
+    <>
+      <svg className="absolute" style={{ left: "8%", top: "6%", width: 28, transform: "rotate(10deg)", opacity: 0.24 }} viewBox="0 0 100 100" fill="var(--color-anzu)">
+        <ellipse cx="50" cy="25" rx="12" ry="18" />
+        <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" />
+        <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" />
+        <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(216 50 50)" />
+        <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(288 50 50)" />
+        <circle cx="50" cy="50" r="5" opacity="0.35" />
+      </svg>
+      <svg className="absolute" style={{ right: "15%", top: "15%", width: 18, transform: "rotate(-20deg)", opacity: 0.16 }} viewBox="0 0 100 100" fill="var(--color-anzu)">
+        <ellipse cx="50" cy="25" rx="12" ry="18" />
+        <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(72 50 50)" />
+        <ellipse cx="50" cy="25" rx="12" ry="18" transform="rotate(144 50 50)" />
+      </svg>
+    </>
+  );
+}
+
+const stripComponents: Record<ProductCategory, React.ReactNode> = {
+  Product: <KaedeStrip />,
+  Tool: <TsubakiStrip />,
+  Content: <AnzuStrip />,
+};
 
 export default function Products() {
   const [filter, setFilter] = useState<Filter>("All");
@@ -124,7 +164,7 @@ export default function Products() {
             >
               {/* Botanical strip */}
               <div className={`relative flex h-12 w-full items-center justify-center overflow-hidden rounded-t-[16px] ${colors.strip}`}>
-                <LeafStrip />
+                {stripComponents[product.category]}
               </div>
 
               <div className="flex flex-1 flex-col p-6">
