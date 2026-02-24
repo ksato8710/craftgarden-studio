@@ -494,7 +494,7 @@ export default function Hero() {
             <path d="M12 12C12 8 8 4.5 3 4c0 6 3 9 9 8z" />
             <path d="M12 12c0-4 4-7.5 9-8 0 6-3 9-9 8z" />
           </svg>
-          Solo Builder&apos;s Garden
+          Solo Craft Garden
         </div>
 
         <h1 className="animate-[fade-in-up_0.8s_0.1s_ease-out_both] text-display font-[800] leading-[1.15] tracking-[-0.025em] text-text-deep">

@@ -63,7 +63,7 @@ Full-viewport section. Dark, atmospheric. The "front door" of the studio.
 | Element | English | Japanese |
 |---------|---------|----------|
 | Tagline | Crafting digital products with AI and passion. | AIと情熱で、デジタルプロダクトをつくる。 |
-| Sub-copy | A solo builder's studio where ideas become real products. | アイデアが本物のプロダクトになる、ソロビルダーの工房。 |
+| Sub-copy | A solo craft studio where ideas become real products. | アイデアが本物のプロダクトになる、ソロビルダーの工房。 |
 | CTA | View Products | プロダクトを見る |
 
 **Visual Treatment:**
@@ -106,14 +106,14 @@ Card grid showcasing all products. Each card links to its subdomain.
 
 | Name | Description (EN) | Description (JP) | Category | URL |
 |------|-------------------|-------------------|----------|-----|
-| AI PM Service | AI-powered task management for solo builders | AIタスク管理で個人開発を加速 | Product | ai-pm-service.craftgarden.studio |
+| AI PM Service | AI-powered task management for solo craft | AIタスク管理で個人開発を加速 | Product | ai-pm-service.craftgarden.studio |
 | History Quiz | Learn history through interactive quizzes | インタラクティブな歴史クイズ | Product | history-quiz-app.craftgarden.studio |
 | WealthPilot | Personal asset management and tracking | 資産管理・資産トラッキング | Product | wealth-pilot.craftgarden.studio |
 | Product Hub | Project management dashboard for the studio | スタジオ全体のプロジェクト管理 | Tool | product-hub.craftgarden.studio |
 | Essential Navigator | Essential discovery and navigation tool | Essential Navigator | Tool | essential-navigator.craftgarden.studio |
 | Content Studio | Content creation and management platform | コンテンツ管理プラットフォーム | Tool | content-studio.craftgarden.studio |
 | Feedback Hub | Collect and analyze user feedback | フィードバック収集・分析 | Tool | feedback-hub.craftgarden.studio |
-| AI Solo Builder | Blog for solo builders leveraging AI | AI活用ソロ開発者向けブログ | Content | ai-solo-builder.craftgarden.studio |
+| AI Solo Craft | Blog for solo craft leveraging AI | AI活用ソロ開発者向けブログ | Content | ai-solo-craft.craftgarden.studio |
 | Conf Hub | Curated tech conference listings | 技術カンファレンス一覧 | Content | conf-hub.craftgarden.studio |
 | Orcha | Development process comparison platform | 開発プロセス比較 | Content | orcha.craftgarden.studio |
 | API Catalog JP | Japanese API reference catalog | 日本語APIカタログ | Content | api-catalog-jp.craftgarden.studio |
@@ -450,7 +450,7 @@ All interactive elements: minimum `44px` height on mobile (WCAG 2.5.5).
 
 ```html
 <title>craftgarden.studio — Crafting digital products with AI and passion</title>
-<meta name="description" content="A solo builder's studio creating digital products powered by AI. Explore tools, apps, and content platforms built with Next.js, Flutter, Claude, and more." />
+<meta name="description" content="A solo craft studio creating digital products powered by AI. Explore tools, apps, and content platforms built with Next.js, Flutter, Claude, and more." />
 <meta property="og:title" content="craftgarden.studio" />
 <meta property="og:description" content="Crafting digital products with AI and passion." />
 <meta property="og:type" content="website" />

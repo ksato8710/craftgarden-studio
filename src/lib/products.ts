@@ -11,7 +11,7 @@ export interface Product {
 export const products: Product[] = [
   {
     name: "AI PM Service",
-    descriptionEn: "AI-powered task management for solo builders",
+    descriptionEn: "AI-powered task management for solo craft",
     descriptionJp: "AIタスク管理で個人開発を加速",
     category: "Product",
     url: "https://ai-pm-service.craftgarden.studio",
@@ -66,11 +66,11 @@ export const products: Product[] = [
     url: "https://agent-skill-search.craftgarden.studio",
   },
   {
-    name: "AI Solo Builder",
-    descriptionEn: "Blog for solo builders leveraging AI",
+    name: "AI Solo Craft",
+    descriptionEn: "Blog for solo craft leveraging AI",
     descriptionJp: "AI活用ソロ開発者向けブログ",
     category: "Content",
-    url: "https://ai-solo-builder.craftgarden.studio",
+    url: "https://ai-solo-craft.craftgarden.studio",
   },
   {
     name: "Conf Hub",

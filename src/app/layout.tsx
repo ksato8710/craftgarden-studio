@@ -19,7 +19,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "craftgarden.studio — Plant ideas. Watch them grow. Have fun.",
   description:
-    "A solo builder's garden crafting tools, products, and content with curiosity and care. Every project starts as a tiny seed.",
+    "A solo craft garden crafting tools, products, and content with curiosity and care. Every project starts as a tiny seed.",
   metadataBase: new URL("https://craftgarden.studio"),
   openGraph: {
     title: "craftgarden.studio",

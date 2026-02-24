@@ -58,7 +58,7 @@ export default function Footer() {
           X / Twitter
         </a>
         <a
-          href="https://ai-solo-builder.craftgarden.studio"
+          href="https://ai-solo-craft.craftgarden.studio"
           target="_blank"
           rel="noopener noreferrer"
           className="font-heading text-[0.88rem] font-semibold opacity-50 transition-opacity duration-200 hover:opacity-100"
