@@ -28,6 +28,14 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     type: "website",
     url: "https://craftgarden.studio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "craftgarden.studio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
