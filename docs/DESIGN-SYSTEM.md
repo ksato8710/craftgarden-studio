@@ -1,7 +1,7 @@
 # craftgarden Design System
 
 > **Quiet Garden** — A design system rooted in botanical tranquility.
-> Version 1.1 | Last updated: 2026-02-24
+> Version 1.2 | Last updated: 2026-02-26
 
 This design system defines the visual language, interaction patterns, and implementation standards for craftgarden.studio and all related products. It is the single source of truth for design decisions across the ecosystem.
 
@@ -128,7 +128,7 @@ craftgarden のデザイン言語は「静かな庭（Quiet Garden）」のメ�
 #### Text
 | Token | HEX | Usage |
 |-------|-----|-------|
-| `--color-text-deep` | `#2D3B2E` | Highest contrast. Headings, nav, footer bg |
+| `--color-text-deep` | `#2A4A32` | Highest contrast. Headings, nav, footer bg |
 | `--color-text-muted` | `#5C7260` | Body text, descriptions |
 | `--color-text-light` | `#8A9E8C` | Auxiliary text, JP subtitles |
 
@@ -187,7 +187,7 @@ craftgarden の三花 — 杏(あんず)・椿(つばき)・楓(かえで) — �
 | Usage | Value |
 |-------|-------|
 | CTA text | `#FFFFFF` |
-| Footer background | `#2D3B2E` (= text-deep, inverted) |
+| Footer background | `#2A4A32` (= text-deep, inverted) |
 | Footer text | `#FAFAF5` (= bg-cream, inverted) |
 
 ### 2.2 Semantic Tokens
@@ -200,7 +200,7 @@ craftgarden の三花 — 杏(あんず)・椿(つばき)・楓(かえで) — �
   --color-bg-card: #F0EDE6;
 
   /* Text */
-  --color-text-deep: #2D3B2E;
+  --color-text-deep: #2A4A32;
   --color-text-muted: #5C7260;
   --color-text-light: #8A9E8C;
 
@@ -355,7 +355,7 @@ Each category color is applied consistently in 5 variations:
 | `bg-cream` #FAFAF5 | `#0F1A12` |
 | `bg-warm` #F5F2EC | `#152018` |
 | `bg-card` #F0EDE6 | `#1A2820` |
-| `text-deep` #2D3B2E | `#E8EDE9` |
+| `text-deep` #2A4A32 | `#E8EDE9` |
 | `text-muted` #5C7260 | `#9BB09E` |
 | `accent-leaf` #6B8F71 | `#82AB88` (+15% lightness) |
 
@@ -1397,12 +1397,12 @@ No fill on trunk/branch paths.
 
 | Foreground | Background | Ratio | AA Normal | AA Large |
 |-----------|------------|:-----:|:---------:|:--------:|
-| text-deep on bg-cream | `#2D3B2E` / `#FAFAF5` | **11.2:1** | Pass | Pass |
+| text-deep on bg-cream | `#2A4A32` / `#FAFAF5` | **9.4:1** | Pass | Pass |
 | text-muted on bg-cream | `#5C7260` / `#FAFAF5` | **5.2:1** | Pass | Pass |
 | text-light on bg-cream | `#8A9E8C` / `#FAFAF5` | **3.2:1** | Fail | Pass |
 | accent-leaf on bg-cream | `#6B8F71` / `#FAFAF5` | **4.0:1** | Fail* | Pass |
 | white on accent-leaf | `#FFFFFF` / `#6B8F71` | **3.8:1** | Fail* | Pass |
-| bg-cream on text-deep | `#FAFAF5` / `#2D3B2E` | **11.2:1** | Pass | Pass |
+| bg-cream on text-deep | `#FAFAF5` / `#2A4A32` | **9.4:1** | Pass | Pass |
 
 *`text-light` and `accent-leaf`: Used only for large text (>= 18px / 14px bold) or decorative elements. `accent-moss` (#4A7051) provides **5.9:1** for accessible alternatives.
 
