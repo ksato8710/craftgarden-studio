@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ktlabworks — Profile Icon v3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#e7e9ea;line-height:1.6;background:#0e1117}
+.header{text-align:center;padding:48px 24px 8px}
+.header h1{font-family:'Nunito',system-ui,sans-serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;letter-spacing:-0.02em}
+.header p{font-size:0.85rem;opacity:0.4;margin-top:4px}
+.section{padding:28px 24px 56px}
+.section-label{text-align:center;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;opacity:0.25;margin-bottom:24px}
+.icons-row{display:flex;flex-wrap:wrap;justify-content:center;gap:32px;max-width:1500px;margin:0 auto}
+.icon-card{display:flex;flex-direction:column;align-items:center;gap:12px;width:240px}
+.icon-frame{width:240px;height:240px;border-radius:50%;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,0.35);flex-shrink:0}
+.icon-frame svg{width:100%;height:100%;display:block}
+.icon-label{font-weight:700;font-size:0.85rem;text-align:center}
+.icon-desc{font-size:0.75rem;opacity:0.4;text-align:center;max-width:220px;line-height:1.5}
+.small-check{margin-top:44px}
+.small-check h3{text-align:center;font-size:0.8rem;margin-bottom:16px;opacity:0.4;font-family:'Nunito',sans-serif}
+.small-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.small-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.small-frame{width:48px;height:48px;border-radius:50%;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.3)}
+.small-frame svg{width:100%;height:100%;display:block}
+.small-label{font-size:0.6rem;opacity:0.35}
+.section-dark{background:#15202b}
+.section-light{background:#fff}
+.section-light *{color:#0f1419}
+.section-light .icon-desc{opacity:0.5}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ktlabworks — Profile Icon v3</h1>
+  <p>シンプルキャラクター + さりげないボタニカル</p>
+</div>
+
+<section class="section section-dark">
+  <p class="section-label">Dark Mode</p>
+  <div class="icons-row">
+
+    <!-- ======== A: Clean Flat Illustration — Sage Green ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="aClip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="aBg" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#E2EDE4"/>
+              <stop offset="100%" stop-color="#C8DBC8"/>
+            </radialGradient>
+          </defs>
+          <g clip-path="url(#aClip)">
+            <!-- Background -->
+            <rect width="240" height="240" fill="url(#aBg)"/>
+
+            <!-- Very subtle leaf shadow in background -->
+            <g opacity="0.07">
+              <path d="M195,15 Q215,5 225,15 Q218,28 200,25Z" fill="#2A4A32"/>
+              <path d="M210,25 Q230,20 238,30 Q228,40 215,35Z" fill="#2A4A32"/>
+              <path d="M15,210 Q30,195 40,205 Q32,215 18,215Z" fill="#2A4A32"/>
+              <path d="M5,195 Q20,185 25,195 Q18,205 8,200Z" fill="#2A4A32"/>
+            </g>
+
+            <!-- Neck -->
+            <rect x="106" y="168" width="28" height="28" rx="2" fill="#F0D5C0"/>
+
+            <!-- Shoulders / Hoodie -->
+            <path d="M30,240 Q35,205 68,195 Q88,188 106,196 L134,196 Q152,188 172,195 Q205,205 210,240Z" fill="#5E8268"/>
+            <!-- Hoodie collar V -->
+            <path d="M106,196 Q115,208 120,212 Q125,208 134,196" fill="#4A7051" opacity="0.6"/>
+            <!-- Hoodie detail -->
+            <path d="M78,210 Q95,204 106,210" fill="none" stroke="#4A6B4A" stroke-width="1" opacity="0.2"/>
+            <path d="M134,210 Q145,204 162,210" fill="none" stroke="#4A6B4A" stroke-width="1" opacity="0.2"/>
+
+            <!-- Small leaf pin on hoodie -->
+            <g transform="translate(155,205) rotate(-15)">
+              <path d="M0,0 Q4,-8 2,-14 Q7,-9 11,-4 Q7,0 0,0Z" fill="#6B8F71" opacity="0.6"/>
+              <path d="M0.5,-1 Q4,-7 2,-12" fill="none" stroke="#3D6B45" stroke-width="0.5" opacity="0.4"/>
+            </g>
+
+            <!-- Face -->
+            <path d="M82,115 Q80,82 88,65 Q98,46 120,43 Q142,46 152,65 Q160,82 158,115 Q156,148 146,162 Q138,172 120,175 Q102,172 94,162 Q84,148 82,115Z" fill="#F0D5C0"/>
+
+            <!-- Ears -->
+            <ellipse cx="82" cy="118" rx="7" ry="10" fill="#EBCDB5"/>
+            <ellipse cx="158" cy="118" rx="7" ry="10" fill="#EBCDB5"/>
+
+            <!-- Eyes — simple, expressive -->
+            <!-- Left eye -->
+            <ellipse cx="105" cy="112" rx="9" ry="9.5" fill="#fff"/>
+            <ellipse cx="106" cy="113" rx="6" ry="6.5" fill="#4A3A2A"/>
+            <circle cx="109" cy="110" r="2.5" fill="#fff" opacity="0.9"/>
+            <circle cx="103" cy="115" r="1.2" fill="#fff" opacity="0.3"/>
+            <!-- Right eye -->
+            <ellipse cx="135" cy="112" rx="9" ry="9.5" fill="#fff"/>
+            <ellipse cx="134" cy="113" rx="6" ry="6.5" fill="#4A3A2A"/>
+            <circle cx="137" cy="110" r="2.5" fill="#fff" opacity="0.9"/>
+            <circle cx="131" cy="115" r="1.2" fill="#fff" opacity="0.3"/>
+
+            <!-- Eyebrows -->
+            <path d="M94,101 Q103,97 114,100" fill="none" stroke="#2A2A30" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
+            <path d="M126,100 Q137,97 146,101" fill="none" stroke="#2A2A30" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/>
+
+            <!-- Nose -->
+            <path d="M118,130 Q120,133 122,130" fill="none" stroke="#D4B8A0" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Smile -->
+            <path d="M110,142 Q115,149 120,149 Q125,149 130,142" fill="none" stroke="#C08070" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Blush -->
+            <ellipse cx="95" cy="132" rx="8" ry="5" fill="#E8A0A0" opacity="0.12"/>
+            <ellipse cx="145" cy="132" rx="8" ry="5" fill="#E8A0A0" opacity="0.12"/>
+
+            <!-- Hair -->
+            <path d="M74,100 Q72,60 86,44 Q98,30 120,27 Q142,30 154,44 Q168,60 166,100 Q162,80 150,68 Q140,60 130,58 Q120,56 110,58 Q100,60 90,68 Q78,80 74,100Z" fill="#2A2A30"/>
+            <!-- Hair bangs -->
+            <path d="M88,68 Q90,50 102,44 Q96,56 92,72 Q90,82 88,90" fill="#323238" opacity="0.9"/>
+            <path d="M100,58 Q108,42 120,40 Q112,52 108,65 Q106,75 104,85" fill="#2A2A30" opacity="0.85"/>
+            <path d="M120,40 Q132,42 140,58 Q138,70 136,82 Q134,72 130,62" fill="#323238" opacity="0.9"/>
+            <path d="M148,48 Q155,55 158,72 Q156,82 154,90 Q152,80 148,70" fill="#2A2A30" opacity="0.85"/>
+            <!-- Top messy strands -->
+            <path d="M80,60 Q75,45 80,32" fill="none" stroke="#2A2A30" stroke-width="3" stroke-linecap="round"/>
+            <path d="M160,58 Q165,44 162,30" fill="none" stroke="#2A2A30" stroke-width="3" stroke-linecap="round"/>
+            <path d="M112,32 Q110,20 115,12" fill="none" stroke="#323238" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M130,30 Q132,18 128,10" fill="none" stroke="#2A2A30" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- Hair highlight -->
+            <path d="M105,34 Q118,28 135,32" fill="none" stroke="#45454E" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">A. Flat + Sage Hoodie</div>
+      <div class="icon-desc">フラットイラスト。セージグリーンのパーカーに葉っぱのピンバッジ。</div>
+    </div>
+
+    <!-- ======== B: Minimal Line Art ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="bClip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="bBg" cx="50%" cy="42%" r="58%">
+              <stop offset="0%" stop-color="#FAFAF5"/>
+              <stop offset="100%" stop-color="#EDEADF"/>
+            </radialGradient>
+          </defs>
+          <g clip-path="url(#bClip)">
+            <rect width="240" height="240" fill="url(#bBg)"/>
+
+            <!-- Neck -->
+            <rect x="108" y="170" width="24" height="24" rx="2" fill="#F0D5C0" opacity="0.0"/>
+
+            <!-- Shoulders / top -->
+            <path d="M35,240 Q40,208 70,196 Q90,188 108,198 L132,198 Q150,188 170,196 Q200,208 205,240Z" fill="#2A2A30"/>
+
+            <!-- Small leaf accent on shoulder -->
+            <g transform="translate(172,206) rotate(-20)">
+              <path d="M0,0 Q3,-8 2,-14 Q6,-9 10,-4 Q6,0 0,0Z" fill="#5E9070" opacity="0.55"/>
+              <path d="M0.5,-1 Q3,-7 2,-12" fill="none" stroke="#3D6B45" stroke-width="0.5" opacity="0.35"/>
+            </g>
+
+            <!-- Neck visible -->
+            <path d="M108,170 L108,198 M132,170 L132,198" stroke="#D4B8A0" stroke-width="0" fill="none"/>
+            <rect x="108" y="168" width="24" height="30" rx="2" fill="#F0D5C0"/>
+
+            <!-- Face outline (thick clean lines) -->
+            <path d="M84,115 Q82,80 90,64 Q100,44 120,41 Q140,44 150,64 Q158,80 156,115 Q154,148 144,163 Q136,173 120,176 Q104,173 96,163 Q86,148 84,115Z" fill="#F0D5C0" stroke="#2A2A30" stroke-width="2.5"/>
+
+            <!-- Ears -->
+            <ellipse cx="84" cy="118" rx="6" ry="9" fill="#F0D5C0" stroke="#2A2A30" stroke-width="2"/>
+            <ellipse cx="156" cy="118" rx="6" ry="9" fill="#F0D5C0" stroke="#2A2A30" stroke-width="2"/>
+
+            <!-- Eyes — simple dots -->
+            <circle cx="106" cy="112" r="3.5" fill="#2A2A30"/>
+            <circle cx="134" cy="112" r="3.5" fill="#2A2A30"/>
+            <!-- Tiny eye shine -->
+            <circle cx="108" cy="110" r="1.2" fill="#fff" opacity="0.8"/>
+            <circle cx="136" cy="110" r="1.2" fill="#fff" opacity="0.8"/>
+
+            <!-- Eyebrows -->
+            <path d="M96,102 Q104,98 114,101" fill="none" stroke="#2A2A30" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M126,101 Q136,98 144,102" fill="none" stroke="#2A2A30" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+
+            <!-- Nose -->
+            <path d="M118,130 Q120,134 122,130" fill="none" stroke="#2A2A30" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+
+            <!-- Smile -->
+            <path d="M112,143 Q116,149 120,149 Q124,149 128,143" fill="none" stroke="#2A2A30" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+
+            <!-- Hair (bold, clean shapes) -->
+            <path d="M76,100 Q74,58 88,42 Q100,28 120,25 Q140,28 152,42 Q166,58 164,100 Q160,78 148,65 Q138,58 128,55 Q118,53 108,55 Q98,58 88,68 Q78,80 76,100Z" fill="#2A2A30" stroke="#2A2A30" stroke-width="1"/>
+            <!-- Bangs -->
+            <path d="M90,65 Q92,46 104,40 Q98,52 94,68 Q92,78 90,88" fill="#35353D"/>
+            <path d="M102,55 Q110,38 122,36 Q114,48 110,62 Q108,72 106,80" fill="#2A2A30"/>
+            <path d="M122,36 Q134,38 142,55 Q140,66 138,76 Q136,68 132,58" fill="#35353D"/>
+            <path d="M150,44 Q158,55 160,72 Q158,82 156,88 Q154,78 150,68" fill="#2A2A30"/>
+            <!-- Top strands -->
+            <path d="M82,56 Q78,40 82,26" fill="none" stroke="#2A2A30" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M158,54 Q162,40 159,26" fill="none" stroke="#2A2A30" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M114,28 Q112,15 116,6" fill="none" stroke="#35353D" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M130,27 Q133,14 128,5" fill="none" stroke="#2A2A30" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">B. Minimal Line Art</div>
+      <div class="icon-desc">太めの輪郭線で描いたシンプルイラスト。黒トップ＋クリーム背景。肩に小さな葉。</div>
+    </div>
+
+    <!-- ======== C: Pixel Art + Botanical Tint ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="cClip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="cBg" cx="50%" cy="40%" r="58%">
+              <stop offset="0%" stop-color="#E5EFE8"/>
+              <stop offset="70%" stop-color="#C5D8CA"/>
+              <stop offset="100%" stop-color="#A8C4AF"/>
+            </radialGradient>
+          </defs>
+          <g clip-path="url(#cClip)">
+            <!-- Soft green gradient background -->
+            <rect width="240" height="240" fill="url(#cBg)"/>
+
+            <!-- Pixel grid: 8px per pixel -->
+            <!-- Body / Hoodie -->
+            <g fill="#5E8268">
+              <rect x="56" y="192" width="128" height="48"/>
+              <rect x="48" y="200" width="8" height="40"/>
+              <rect x="184" y="200" width="8" height="40"/>
+              <rect x="40" y="208" width="8" height="32"/>
+              <rect x="192" y="208" width="8" height="32"/>
+              <rect x="32" y="216" width="8" height="24"/>
+              <rect x="200" y="216" width="8" height="24"/>
+            </g>
+            <!-- Hoodie darker area (collar) -->
+            <g fill="#4A7051">
+              <rect x="104" y="192" width="8" height="8"/>
+              <rect x="128" y="192" width="8" height="8"/>
+              <rect x="112" y="200" width="16" height="8"/>
+            </g>
+            <!-- Hoodie string hints -->
+            <rect x="108" y="200" width="2" height="12" fill="#3D6B45" opacity="0.4"/>
+            <rect x="130" y="200" width="2" height="12" fill="#3D6B45" opacity="0.4"/>
+
+            <!-- Neck -->
+            <rect x="104" y="176" width="32" height="16" fill="#F0D5B8"/>
+
+            <!-- Face -->
+            <rect x="88" y="88" width="64" height="88" fill="#F0D5B8"/>
+            <rect x="80" y="96" width="8" height="72" fill="#F0D5B8"/>
+            <rect x="152" y="96" width="8" height="72" fill="#F0D5B8"/>
+            <!-- Jaw taper -->
+            <rect x="88" y="168" width="8" height="8" fill="url(#cBg)"/>
+            <rect x="144" y="168" width="8" height="8" fill="url(#cBg)"/>
+            <!-- Rounded chin -->
+            <rect x="96" y="168" width="48" height="8" fill="#F0D5B8"/>
+
+            <!-- Ears -->
+            <rect x="72" y="112" width="8" height="16" fill="#EBCDB5"/>
+            <rect x="160" y="112" width="8" height="16" fill="#EBCDB5"/>
+
+            <!-- Eyes -->
+            <rect x="96" y="120" width="16" height="16" fill="#fff"/>
+            <rect x="128" y="120" width="16" height="16" fill="#fff"/>
+            <!-- Iris -->
+            <rect x="100" y="124" width="10" height="10" fill="#4A6050"/>
+            <rect x="132" y="124" width="10" height="10" fill="#4A6050"/>
+            <!-- Pupil -->
+            <rect x="102" y="126" width="6" height="6" fill="#2A3A30"/>
+            <rect x="134" y="126" width="6" height="6" fill="#2A3A30"/>
+            <!-- Eye shine -->
+            <rect x="106" y="122" width="4" height="4" fill="#fff" opacity="0.9"/>
+            <rect x="138" y="122" width="4" height="4" fill="#fff" opacity="0.9"/>
+            <rect x="100" y="130" width="2" height="2" fill="#fff" opacity="0.35"/>
+            <rect x="132" y="130" width="2" height="2" fill="#fff" opacity="0.35"/>
+
+            <!-- Eyebrows -->
+            <rect x="96" y="112" width="16" height="4" fill="#2A2A30" opacity="0.5"/>
+            <rect x="128" y="112" width="16" height="4" fill="#2A2A30" opacity="0.5"/>
+
+            <!-- Nose -->
+            <rect x="116" y="144" width="8" height="4" fill="#E8C8B0" opacity="0.5"/>
+
+            <!-- Mouth - smile -->
+            <rect x="108" y="152" width="4" height="4" fill="#C08070" opacity="0.5"/>
+            <rect x="112" y="156" width="16" height="4" fill="#C08070" opacity="0.45"/>
+            <rect x="128" y="152" width="4" height="4" fill="#C08070" opacity="0.5"/>
+
+            <!-- Blush -->
+            <rect x="88" y="140" width="8" height="8" fill="#E8A0A0" opacity="0.18"/>
+            <rect x="144" y="140" width="8" height="8" fill="#E8A0A0" opacity="0.18"/>
+
+            <!-- Hair -->
+            <g fill="#2A2A30">
+              <!-- Hair top mass -->
+              <rect x="80" y="56" width="80" height="40"/>
+              <rect x="72" y="64" width="8" height="48"/>
+              <rect x="160" y="64" width="8" height="48"/>
+              <!-- Hair sides -->
+              <rect x="72" y="96" width="8" height="24" opacity="0.9"/>
+              <rect x="160" y="96" width="8" height="24" opacity="0.9"/>
+              <!-- Bangs -->
+              <rect x="88" y="96" width="12" height="16" opacity="0.85"/>
+              <rect x="96" y="88" width="8" height="16" opacity="0.8"/>
+              <rect x="136" y="88" width="8" height="16" opacity="0.8"/>
+              <rect x="140" y="96" width="12" height="16" opacity="0.85"/>
+              <!-- Top messy strands -->
+              <rect x="88" y="48" width="8" height="12" opacity="0.8"/>
+              <rect x="104" y="44" width="8" height="16" opacity="0.7"/>
+              <rect x="128" y="42" width="8" height="18" opacity="0.7"/>
+              <rect x="144" y="48" width="8" height="12" opacity="0.8"/>
+              <rect x="112" y="40" width="8" height="8" opacity="0.6"/>
+              <rect x="120" y="38" width="8" height="8" opacity="0.55"/>
+            </g>
+            <!-- Hair highlights -->
+            <rect x="100" y="60" width="8" height="4" fill="#45454E" opacity="0.4"/>
+            <rect x="132" y="60" width="8" height="4" fill="#45454E" opacity="0.4"/>
+
+            <!-- Tiny pixel leaf on shoulder area -->
+            <g opacity="0.55">
+              <rect x="168" y="196" width="4" height="4" fill="#6B8F71"/>
+              <rect x="172" y="192" width="4" height="4" fill="#6B8F71"/>
+              <rect x="176" y="188" width="4" height="4" fill="#5E9070"/>
+              <rect x="172" y="196" width="4" height="4" fill="#5E9070"/>
+              <!-- Stem -->
+              <rect x="170" y="200" width="2" height="6" fill="#4A7051" opacity="0.5"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">C. Pixel Art + Green</div>
+      <div class="icon-desc">ピクセルアート。ソフトグリーンのグラデ背景、緑のパーカー、肩にドット絵の葉。</div>
+    </div>
+
+    <!-- ======== D: Soft Illustration — Warm Cream ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="dClip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="dBg" cx="50%" cy="38%" r="60%">
+              <stop offset="0%" stop-color="#FDF8F0"/>
+              <stop offset="100%" stop-color="#EDE5D5"/>
+            </radialGradient>
+            <linearGradient id="dShirt" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F5F0E8"/>
+              <stop offset="100%" stop-color="#E8E0D0"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#dClip)">
+            <rect width="240" height="240" fill="url(#dBg)"/>
+
+            <!-- Very subtle botanical pattern in background -->
+            <g opacity="0.04">
+              <path d="M30,30 Q40,10 50,20 Q42,32 32,35Z" fill="#2A4A32"/>
+              <path d="M200,15 Q215,5 220,18 Q212,25 202,22Z" fill="#2A4A32"/>
+              <path d="M15,180 Q28,170 32,182 Q24,188 17,185Z" fill="#2A4A32"/>
+              <path d="M215,195 Q228,188 230,200 Q222,205 217,200Z" fill="#2A4A32"/>
+            </g>
+
+            <!-- Neck -->
+            <rect x="108" y="170" width="24" height="26" rx="2" fill="#F0D5C0"/>
+
+            <!-- Shirt (cream/white, simple) -->
+            <path d="M35,240 Q40,206 70,195 Q90,188 108,196 L132,196 Q150,188 170,195 Q200,206 205,240Z" fill="url(#dShirt)" stroke="#D4CABB" stroke-width="1"/>
+            <!-- Collar -->
+            <path d="M108,196 L120,210 L132,196" fill="none" stroke="#C4B8A0" stroke-width="1.5" opacity="0.5"/>
+
+            <!-- Small sprig of green in shirt pocket area -->
+            <g transform="translate(88,212)" opacity="0.45">
+              <path d="M0,0 Q-2,-10 0,-18" fill="none" stroke="#5E9070" stroke-width="1.2"/>
+              <path d="M0,-12 Q-6,-16 -8,-22 Q-4,-18 0,-14" fill="#5E9070" opacity="0.7"/>
+              <path d="M0,-16 Q4,-20 6,-26 Q3,-22 0,-18" fill="#6B8F71" opacity="0.6"/>
+            </g>
+
+            <!-- Face -->
+            <path d="M82,115 Q80,82 88,65 Q98,46 120,43 Q142,46 152,65 Q160,82 158,115 Q156,148 146,162 Q138,172 120,175 Q102,172 94,162 Q84,148 82,115Z" fill="#F0D5C0"/>
+
+            <!-- Ears -->
+            <ellipse cx="82" cy="118" rx="7" ry="10" fill="#EBCDB5"/>
+            <ellipse cx="158" cy="118" rx="7" ry="10" fill="#EBCDB5"/>
+
+            <!-- Eyes — round, warm brown -->
+            <ellipse cx="105" cy="113" rx="10" ry="10" fill="#fff"/>
+            <ellipse cx="106" cy="114" rx="6.5" ry="7" fill="#6B4A30"/>
+            <ellipse cx="106" cy="114" rx="4.5" ry="5" fill="#3A2A18"/>
+            <circle cx="109" cy="111" r="2.5" fill="#fff" opacity="0.85"/>
+            <circle cx="103" cy="116" r="1" fill="#fff" opacity="0.3"/>
+
+            <ellipse cx="135" cy="113" rx="10" ry="10" fill="#fff"/>
+            <ellipse cx="134" cy="114" rx="6.5" ry="7" fill="#6B4A30"/>
+            <ellipse cx="134" cy="114" rx="4.5" ry="5" fill="#3A2A18"/>
+            <circle cx="137" cy="111" r="2.5" fill="#fff" opacity="0.85"/>
+            <circle cx="131" cy="116" r="1" fill="#fff" opacity="0.3"/>
+
+            <!-- Eyebrows -->
+            <path d="M94,101 Q103,97 114,100" fill="none" stroke="#3A3030" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <path d="M126,100 Q137,97 146,101" fill="none" stroke="#3A3030" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+
+            <!-- Nose -->
+            <path d="M118,131 Q120,134 122,131" fill="none" stroke="#D4B8A0" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
+
+            <!-- Smile — slightly open -->
+            <path d="M110,143 Q116,150 120,150 Q124,150 130,143" fill="#C08070" fill-opacity="0.15" stroke="#C08070" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Blush -->
+            <ellipse cx="94" cy="133" rx="9" ry="5" fill="#E8A0A0" opacity="0.1"/>
+            <ellipse cx="146" cy="133" rx="9" ry="5" fill="#E8A0A0" opacity="0.1"/>
+
+            <!-- Hair -->
+            <path d="M74,100 Q72,58 86,42 Q100,28 120,25 Q140,28 154,42 Q168,58 166,100 Q162,78 148,65 Q138,56 120,53 Q102,56 92,65 Q78,78 74,100Z" fill="#3A2A18"/>
+            <path d="M88,65 Q92,46 104,40 Q98,54 94,70 Q92,80 90,88" fill="#44342A" opacity="0.9"/>
+            <path d="M102,54 Q112,38 124,36 Q116,48 112,62 Q110,72 108,80" fill="#3A2A18" opacity="0.85"/>
+            <path d="M124,36 Q136,38 146,55 Q144,68 142,78 Q140,68 136,58" fill="#44342A" opacity="0.9"/>
+            <path d="M150,44 Q158,55 160,72 Q158,82 156,90 Q154,78 150,68" fill="#3A2A18" opacity="0.85"/>
+            <path d="M80,58 Q76,42 80,28" fill="none" stroke="#3A2A18" stroke-width="3" stroke-linecap="round"/>
+            <path d="M160,56 Q164,42 161,28" fill="none" stroke="#3A2A18" stroke-width="3" stroke-linecap="round"/>
+            <path d="M114,30 Q112,18 116,8" fill="none" stroke="#44342A" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M132,28 Q134,16 130,6" fill="none" stroke="#3A2A18" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- Hair highlight -->
+            <path d="M106,32 Q120,26 136,30" fill="none" stroke="#5A4A38" stroke-width="1.8" opacity="0.25" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">D. Warm Cream + Sprig</div>
+      <div class="icon-desc">温かみのあるクリーム背景。白シャツの胸ポケットにグリーンの小枝。茶色の瞳。</div>
+    </div>
+
+    <!-- ======== E: Bold Illustration — Dark Top + Leaf Earring ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="eClip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="eBg" cx="50%" cy="40%" r="58%">
+              <stop offset="0%" stop-color="#F0F0EA"/>
+              <stop offset="100%" stop-color="#D8D8CE"/>
+            </radialGradient>
+          </defs>
+          <g clip-path="url(#eClip)">
+            <rect width="240" height="240" fill="url(#eBg)"/>
+
+            <!-- Neck -->
+            <rect x="108" y="170" width="24" height="26" rx="2" fill="#F0D5C0"/>
+
+            <!-- Black turtleneck -->
+            <path d="M35,240 Q40,206 70,195 Q90,188 108,196 L132,196 Q150,188 170,195 Q200,206 205,240Z" fill="#1A1A1E"/>
+            <!-- Turtleneck collar -->
+            <path d="M102,196 Q102,182 108,178 L132,178 Q138,182 138,196" fill="#1A1A1E"/>
+            <path d="M104,190 Q120,194 136,190" fill="none" stroke="#2A2A30" stroke-width="0.8" opacity="0.3"/>
+            <path d="M106,186 Q120,189 134,186" fill="none" stroke="#2A2A30" stroke-width="0.8" opacity="0.25"/>
+
+            <!-- Face -->
+            <path d="M82,115 Q80,82 88,65 Q98,46 120,43 Q142,46 152,65 Q160,82 158,115 Q156,148 146,162 Q138,172 120,175 Q102,172 94,162 Q84,148 82,115Z" fill="#F0D5C0"/>
+
+            <!-- Ears -->
+            <ellipse cx="82" cy="118" rx="7" ry="10" fill="#EBCDB5"/>
+            <ellipse cx="158" cy="118" rx="7" ry="10" fill="#EBCDB5"/>
+
+            <!-- Leaf earring on left ear -->
+            <g transform="translate(78,132)">
+              <path d="M0,0 Q0,4 -1,8 Q-4,4 -6,0 Q-4,-2 0,0Z" fill="#5E9070" opacity="0.85"/>
+              <path d="M-0.5,1 Q-1,4 -1,7" fill="none" stroke="#3D6B45" stroke-width="0.5" opacity="0.6"/>
+              <!-- Small ring -->
+              <circle cx="0" cy="-1" r="2" fill="none" stroke="#5E9070" stroke-width="1.2" opacity="0.7"/>
+            </g>
+
+            <!-- Eyes — slightly narrower, confident -->
+            <ellipse cx="105" cy="114" rx="9.5" ry="8.5" fill="#fff"/>
+            <ellipse cx="106" cy="115" rx="6" ry="6" fill="#4A3A2A"/>
+            <ellipse cx="106" cy="115" rx="4" ry="4.2" fill="#2A1A10"/>
+            <circle cx="108.5" cy="112.5" r="2.2" fill="#fff" opacity="0.85"/>
+
+            <ellipse cx="135" cy="114" rx="9.5" ry="8.5" fill="#fff"/>
+            <ellipse cx="134" cy="115" rx="6" ry="6" fill="#4A3A2A"/>
+            <ellipse cx="134" cy="115" rx="4" ry="4.2" fill="#2A1A10"/>
+            <circle cx="136.5" cy="112.5" r="2.2" fill="#fff" opacity="0.85"/>
+
+            <!-- Eyebrows — slightly more defined -->
+            <path d="M94,103 Q103,98 114,101" fill="none" stroke="#2A2A30" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            <path d="M126,101 Q137,98 146,103" fill="none" stroke="#2A2A30" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Nose -->
+            <path d="M117,131 Q120,135 123,131" fill="none" stroke="#D4B8A0" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Slight smirk -->
+            <path d="M112,143 Q118,148 122,148 Q128,147 132,142" fill="none" stroke="#B07060" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
+
+            <!-- Hair — wavy, slightly longer -->
+            <path d="M72,105 Q70,58 85,40 Q98,24 120,22 Q142,24 155,40 Q170,58 168,105 Q164,82 152,68 Q140,56 120,52 Q100,56 88,68 Q76,82 72,105Z" fill="#2A2A30"/>
+            <!-- Wavy texture -->
+            <path d="M85,68 Q88,48 102,38 Q96,52 92,68 Q90,80 88,92" fill="#35353D" opacity="0.9"/>
+            <path d="M98,52 Q108,34 122,32 Q114,45 110,60 Q108,72 106,84" fill="#2A2A30" opacity="0.85"/>
+            <path d="M122,32 Q136,34 146,52 Q144,64 142,76 Q140,66 135,55" fill="#35353D" opacity="0.9"/>
+            <path d="M150,42 Q160,55 162,75 Q160,85 158,92 Q156,80 152,68" fill="#2A2A30" opacity="0.85"/>
+            <!-- Top wisps -->
+            <path d="M78,58 Q74,40 78,24" fill="none" stroke="#2A2A30" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M162,55 Q167,38 163,22" fill="none" stroke="#2A2A30" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M108,28 Q105,14 110,4" fill="none" stroke="#35353D" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M134,26 Q137,12 132,2" fill="none" stroke="#2A2A30" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M120,24 Q118,10 122,0" fill="none" stroke="#2A2A30" stroke-width="2" stroke-linecap="round"/>
+            <!-- Hair side falls -->
+            <path d="M74,90 Q72,108 76,120" fill="none" stroke="#2A2A30" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+            <path d="M166,88 Q168,106 164,118" fill="none" stroke="#2A2A30" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+            <!-- Subtle highlight -->
+            <path d="M102,28 Q118,22 138,26" fill="none" stroke="#48484E" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">E. Turtleneck + Leaf Earring</div>
+      <div class="icon-desc">黒タートルにリーフモチーフのピアス。クールだけど植物のアクセントで柔らかく。</div>
+    </div>
+
+  </div>
+
+  <div class="small-check">
+    <h3>48px — X Timeline Size</h3>
+    <div class="small-row" id="dark-small"></div>
+  </div>
+</section>
+
+<section class="section section-light">
+  <p class="section-label" style="opacity:0.25">Light Mode</p>
+  <div class="icons-row" id="light-icons"></div>
+  <div class="small-check">
+    <h3 style="opacity:0.35">48px — Light Mode</h3>
+    <div class="small-row" id="light-small"></div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const src=document.querySelector('.section-dark .icons-row');
+  const labels=['A','B','C','D','E'];
+  // Dark small
+  const ds=document.getElementById('dark-small');
+  src.querySelectorAll('.icon-card').forEach((c,i)=>{
+    const si=document.createElement('div');si.className='small-item';
+    const sf=document.createElement('div');sf.className='small-frame';
+    const sv=c.querySelector('svg').cloneNode(true);
+    sv.innerHTML=sv.innerHTML.replace(/id="([a-e])/gi,'id="ds$1').replace(/url\(#([a-e])/gi,'url(#ds$1');
+    sf.appendChild(sv);si.appendChild(sf);
+    const lb=document.createElement('div');lb.className='small-label';lb.textContent=labels[i];
+    si.appendChild(lb);ds.appendChild(si);
+  });
+  // Light section
+  const li=document.getElementById('light-icons');
+  const ls=document.getElementById('light-small');
+  src.querySelectorAll('.icon-card').forEach((c,i)=>{
+    const cl=c.cloneNode(true);
+    cl.querySelector('svg').innerHTML=cl.querySelector('svg').innerHTML.replace(/id="([a-e])/gi,'id="l$1').replace(/url\(#([a-e])/gi,'url(#l$1');
+    li.appendChild(cl);
+    const si=document.createElement('div');si.className='small-item';
+    const sf=document.createElement('div');sf.className='small-frame';
+    const sv=cl.querySelector('svg').cloneNode(true);
+    sv.innerHTML=sv.innerHTML.replace(/id="l([a-e])/gi,'id="ls$1').replace(/url\(#l([a-e])/gi,'url(#ls$1');
+    sf.appendChild(sv);si.appendChild(sf);
+    const lb=document.createElement('div');lb.className='small-label';lb.textContent=labels[i];
+    si.appendChild(lb);ls.appendChild(si);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+[  194059ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  195302ms] [WARNING] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  196303ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  354059ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  354889ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  355206ms] [WARNING] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  358853ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3001". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  363765ms] [ERROR] In HTML, %s cannot be a descendant of <%s>.
+This will cause a hydration error.%s <button> button 
+
+  ...
+    <LoadingBoundary name="mcp/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/mcp" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+              <SegmentViewNode type="page" pagePath="mcp/page.tsx">
+                <SegmentTrieNode>
+                <McpPage>
+                  <McpPageClient apis={[...]}>
+                    <div className="min-h-screen">
+                      <Header>
+                      <div className="space-y-6 ...">
+                        <div>
+                        <div>
+                        <div>
+                          <h3>
+                          <div className="space-y-2">
+                            <div className="rounded-lg...">
+>                             <button
+>                               onClick={function onClick}
+>                               className="flex w-full items-center gap-3 p-4 text-left"
+>                             >
+                                <span>
+                                <div>
+>                               <button
+>                                 onClick={function onClick}
+>                                 className="flex-shrink-0 rounded-lg p-2 text-text-light transition-all hover:bg-bg-c..."
+>                                 title="スキーマをコピー"
+>                               >
+                            ...
+              ...
+            ...
+ @ http://localhost:3001/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:3127

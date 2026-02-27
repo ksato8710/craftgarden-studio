@@ -1,0 +1,10 @@
+[    1079ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rK (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:46765)
+    at rX (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:47798)
+    at https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:141517
+    at sp (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:146678)
+    at sc (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:138018)
+    at https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:132847
+    at u9 (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:132948)
+    at sV (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:159330)
+    at MessagePort.O (https://ai-pm-service.craftgarden.studio/_next/static/chunks/8b72cfc40036c827.js:1:8296)

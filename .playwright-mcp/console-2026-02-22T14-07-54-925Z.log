@@ -1,0 +1,10 @@
+[     629ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rD (https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:35056)
+    at https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:119645
+    at ix (https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:122949)
+    at ik (https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:114737)
+    at https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:110724
+    at iu (https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:110825)
+    at iX (https://product-hub.craftgarden.studio/_next/static/chunks/4bd1b696-c023c6e3521b1417.js:1:132928)
+    at MessagePort.w (https://product-hub.craftgarden.studio/_next/static/chunks/255-ebd51be49873d76c.js:1:113837)
+[     852ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://product-hub.craftgarden.studio/favicon.ico:0

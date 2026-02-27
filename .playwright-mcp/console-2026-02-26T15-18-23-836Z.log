@@ -1,0 +1,62 @@
+[     354ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <SegmentViewNode type="layout" pagePath="layout.tsx">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ja" suppressHydrationWarning={true}>
+          <body className="inter_5901...">
+            <TooltipProvider>
+              <TooltipProvider data-slot="tooltip-pr..." delayDuration={0}>
+                <TooltipProviderProvider scope={undefined} isOpenDelayedRef={{current:true}} delayDuration={0} ...>
+                  <div>
+                  <div className="relative z...">
+                    <Header authSlot={{...}}>
+                      <header className="sticky top...">
+                        <div className="relative m...">
+                          <HeaderSeedAccent>
+                            <svg className="pointer-ev..." width="20" height="28" viewBox="0 0 40 60" aria-hidden="true">
+                              <ellipse>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line>
+                              <line
+                                x1="20"
+                                y1="18"
++                               x2={15.669872981077809}
+-                               x2="15.669872981077807"
+                                y2={20.500000000000004}
+                                stroke="var(--color-tanpopo-seed)"
+                                strokeWidth="0.35"
+                                opacity="0.45"
+                              >
+                              ...
+                          ...
+                        ...
+                    ...
+            ...
+ @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:3127
+[  101137ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3002". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  110541ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3002". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  120039ms] [WARNING] %c%s%c ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3002". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px  Server   @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_77a734fe._.js:2297
+[  132114ms] [ERROR] WebSocket connection to 'ws://localhost:3002/_next/webpack-hmr?id=twsDA7iyfSbwrPNHxyOFE' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_client_121ab40e._.js:10878
+[  133116ms] [ERROR] WebSocket connection to 'ws://localhost:3002/_next/webpack-hmr?id=twsDA7iyfSbwrPNHxyOFE' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_client_121ab40e._.js:10878
+[  134117ms] [ERROR] WebSocket connection to 'ws://localhost:3002/_next/webpack-hmr?id=twsDA7iyfSbwrPNHxyOFE' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_client_121ab40e._.js:10878
+[  135118ms] [ERROR] WebSocket connection to 'ws://localhost:3002/_next/webpack-hmr?id=twsDA7iyfSbwrPNHxyOFE' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_client_121ab40e._.js:10878
+[  136120ms] [ERROR] WebSocket connection to 'ws://localhost:3002/_next/webpack-hmr?id=twsDA7iyfSbwrPNHxyOFE' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3002/_next/static/chunks/b2b3e_next_dist_client_121ab40e._.js:10878

@@ -1,0 +1,18 @@
+[    1539ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[    1788ms] TypeError: Cannot read properties of undefined (reading 'call')
+    at Object.c [as require] (file:///Users/satokeita/Dev/product-hub/packages/dashboard/.next/server/webpack-runtime.js:1:128)
+    at Object.require (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:21:17460)
+    at globalThis.__next_require__ (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:21:18029)
+    at d (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:135536)
+    at B (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:146373)
+    at J (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:149956)
+    at Array._fromJSON (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:152664)
+    at JSON.parse (<anonymous>)
+    at H (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:146078)
+    at L (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:145270)
+    at ep (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:157781)
+    at <unknown> (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:159033)
+    at em (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:159059)
+    at t (file:///Users/satokeita/Dev/product-hub/node_modules/.pnpm/next@15.5.12_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:2:159902)
+[    4898ms] [WARNING] The resource http://localhost:3000/_next/static/media/13971731025ec697-s.p.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[    4898ms] [WARNING] The resource http://localhost:3000/_next/static/media/ee40bb094c99a29a-s.p.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0

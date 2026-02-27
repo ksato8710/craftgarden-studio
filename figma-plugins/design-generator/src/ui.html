@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FAFAF5;
+      color: #2D3B2E;
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #2D3B2E;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #8A9E8C;
+      margin-bottom: 24px;
+    }
+
+    .section-group {
+      margin-bottom: 20px;
+    }
+
+    .section-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8A9E8C;
+      margin-bottom: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(107, 143, 113, 0.08);
+    }
+
+    .checkbox-item:last-child {
+      border-bottom: none;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #6B8F71;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checkbox-item label {
+      cursor: pointer;
+      flex: 1;
+      font-size: 13px;
+      color: #2D3B2E;
+    }
+
+    .checkbox-item .desc {
+      font-size: 11px;
+      color: #8A9E8C;
+      display: block;
+    }
+
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-generate {
+      flex: 1;
+      padding: 12px 24px;
+      background: #6B8F71;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 4px 16px rgba(107, 143, 113, 0.25);
+    }
+
+    .btn-generate:hover {
+      background: #4A7051;
+    }
+
+    .btn-generate:disabled {
+      background: #9BB09E;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-cancel {
+      padding: 12px 18px;
+      background: transparent;
+      color: #8A9E8C;
+      border: 1px solid rgba(107, 143, 113, 0.2);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-cancel:hover {
+      border-color: #6B8F71;
+      color: #5C7260;
+    }
+
+    .progress-area {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .progress-area.visible {
+      display: block;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(107, 143, 113, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6B8F71, #9BB09E);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: #5C7260;
+    }
+
+    .status-complete {
+      color: #4A7051;
+      font-weight: 600;
+    }
+
+    .status-error {
+      color: #E05577;
+      font-weight: 600;
+    }
+
+    .select-controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .select-controls button {
+      background: none;
+      border: none;
+      font-size: 11px;
+      color: #6B8F71;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    .select-controls button:hover {
+      color: #4A7051;
+    }
+  </style>
+</head>
+<body>
+  <h1>CraftGarden Design Generator</h1>
+  <p class="subtitle">Generate the craftgarden.studio design in Figma</p>
+
+  <div class="section-group">
+    <div class="section-group-label">Setup</div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-tokens" value="tokens" checked />
+      <label for="cb-tokens">
+        Tokens & Styles
+        <span class="desc">Color variables, spacing, text styles</span>
+      </label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-components" value="components" checked />
+      <label for="cb-components">
+        Components
+        <span class="desc">Botanical motifs, buttons, cards</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section-group">
+    <div class="section-group-label">Sections</div>
+    <div class="select-controls">
+      <button onclick="selectAll()">Select all</button>
+      <button onclick="selectNone()">Deselect all</button>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-navigation" value="navigation" checked />
+      <label for="cb-navigation">
+        Navigation
+        <span class="desc">Fixed header with logo and links</span>
+      </label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-hero" value="hero" checked />
+      <label for="cb-hero">
+        Hero
+        <span class="desc">Full-viewport hero with botanical background</span>
+      </label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-products" value="products" checked />
+      <label for="cb-products">
+        Products
+        <span class="desc">12 product cards in 3-column grid</span>
+      </label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-philosophy" value="philosophy" checked />
+      <label for="cb-philosophy">
+        Philosophy
+        <span class="desc">"A garden, not a factory" with value icons</span>
+      </label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="cb-footer" value="footer" checked />
+      <label for="cb-footer">
+        Footer
+        <span class="desc">Dark footer with wave, social links</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-generate" id="btn-generate" onclick="generate()">
+      Generate
+    </button>
+    <button class="btn-cancel" onclick="cancel()">Close</button>
+  </div>
+
+  <div class="progress-area" id="progress-area">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <p class="progress-label" id="progress-label">Preparing...</p>
+  </div>
+
+  <script>
+    function getSelectedSections() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      return Array.from(checkboxes).map(cb => cb.value);
+    }
+
+    function selectAll() {
+      const sectionCheckboxes = document.querySelectorAll('.section-group:last-of-type input[type="checkbox"]');
+      sectionCheckboxes.forEach(cb => cb.checked = true);
+    }
+
+    function selectNone() {
+      const sectionCheckboxes = document.querySelectorAll('.section-group:last-of-type input[type="checkbox"]');
+      sectionCheckboxes.forEach(cb => cb.checked = false);
+    }
+
+    function generate() {
+      const sections = getSelectedSections();
+      if (sections.length === 0) {
+        alert("Please select at least one section to generate.");
+        return;
+      }
+
+      const btn = document.getElementById("btn-generate");
+      btn.disabled = true;
+      btn.textContent = "Generating...";
+
+      const progressArea = document.getElementById("progress-area");
+      progressArea.classList.add("visible");
+
+      const progressFill = document.getElementById("progress-fill");
+      progressFill.style.width = "0%";
+
+      const progressLabel = document.getElementById("progress-label");
+      progressLabel.textContent = "Starting...";
+      progressLabel.className = "progress-label";
+
+      parent.postMessage({ pluginMessage: { type: "generate", sections } }, "*");
+    }
+
+    function cancel() {
+      parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+    }
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+
+      const progressFill = document.getElementById("progress-fill");
+      const progressLabel = document.getElementById("progress-label");
+      const progressArea = document.getElementById("progress-area");
+      const btn = document.getElementById("btn-generate");
+
+      if (msg.type === "progress") {
+        progressArea.classList.add("visible");
+        const pct = Math.round((msg.step / msg.total) * 100);
+        progressFill.style.width = pct + "%";
+        progressLabel.textContent = msg.label;
+        progressLabel.className = "progress-label";
+      }
+
+      if (msg.type === "complete") {
+        progressFill.style.width = "100%";
+        progressLabel.textContent = msg.label;
+        progressLabel.className = "progress-label status-complete";
+        btn.disabled = false;
+        btn.textContent = "Generate Again";
+      }
+
+      if (msg.type === "error") {
+        progressLabel.textContent = msg.label;
+        progressLabel.className = "progress-label status-error";
+        btn.disabled = false;
+        btn.textContent = "Retry";
+      }
+    };
+  </script>
+</body>
+</html>

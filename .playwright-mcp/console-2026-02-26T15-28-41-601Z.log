@@ -1,0 +1,11 @@
+[    2038ms] SyntaxError: Failed to execute 'appendChild' on 'Node': Invalid or unexpected token
+    at m (https://agent-skill-search.craftgarden.studio/_next/static/chunks/877098cb90be3d5a.js:1:2794)
+    at https://agent-skill-search.craftgarden.studio/_next/static/chunks/877098cb90be3d5a.js:1:3608
+    at ih (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:101244)
+    at uf (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:125094)
+    at uc (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:124756)
+    at uf (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:125074)
+    at uc (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:124756)
+    at uf (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:125139)
+    at uc (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:124756)
+    at uf (https://agent-skill-search.craftgarden.studio/_next/static/chunks/e5f1067d2607aa84.js:1:125139)

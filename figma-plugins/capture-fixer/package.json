@@ -1,0 +1,14 @@
+{
+  "name": "craftgarden-capture-fixer",
+  "version": "1.0.0",
+  "description": "Figma plugin that fixes issues in designs captured from craftgarden.studio via MCP generate_figma_design",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.98.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  }
+}

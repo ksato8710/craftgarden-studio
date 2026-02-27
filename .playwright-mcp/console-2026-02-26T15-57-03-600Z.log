@@ -1,0 +1,11 @@
+[    1814ms] SyntaxError: Failed to execute 'appendChild' on 'Node': Invalid or unexpected token
+    at _ (https://feedback-hub-steel.vercel.app/_next/static/chunks/7ce06ec190d7c807.js:1:2783)
+    at https://feedback-hub-steel.vercel.app/_next/static/chunks/7ce06ec190d7c807.js:1:3597
+    at ih (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:101216)
+    at uf (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:125066)
+    at uc (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:124728)
+    at uf (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:125046)
+    at uc (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:124728)
+    at uf (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:125111)
+    at uc (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:124728)
+    at uf (https://feedback-hub-steel.vercel.app/_next/static/chunks/1d8ba43a5e3538b5.js:1:125111)

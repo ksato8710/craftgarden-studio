@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ktlabworks Profile Icon Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#e7e9ea;line-height:1.5}
+h1,h2,h3{font-family:'Nunito',system-ui,sans-serif}
+
+/* Dark section (X dark mode) */
+.section-dark{background:#15202b;padding:60px 24px 80px}
+.section-light{background:#fff;padding:60px 24px 80px}
+.section-light *{color:#0f1419}
+
+.page-title{text-align:center;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;margin-bottom:4px;letter-spacing:-0.02em}
+.page-sub{text-align:center;font-size:clamp(0.85rem,2vw,1rem);opacity:0.6;margin-bottom:48px}
+
+.icons-row{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;max-width:1400px;margin:0 auto}
+.icon-card{display:flex;flex-direction:column;align-items:center;gap:16px;width:240px}
+.icon-frame{width:240px;height:240px;border-radius:50%;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.3);flex-shrink:0}
+.icon-frame svg{width:100%;height:100%;display:block}
+.icon-label{font-weight:700;font-size:0.95rem;text-align:center}
+.icon-desc{font-size:0.8rem;opacity:0.55;text-align:center;max-width:220px}
+
+/* Small size check */
+.small-check{margin-top:56px}
+.small-check h3{text-align:center;font-size:1rem;margin-bottom:20px;opacity:0.7}
+.small-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.small-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.small-frame{width:48px;height:48px;border-radius:50%;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,0.25)}
+.small-frame svg{width:100%;height:100%;display:block}
+.small-label{font-size:0.65rem;opacity:0.5;text-align:center}
+
+.section-label{text-align:center;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;opacity:0.4;margin-bottom:32px}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     DARK MODE SECTION
+     ============================================================ -->
+<section class="section-dark">
+  <h1 class="page-title">ktlabworks Profile Icon Concepts</h1>
+  <p class="page-sub">X (Twitter) プロフィールアイコン候補</p>
+  <p class="section-label">Dark Mode Preview</p>
+
+  <div class="icons-row">
+
+    <!-- ======== CONCEPT 1: Botanical x Developer ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="c1clip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="c1bg" cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stop-color="#FDFDF8"/>
+              <stop offset="100%" stop-color="#F0EDE6"/>
+            </radialGradient>
+            <linearGradient id="c1leaf1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6B8F71"/>
+              <stop offset="100%" stop-color="#4A7051"/>
+            </linearGradient>
+            <linearGradient id="c1leaf2" x1="0" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#9BB09E"/>
+              <stop offset="100%" stop-color="#6B8F71"/>
+            </linearGradient>
+            <linearGradient id="c1stem" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5E9070"/>
+              <stop offset="100%" stop-color="#3D6B45"/>
+            </linearGradient>
+            <linearGradient id="c1flower1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C9838A"/>
+              <stop offset="100%" stop-color="#B47478"/>
+            </linearGradient>
+            <linearGradient id="c1flower2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#A08DBF"/>
+              <stop offset="100%" stop-color="#8E7EAD"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#c1clip)">
+            <!-- Background -->
+            <rect width="240" height="240" fill="url(#c1bg)"/>
+            <!-- Subtle grid dots -->
+            <g opacity="0.06">
+              <pattern id="c1dots" width="16" height="16" patternUnits="userSpaceOnUse">
+                <circle cx="8" cy="8" r="0.8" fill="#2A4A32"/>
+              </pattern>
+              <rect width="240" height="240" fill="url(#c1dots)"/>
+            </g>
+
+            <!-- Back vines -->
+            <path d="M30,240 Q50,200 45,170 Q40,140 60,120 Q75,105 70,80 Q65,55 80,30" fill="none" stroke="#9BB09E" stroke-width="1.5" opacity="0.3"/>
+            <path d="M210,240 Q195,210 200,180 Q205,150 185,125 Q170,105 175,75 Q180,50 165,20" fill="none" stroke="#9BB09E" stroke-width="1.2" opacity="0.25"/>
+
+            <!-- Large leaf bottom-left -->
+            <g transform="translate(25,185) rotate(-25)">
+              <path d="M0,0 Q15,-35 5,-60 Q20,-45 35,-30 Q25,-10 0,0Z" fill="url(#c1leaf1)" opacity="0.7"/>
+              <path d="M3,-5 Q13,-32 5,-55" fill="none" stroke="#3D6B45" stroke-width="0.6" opacity="0.5"/>
+            </g>
+            <!-- Large leaf bottom-right -->
+            <g transform="translate(195,195) rotate(20)">
+              <path d="M0,0 Q-15,-40 -5,-65 Q-22,-45 -38,-28 Q-25,-8 0,0Z" fill="url(#c1leaf2)" opacity="0.65"/>
+              <path d="M-3,-5 Q-13,-35 -5,-60" fill="none" stroke="#4A7051" stroke-width="0.6" opacity="0.5"/>
+            </g>
+
+            <!-- Terminal window frame -->
+            <g transform="translate(52,62)">
+              <rect x="0" y="0" width="136" height="100" rx="8" fill="#2A4A32" opacity="0.9"/>
+              <rect x="0" y="0" width="136" height="22" rx="8" fill="#1E3626"/>
+              <rect x="0" y="14" width="136" height="8" fill="#1E3626"/>
+              <!-- Window dots -->
+              <circle cx="14" cy="11" r="3.5" fill="#B47478" opacity="0.8"/>
+              <circle cx="26" cy="11" r="3.5" fill="#AB9058" opacity="0.8"/>
+              <circle cx="38" cy="11" r="3.5" fill="#5E9070" opacity="0.8"/>
+              <!-- Code lines -->
+              <g transform="translate(12,32)" font-family="monospace" font-size="8.5" fill="#9BB09E">
+                <text y="0" opacity="0.7">$ <tspan fill="#6B96A0">npm</tspan> run dev</text>
+                <text y="14" opacity="0.5">  <tspan fill="#5E9070">ready</tspan> - started</text>
+                <text y="28" opacity="0.6">  <tspan fill="#AB9058">~</tspan> <tspan fill="#9BB09E">localhost</tspan>:3000</text>
+                <text y="42" fill="#6B8F71" opacity="0.8">_ <tspan opacity="0.4" fill="#9BB09E">|</tspan></text>
+              </g>
+            </g>
+
+            <!-- Vine wrapping around terminal -->
+            <path d="M52,140 Q45,130 48,115 Q52,100 50,90" fill="none" stroke="url(#c1stem)" stroke-width="2" opacity="0.7"/>
+            <path d="M188,85 Q195,95 190,110 Q185,125 188,140" fill="none" stroke="url(#c1stem)" stroke-width="1.8" opacity="0.6"/>
+
+            <!-- Small leaves on vines around terminal -->
+            <g transform="translate(46,118) rotate(30)">
+              <path d="M0,0 Q5,-12 2,-20 Q8,-14 14,-8 Q8,-2 0,0Z" fill="#6B8F71" opacity="0.75"/>
+            </g>
+            <g transform="translate(44,98) rotate(-15)">
+              <path d="M0,0 Q-5,-10 -2,-18 Q-8,-12 -13,-6 Q-7,-1 0,0Z" fill="#5E9070" opacity="0.6"/>
+            </g>
+            <g transform="translate(190,100) rotate(-30)">
+              <path d="M0,0 Q-5,-12 -2,-20 Q-9,-13 -14,-7 Q-8,-2 0,0Z" fill="#6B8F71" opacity="0.7"/>
+            </g>
+            <g transform="translate(192,125) rotate(15)">
+              <path d="M0,0 Q5,-10 2,-17 Q8,-11 13,-5 Q7,-1 0,0Z" fill="#9BB09E" opacity="0.6"/>
+            </g>
+
+            <!-- Small flowers -->
+            <!-- Rose flower top-left -->
+            <g transform="translate(60,48)">
+              <circle cx="0" cy="0" r="5" fill="url(#c1flower1)" opacity="0.8"/>
+              <circle cx="-4" cy="-3" r="3.5" fill="#C9838A" opacity="0.6"/>
+              <circle cx="3" cy="-4" r="3" fill="#D4979C" opacity="0.5"/>
+              <circle cx="0" cy="0" r="2" fill="#E8B5B9" opacity="0.7"/>
+            </g>
+            <!-- Violet flower top-right -->
+            <g transform="translate(180,50)">
+              <circle cx="0" cy="-4" r="3.5" fill="url(#c1flower2)" opacity="0.7"/>
+              <circle cx="-3.5" cy="1" r="3.5" fill="#A08DBF" opacity="0.6"/>
+              <circle cx="3.5" cy="1" r="3.5" fill="#8E7EAD" opacity="0.65"/>
+              <circle cx="0" cy="0" r="2" fill="#D4CBE5" opacity="0.8"/>
+            </g>
+
+            <!-- Scattered small leaves top -->
+            <g transform="translate(100,35) rotate(40)">
+              <path d="M0,0 Q4,-8 2,-14 Q6,-9 10,-5 Q6,-1 0,0Z" fill="#5E9070" opacity="0.4"/>
+            </g>
+            <g transform="translate(145,40) rotate(-35)">
+              <path d="M0,0 Q-3,-8 -1,-13 Q-5,-8 -9,-4 Q-5,-1 0,0Z" fill="#6B8F71" opacity="0.35"/>
+            </g>
+
+            <!-- Large decorative leaves top corners -->
+            <g transform="translate(10,30) rotate(-50)">
+              <path d="M0,0 Q10,-25 5,-45 Q18,-32 28,-18 Q18,-5 0,0Z" fill="#6B8F71" opacity="0.5"/>
+              <path d="M2,-4 Q9,-22 5,-40" fill="none" stroke="#3D6B45" stroke-width="0.5" opacity="0.4"/>
+            </g>
+            <g transform="translate(225,25) rotate(45)">
+              <path d="M0,0 Q-8,-22 -3,-40 Q-15,-28 -24,-15 Q-15,-4 0,0Z" fill="#5E9070" opacity="0.45"/>
+            </g>
+
+            <!-- Bottom foliage -->
+            <g transform="translate(80,210) rotate(10)">
+              <path d="M0,0 Q8,-18 4,-32 Q14,-22 22,-12 Q14,-3 0,0Z" fill="#6B8F71" opacity="0.55"/>
+            </g>
+            <g transform="translate(120,215) rotate(-5)">
+              <path d="M0,0 Q-6,-15 -2,-28 Q-10,-18 -18,-10 Q-10,-2 0,0Z" fill="#9BB09E" opacity="0.45"/>
+            </g>
+            <g transform="translate(155,208) rotate(-15)">
+              <path d="M0,0 Q6,-16 3,-28 Q11,-19 18,-10 Q11,-3 0,0Z" fill="#4A7051" opacity="0.5"/>
+            </g>
+
+            <!-- Tiny accent dots (pollen/seeds) -->
+            <circle cx="75" cy="55" r="1.2" fill="#AB9058" opacity="0.5"/>
+            <circle cx="165" cy="58" r="1" fill="#AB9058" opacity="0.4"/>
+            <circle cx="120" cy="180" r="1.5" fill="#6B8F71" opacity="0.3"/>
+            <circle cx="40" cy="160" r="1" fill="#B47478" opacity="0.3"/>
+            <circle cx="200" cy="165" r="1.2" fill="#8E7EAD" opacity="0.25"/>
+
+            <!-- Code brackets peeking through foliage bottom -->
+            <text x="95" y="200" font-family="monospace" font-size="18" fill="#2A4A32" opacity="0.2" font-weight="700">&lt;/&gt;</text>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">1. Botanical x Developer</div>
+      <div class="icon-desc">庭でコードが育つ。植物とターミナルが共存するデザイン。</div>
+    </div>
+
+    <!-- ======== CONCEPT 2: Soft Anime Avatar ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="c2clip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <radialGradient id="c2bg" cx="50%" cy="40%" r="65%">
+              <stop offset="0%" stop-color="#E8F0E8"/>
+              <stop offset="60%" stop-color="#D5E3D5"/>
+              <stop offset="100%" stop-color="#C2D4C2"/>
+            </radialGradient>
+            <linearGradient id="c2hair" x1="0" y1="0" x2="0.3" y2="1">
+              <stop offset="0%" stop-color="#3A3A42"/>
+              <stop offset="100%" stop-color="#28282E"/>
+            </linearGradient>
+            <linearGradient id="c2skin" x1="0.3" y1="0" x2="0.7" y2="1">
+              <stop offset="0%" stop-color="#F5E0D0"/>
+              <stop offset="100%" stop-color="#EDDBC8"/>
+            </linearGradient>
+            <linearGradient id="c2hoodie" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7BA083"/>
+              <stop offset="100%" stop-color="#5E8A68"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#c2clip)">
+            <!-- Background -->
+            <rect width="240" height="240" fill="url(#c2bg)"/>
+            <!-- Subtle bokeh -->
+            <circle cx="45" cy="50" r="25" fill="#fff" opacity="0.08"/>
+            <circle cx="200" cy="70" r="18" fill="#fff" opacity="0.06"/>
+            <circle cx="180" cy="200" r="30" fill="#fff" opacity="0.05"/>
+
+            <!-- Neck -->
+            <path d="M105,170 L105,195 Q105,200 110,200 L130,200 Q135,200 135,195 L135,170" fill="url(#c2skin)"/>
+
+            <!-- Hoodie / shoulders -->
+            <path d="M50,240 Q50,200 80,190 Q95,185 110,200 L130,200 Q145,185 160,190 Q190,200 190,240 Z" fill="url(#c2hoodie)"/>
+            <!-- Hoodie detail - collar -->
+            <path d="M100,200 Q110,215 120,218 Q130,215 140,200" fill="none" stroke="#4A7051" stroke-width="1.5" opacity="0.5"/>
+            <!-- Hoodie string -->
+            <line x1="108" y1="200" x2="105" y2="220" stroke="#5E9070" stroke-width="1" opacity="0.4"/>
+            <line x1="132" y1="200" x2="135" y2="220" stroke="#5E9070" stroke-width="1" opacity="0.4"/>
+            <!-- Hoodie pocket line -->
+            <path d="M85,230 Q120,240 155,230" fill="none" stroke="#4A7051" stroke-width="1" opacity="0.25"/>
+
+            <!-- Face shape -->
+            <path d="M82,120 Q80,95 85,78 Q92,60 120,58 Q148,60 155,78 Q160,95 158,120 Q156,145 145,160 Q138,168 120,172 Q102,168 95,160 Q84,145 82,120Z" fill="url(#c2skin)"/>
+
+            <!-- Ear left -->
+            <ellipse cx="82" cy="120" rx="7" ry="10" fill="#EDDBC8"/>
+            <ellipse cx="83" cy="120" rx="4" ry="7" fill="#E5D0BC" opacity="0.6"/>
+            <!-- Ear right -->
+            <ellipse cx="158" cy="120" rx="7" ry="10" fill="#EDDBC8"/>
+            <ellipse cx="157" cy="120" rx="4" ry="7" fill="#E5D0BC" opacity="0.6"/>
+
+            <!-- Eyes -->
+            <!-- Left eye -->
+            <ellipse cx="102" cy="118" rx="10" ry="10.5" fill="#fff"/>
+            <ellipse cx="103" cy="119" rx="6.5" ry="7" fill="#4A5C52"/>
+            <ellipse cx="103" cy="119" rx="4.5" ry="5" fill="#2A3A30"/>
+            <circle cx="106" cy="116" r="2.2" fill="#fff" opacity="0.85"/>
+            <circle cx="100" cy="121" r="1.2" fill="#fff" opacity="0.4"/>
+            <!-- Right eye -->
+            <ellipse cx="138" cy="118" rx="10" ry="10.5" fill="#fff"/>
+            <ellipse cx="137" cy="119" rx="6.5" ry="7" fill="#4A5C52"/>
+            <ellipse cx="137" cy="119" rx="4.5" ry="5" fill="#2A3A30"/>
+            <circle cx="140" cy="116" r="2.2" fill="#fff" opacity="0.85"/>
+            <circle cx="134" cy="121" r="1.2" fill="#fff" opacity="0.4"/>
+
+            <!-- Eyebrows -->
+            <path d="M92,105 Q100,101 112,103" fill="none" stroke="#3A3A42" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <path d="M128,103 Q140,101 148,105" fill="none" stroke="#3A3A42" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Nose -->
+            <path d="M118,130 Q120,133 122,130" fill="none" stroke="#D4B8A0" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+
+            <!-- Mouth - gentle smile -->
+            <path d="M108,144 Q114,150 120,150 Q126,150 132,144" fill="none" stroke="#C4988A" stroke-width="1.8" stroke-linecap="round" opacity="0.65"/>
+
+            <!-- Blush -->
+            <ellipse cx="92" cy="138" rx="10" ry="6" fill="#E8A0A0" opacity="0.15"/>
+            <ellipse cx="148" cy="138" rx="10" ry="6" fill="#E8A0A0" opacity="0.15"/>
+
+            <!-- Hair - main mass -->
+            <path d="M72,100 Q70,70 82,52 Q92,38 120,35 Q148,38 158,52 Q170,70 168,100 Q165,85 155,75 Q145,68 135,72 Q125,55 115,55 Q105,55 95,72 Q85,68 75,80 Z" fill="url(#c2hair)"/>
+            <!-- Hair bangs -->
+            <path d="M85,75 Q90,58 100,55 Q95,65 92,80 Q88,90 85,95" fill="#3A3A42" opacity="0.9"/>
+            <path d="M95,68 Q102,50 115,48 Q108,58 105,72 Q102,82 100,90" fill="#33333A" opacity="0.85"/>
+            <path d="M125,48 Q138,50 145,68 Q142,82 140,90 Q138,78 135,72" fill="#3A3A42" opacity="0.9"/>
+            <path d="M140,55 Q150,58 155,75 Q152,85 155,95 Q152,90 148,80" fill="#33333A" opacity="0.85"/>
+            <!-- Hair highlight -->
+            <path d="M105,42 Q115,38 125,40" fill="none" stroke="#555560" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+            <!-- Messy hair strands -->
+            <path d="M78,65 Q72,55 75,42" fill="none" stroke="#3A3A42" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M162,65 Q168,55 165,42" fill="none" stroke="#3A3A42" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M110,38 Q108,28 112,22" fill="none" stroke="#33333A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M130,38 Q133,30 128,24" fill="none" stroke="#3A3A42" stroke-width="1.8" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">2. Soft Anime Avatar</div>
+      <div class="icon-desc">親しみやすいアニメ風アバター。柔らかなパーカー姿。</div>
+    </div>
+
+    <!-- ======== CONCEPT 3: Logo/Monogram "kt" ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="c3clip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <linearGradient id="c3bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FDFDF8"/>
+              <stop offset="100%" stop-color="#F0EDE6"/>
+            </linearGradient>
+            <linearGradient id="c3text" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2A4A32"/>
+              <stop offset="100%" stop-color="#1E3626"/>
+            </linearGradient>
+            <linearGradient id="c3leaf" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6B8F71"/>
+              <stop offset="100%" stop-color="#4A7051"/>
+            </linearGradient>
+            <linearGradient id="c3vine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#5E9070"/>
+              <stop offset="100%" stop-color="#3D6B45"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#c3clip)">
+            <rect width="240" height="240" fill="url(#c3bg)"/>
+            <!-- Subtle texture -->
+            <g opacity="0.03">
+              <pattern id="c3noise" width="4" height="4" patternUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="1" height="1" fill="#2A4A32"/>
+                <rect x="2" y="2" width="1" height="1" fill="#2A4A32"/>
+              </pattern>
+              <rect width="240" height="240" fill="url(#c3noise)"/>
+            </g>
+
+            <!-- Decorative circle border -->
+            <circle cx="120" cy="120" r="105" fill="none" stroke="#2A4A32" stroke-width="1" opacity="0.1"/>
+            <circle cx="120" cy="120" r="100" fill="none" stroke="#2A4A32" stroke-width="0.5" opacity="0.06"/>
+
+            <!-- "k" letter -->
+            <g transform="translate(58,68)">
+              <!-- k stem -->
+              <rect x="0" y="0" width="11" height="105" rx="2" fill="url(#c3text)"/>
+              <!-- k diagonal arms -->
+              <path d="M11,52 L52,10 L60,10 Q58,15 48,28 L11,62Z" fill="url(#c3text)"/>
+              <path d="M11,58 L55,100 L62,105 Q55,105 48,96 L11,52Z" fill="url(#c3text)"/>
+            </g>
+
+            <!-- "t" letter with botanical cross -->
+            <g transform="translate(130,68)">
+              <!-- t stem -->
+              <rect x="16" y="0" width="10" height="105" rx="2" fill="url(#c3text)"/>
+              <!-- t crossbar -->
+              <rect x="0" y="22" width="50" height="9" rx="2" fill="url(#c3text)"/>
+              <!-- t foot curve -->
+              <path d="M26,173 Q26,180 34,180 L40,178" fill="none" stroke="url(#c3text)" stroke-width="6" stroke-linecap="round" opacity="0" />
+            </g>
+
+            <!-- Leaf growing from top of "t" -->
+            <g transform="translate(155,62)">
+              <path d="M0,8 Q8,-15 4,-32 Q14,-20 22,-8 Q14,2 0,8Z" fill="url(#c3leaf)" opacity="0.85"/>
+              <path d="M1,5 Q7,-12 4,-28" fill="none" stroke="#3D6B45" stroke-width="0.7" opacity="0.5"/>
+              <!-- Secondary leaf -->
+              <path d="M3,5 Q-10,-8 -8,-22 Q-3,-12 4,-6Z" fill="#9BB09E" opacity="0.6"/>
+            </g>
+
+            <!-- Vine wrapping from k to t -->
+            <path d="M118,155 Q125,148 135,150 Q145,152 148,158" fill="none" stroke="url(#c3vine)" stroke-width="1.8" opacity="0.5"/>
+            <!-- Small leaf on vine -->
+            <g transform="translate(130,148) rotate(-20)">
+              <path d="M0,0 Q3,-8 1,-14 Q5,-9 9,-4 Q5,0 0,0Z" fill="#6B8F71" opacity="0.6"/>
+            </g>
+
+            <!-- Tiny leaf accent on k -->
+            <g transform="translate(108,75) rotate(25)">
+              <path d="M0,0 Q4,-10 2,-18 Q7,-12 12,-6 Q7,-1 0,0Z" fill="#9BB09E" opacity="0.45"/>
+            </g>
+
+            <!-- Small flower at junction -->
+            <g transform="translate(122,130)">
+              <circle cx="0" cy="-3" r="3" fill="#B47478" opacity="0.5"/>
+              <circle cx="-3" cy="1" r="2.8" fill="#C9838A" opacity="0.4"/>
+              <circle cx="3" cy="1" r="2.8" fill="#B47478" opacity="0.45"/>
+              <circle cx="0" cy="0" r="1.5" fill="#AB9058" opacity="0.6"/>
+            </g>
+
+            <!-- Small vine tendrils -->
+            <path d="M62,170 Q55,178 58,185" fill="none" stroke="#9BB09E" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+            <path d="M180,75 Q188,68 185,60" fill="none" stroke="#9BB09E" stroke-width="0.8" opacity="0.25" stroke-linecap="round"/>
+
+            <!-- Accent dots -->
+            <circle cx="75" cy="60" r="1.5" fill="#6B8F71" opacity="0.15"/>
+            <circle cx="185" cy="170" r="2" fill="#6B8F71" opacity="0.12"/>
+            <circle cx="50" cy="140" r="1" fill="#B47478" opacity="0.15"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">3. Monogram "kt"</div>
+      <div class="icon-desc">洗練されたモノグラム。t から萌え出る若葉のアクセント。</div>
+    </div>
+
+    <!-- ======== CONCEPT 4: Hand-drawn Sketch ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="c4clip"><circle cx="120" cy="120" r="120"/></clipPath>
+            <filter id="c4rough">
+              <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="4" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+          <g clip-path="url(#c4clip)">
+            <!-- Paper background -->
+            <rect width="240" height="240" fill="#F5F0E8"/>
+            <!-- Paper texture lines -->
+            <g opacity="0.04">
+              <line x1="0" y1="20" x2="240" y2="20" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="40" x2="240" y2="40" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="60" x2="240" y2="60" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="80" x2="240" y2="80" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="100" x2="240" y2="100" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="120" x2="240" y2="120" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="140" x2="240" y2="140" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="160" x2="240" y2="160" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="180" x2="240" y2="180" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="200" x2="240" y2="200" stroke="#8B7355" stroke-width="0.5"/>
+              <line x1="0" y1="220" x2="240" y2="220" stroke="#8B7355" stroke-width="0.5"/>
+            </g>
+
+            <!-- Sketch style person at desk -->
+            <g filter="url(#c4rough)" stroke="#4A5A4A" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <!-- Desk -->
+              <path d="M35,170 Q38,168 200,168 Q205,170 205,170" stroke-width="2.5" opacity="0.7"/>
+              <!-- Desk legs (wobbly) -->
+              <path d="M55,170 Q53,195 52,215" stroke-width="2" opacity="0.5"/>
+              <path d="M185,170 Q187,195 188,215" stroke-width="2" opacity="0.5"/>
+
+              <!-- Laptop base -->
+              <path d="M85,168 Q83,155 82,148 L158,148 Q157,155 155,168" stroke-width="2" opacity="0.65"/>
+              <!-- Laptop screen -->
+              <path d="M85,148 Q84,110 86,105 L154,105 Q156,110 155,148" stroke-width="2" opacity="0.65"/>
+              <!-- Screen glow -->
+              <rect x="90" y="110" width="60" height="34" rx="2" fill="#6B96A0" opacity="0.12"/>
+              <!-- Code lines on screen -->
+              <line x1="95" y1="118" x2="125" y2="118" stroke="#5E9070" stroke-width="1.5" opacity="0.4"/>
+              <line x1="95" y1="126" x2="140" y2="126" stroke="#6B96A0" stroke-width="1.5" opacity="0.35"/>
+              <line x1="95" y1="134" x2="118" y2="134" stroke="#AB9058" stroke-width="1.5" opacity="0.3"/>
+            </g>
+
+            <!-- Person (sketch style) -->
+            <g stroke="#4A5A4A" stroke-linecap="round" fill="none" filter="url(#c4rough)">
+              <!-- Body/torso -->
+              <path d="M105,148 Q100,130 102,115 Q100,105 105,98" stroke-width="2" opacity="0.6"/>
+              <path d="M135,148 Q140,130 138,115 Q140,105 135,98" stroke-width="2" opacity="0.6"/>
+              <!-- Shoulders connection -->
+              <path d="M105,98 Q120,92 135,98" stroke-width="2" opacity="0.55"/>
+
+              <!-- Head -->
+              <ellipse cx="120" cy="72" rx="22" ry="25" stroke-width="2.2" opacity="0.65"/>
+              <!-- Hair (messy sketch) -->
+              <path d="M98,65 Q95,48 105,40 Q115,34 125,36 Q140,40 142,55" stroke-width="2.5" opacity="0.6"/>
+              <path d="M100,58 Q98,50 102,44" stroke-width="1.8" opacity="0.45"/>
+              <path d="M140,58 Q142,50 138,44" stroke-width="1.8" opacity="0.45"/>
+              <path d="M112,38 Q110,30 115,28" stroke-width="1.5" opacity="0.4"/>
+              <path d="M128,37 Q132,32 128,28" stroke-width="1.5" opacity="0.4"/>
+
+              <!-- Face features (minimal) -->
+              <!-- Eyes - simple dots -->
+              <circle cx="111" cy="72" r="2" fill="#4A5A4A" stroke="none" opacity="0.6"/>
+              <circle cx="129" cy="72" r="2" fill="#4A5A4A" stroke="none" opacity="0.6"/>
+              <!-- Smile -->
+              <path d="M114,82 Q120,87 126,82" stroke-width="1.5" opacity="0.5"/>
+              <!-- Glasses -->
+              <circle cx="111" cy="72" r="8" stroke-width="1.2" opacity="0.35"/>
+              <circle cx="129" cy="72" r="8" stroke-width="1.2" opacity="0.35"/>
+              <line x1="119" y1="72" x2="121" y2="72" stroke-width="1" opacity="0.35"/>
+
+              <!-- Arms reaching to laptop -->
+              <path d="M105,110 Q95,130 88,148 Q85,155 88,158" stroke-width="1.8" opacity="0.5"/>
+              <path d="M135,110 Q145,130 152,148 Q155,155 152,158" stroke-width="1.8" opacity="0.5"/>
+            </g>
+
+            <!-- Doodle: Plant in pot on desk -->
+            <g stroke="#5E9070" stroke-linecap="round" fill="none" stroke-width="1.5" opacity="0.55">
+              <path d="M170,168 L168,155 L180,155 L178,168"/>
+              <path d="M174,155 Q174,145 170,138"/>
+              <path d="M174,148 Q178,142 182,138"/>
+              <!-- Leaves -->
+              <path d="M170,138 Q165,132 168,126" stroke-width="1.8"/>
+              <path d="M182,138 Q187,132 184,126" stroke-width="1.8"/>
+              <ellipse cx="168" cy="124" rx="4" ry="6" stroke-width="1.2" fill="#5E9070" fill-opacity="0.15"/>
+              <ellipse cx="184" cy="124" rx="4" ry="6" stroke-width="1.2" fill="#5E9070" fill-opacity="0.15"/>
+            </g>
+
+            <!-- Doodle: Coffee cup -->
+            <g stroke="#8B7355" stroke-linecap="round" fill="none" stroke-width="1.3" opacity="0.5">
+              <path d="M55,168 L57,152 L70,152 L72,168"/>
+              <path d="M70,156 Q76,156 76,162 Q76,168 70,165" stroke-width="1"/>
+              <!-- Steam -->
+              <path d="M60,150 Q58,144 61,138" stroke-width="1" opacity="0.35"/>
+              <path d="M65,150 Q67,142 64,136" stroke-width="1" opacity="0.35"/>
+            </g>
+
+            <!-- Doodle: Small code symbols scattered -->
+            <g font-family="monospace" font-size="11" fill="#6B96A0" opacity="0.3">
+              <text x="20" y="40" transform="rotate(-12,20,40)">{}</text>
+              <text x="195" y="35" transform="rotate(8,195,35)">&lt;/&gt;</text>
+              <text x="15" y="130">( )</text>
+            </g>
+
+            <!-- Doodle: Small flowers -->
+            <g stroke="#B47478" stroke-width="1.2" fill="none" opacity="0.45">
+              <circle cx="210" cy="100" r="4"/>
+              <circle cx="210" cy="92" r="3"/>
+              <circle cx="204" cy="96" r="3"/>
+              <circle cx="216" cy="96" r="3"/>
+              <circle cx="210" cy="96" r="2" fill="#B47478" fill-opacity="0.3"/>
+              <path d="M210,104 Q210,115 208,125" stroke="#5E9070"/>
+            </g>
+            <!-- Another small flower -->
+            <g stroke="#8E7EAD" stroke-width="1" fill="none" opacity="0.35">
+              <circle cx="30" cy="200" r="3.5"/>
+              <circle cx="30" cy="194" r="2.5"/>
+              <circle cx="25" cy="198" r="2.5"/>
+              <circle cx="35" cy="198" r="2.5"/>
+              <circle cx="30" cy="197" r="1.5" fill="#8E7EAD" fill-opacity="0.3"/>
+            </g>
+
+            <!-- Doodle: Stars/sparkles -->
+            <g stroke="#AB9058" stroke-width="1" opacity="0.35">
+              <path d="M200,180 L200,175 M197,177.5 L203,177.5"/>
+              <path d="M40,55 L40,50 M37,52.5 L43,52.5"/>
+            </g>
+
+            <!-- Handwritten "kt" label -->
+            <g opacity="0.25">
+              <text x="185" y="220" font-family="'DM Sans',sans-serif" font-size="14" fill="#4A5A4A" font-style="italic" transform="rotate(-5,185,220)">kt</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">4. Hand-drawn Sketch</div>
+      <div class="icon-desc">ノートに描いたようなスケッチ風。手作りの温もり。</div>
+    </div>
+
+    <!-- ======== CONCEPT 5: Pixel Art Developer ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="c5clip"><circle cx="120" cy="120" r="120"/></clipPath>
+          </defs>
+          <g clip-path="url(#c5clip)">
+            <!-- Background -->
+            <rect width="240" height="240" fill="#E8F0E8"/>
+            <!-- Pixel grid overlay -->
+            <g opacity="0.03">
+              <pattern id="c5grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <rect width="10" height="10" fill="none" stroke="#2A4A32" stroke-width="0.3"/>
+              </pattern>
+              <rect width="240" height="240" fill="url(#c5grid)"/>
+            </g>
+
+            <!-- Floor -->
+            <rect x="0" y="180" width="240" height="60" fill="#C2D4C2" opacity="0.5"/>
+
+            <!-- Desk - pixel style (10px grid) -->
+            <g fill="#8B7355">
+              <!-- desk top -->
+              <rect x="30" y="140" width="180" height="10"/>
+              <!-- desk front panel -->
+              <rect x="30" y="150" width="180" height="5" fill="#7A5E3A"/>
+              <!-- desk legs -->
+              <rect x="40" y="155" width="10" height="30" fill="#7A5E3A"/>
+              <rect x="190" y="155" width="10" height="30" fill="#7A5E3A"/>
+              <!-- desk cross bar -->
+              <rect x="40" y="170" width="160" height="5" fill="#6B5530" opacity="0.5"/>
+            </g>
+
+            <!-- Monitor -->
+            <g>
+              <!-- Monitor screen border -->
+              <rect x="80" y="80" width="80" height="60" fill="#2A4A32"/>
+              <!-- Screen -->
+              <rect x="85" y="85" width="70" height="48" fill="#1a2e20"/>
+              <!-- Code on screen -->
+              <rect x="90" y="92" width="30" height="4" fill="#6B96A0" opacity="0.8"/>
+              <rect x="90" y="100" width="45" height="4" fill="#5E9070" opacity="0.7"/>
+              <rect x="90" y="108" width="20" height="4" fill="#AB9058" opacity="0.7"/>
+              <rect x="90" y="116" width="35" height="4" fill="#6B8F71" opacity="0.6"/>
+              <rect x="90" y="124" width="15" height="4" fill="#B47478" opacity="0.5"/>
+              <!-- Cursor blink -->
+              <rect x="108" y="124" width="4" height="4" fill="#9BB09E" opacity="0.9"/>
+              <!-- Monitor stand -->
+              <rect x="110" y="140" width="20" height="5" fill="#3D3D3D"/>
+              <rect x="105" y="140" width="30" height="5" fill="#4A4A4A"/>
+            </g>
+
+            <!-- Character sitting at desk -->
+            <!-- Chair -->
+            <rect x="95" y="155" width="50" height="5" fill="#6B96A0" opacity="0.7"/>
+            <rect x="90" y="130" width="5" height="30" fill="#5A8690" opacity="0.6"/>
+            <rect x="145" y="130" width="5" height="30" fill="#5A8690" opacity="0.6"/>
+            <rect x="90" y="125" width="60" height="10" fill="#6B96A0" opacity="0.7"/>
+
+            <!-- Body -->
+            <!-- Torso (hoodie) -->
+            <rect x="100" y="110" width="40" height="30" fill="#5E9070"/>
+            <rect x="100" y="110" width="40" height="5" fill="#4A7051"/>
+            <!-- Arms -->
+            <rect x="90" y="115" width="15" height="10" fill="#5E9070"/>
+            <rect x="135" y="115" width="15" height="10" fill="#5E9070"/>
+            <!-- Hands on desk (skin) -->
+            <rect x="85" y="130" width="10" height="10" fill="#F0D5B8"/>
+            <rect x="145" y="130" width="10" height="10" fill="#F0D5B8"/>
+
+            <!-- Head -->
+            <rect x="105" y="70" width="30" height="35" fill="#F0D5B8"/>
+            <!-- Eyes -->
+            <rect x="112" y="85" width="5" height="5" fill="#2A3A30"/>
+            <rect x="125" y="85" width="5" height="5" fill="#2A3A30"/>
+            <!-- Eye shine -->
+            <rect x="114" y="85" width="2" height="2" fill="#fff" opacity="0.7"/>
+            <rect x="127" y="85" width="2" height="2" fill="#fff" opacity="0.7"/>
+            <!-- Mouth -->
+            <rect x="115" y="95" width="12" height="3" fill="#D4A08A" opacity="0.6"/>
+            <!-- Smile detail -->
+            <rect x="115" y="96" width="3" height="2" fill="#C4908A" opacity="0.4"/>
+            <rect x="124" y="96" width="3" height="2" fill="#C4908A" opacity="0.4"/>
+            <!-- Blush -->
+            <rect x="107" y="90" width="5" height="5" fill="#E8A0A0" opacity="0.25"/>
+            <rect x="130" y="90" width="5" height="5" fill="#E8A0A0" opacity="0.25"/>
+
+            <!-- Hair -->
+            <rect x="100" y="60" width="40" height="15" fill="#33333A"/>
+            <rect x="97" y="65" width="8" height="25" fill="#33333A"/>
+            <rect x="135" y="65" width="8" height="25" fill="#33333A"/>
+            <!-- Hair top strands -->
+            <rect x="105" y="55" width="10" height="10" fill="#3A3A42"/>
+            <rect x="125" y="55" width="10" height="10" fill="#3A3A42"/>
+            <rect x="115" y="52" width="10" height="8" fill="#33333A"/>
+            <!-- Messy pixel strands -->
+            <rect x="98" y="60" width="5" height="5" fill="#3A3A42"/>
+            <rect x="137" y="60" width="5" height="5" fill="#3A3A42"/>
+            <rect x="110" y="50" width="5" height="5" fill="#3A3A42" opacity="0.7"/>
+            <rect x="128" y="48" width="5" height="7" fill="#33333A" opacity="0.6"/>
+
+            <!-- Plant on desk (pixel) -->
+            <g>
+              <!-- Pot -->
+              <rect x="170" y="125" width="20" height="15" fill="#AB9058"/>
+              <rect x="168" y="123" width="24" height="5" fill="#C4A66A"/>
+              <!-- Stem -->
+              <rect x="178" y="105" width="4" height="20" fill="#4A7051"/>
+              <!-- Leaves -->
+              <rect x="170" y="100" width="8" height="8" fill="#5E9070"/>
+              <rect x="182" y="95" width="8" height="8" fill="#6B8F71"/>
+              <rect x="174" y="90" width="8" height="10" fill="#5E9070"/>
+              <!-- Small flower -->
+              <rect x="184" y="88" width="6" height="6" fill="#B47478" opacity="0.8"/>
+              <rect x="186" y="90" width="2" height="2" fill="#E8C0C0"/>
+            </g>
+
+            <!-- Coffee mug (pixel) -->
+            <rect x="55" y="125" width="15" height="15" fill="#6B96A0" opacity="0.8"/>
+            <rect x="52" y="123" width="20" height="4" fill="#7BA8B5"/>
+            <!-- Handle -->
+            <rect x="70" y="128" width="5" height="3" fill="#5A8690"/>
+            <rect x="73" y="128" width="3" height="10" fill="#5A8690"/>
+            <rect x="70" y="135" width="5" height="3" fill="#5A8690"/>
+            <!-- Steam pixels -->
+            <rect x="58" y="115" width="3" height="5" fill="#9BB09E" opacity="0.25"/>
+            <rect x="63" y="112" width="3" height="5" fill="#9BB09E" opacity="0.2"/>
+
+            <!-- Pixel hearts/sparkles -->
+            <rect x="35" y="45" width="4" height="4" fill="#B47478" opacity="0.35"/>
+            <rect x="39" y="45" width="4" height="4" fill="#B47478" opacity="0.35"/>
+            <rect x="33" y="49" width="12" height="4" fill="#B47478" opacity="0.3"/>
+            <rect x="35" y="53" width="8" height="4" fill="#B47478" opacity="0.25"/>
+            <rect x="37" y="57" width="4" height="4" fill="#B47478" opacity="0.2"/>
+
+            <!-- Pixel star -->
+            <rect x="198" y="40" width="4" height="4" fill="#AB9058" opacity="0.4"/>
+            <rect x="194" y="44" width="12" height="4" fill="#AB9058" opacity="0.35"/>
+            <rect x="198" y="48" width="4" height="4" fill="#AB9058" opacity="0.3"/>
+
+            <!-- Small pixel leaves floating -->
+            <rect x="25" y="110" width="5" height="5" fill="#6B8F71" opacity="0.3"/>
+            <rect x="30" y="108" width="3" height="3" fill="#5E9070" opacity="0.25"/>
+            <rect x="210" y="120" width="5" height="5" fill="#9BB09E" opacity="0.25"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">5. Pixel Art Developer</div>
+      <div class="icon-desc">レトロゲーム風ピクセルアート。植物と共にコーディング。</div>
+    </div>
+
+  </div>
+
+  <!-- Small size check -->
+  <div class="small-check">
+    <h3>Small Size Check (48px - X timeline size)</h3>
+    <div class="small-row">
+      <div class="small-item">
+        <div class="small-frame"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><use href="#c1full"/></svg></div>
+        <div class="small-label">1</div>
+      </div>
+      <div class="small-item">
+        <div class="small-frame"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><use href="#c2full"/></svg></div>
+        <div class="small-label">2</div>
+      </div>
+      <div class="small-item">
+        <div class="small-frame"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><use href="#c3full"/></svg></div>
+        <div class="small-label">3</div>
+      </div>
+      <div class="small-item">
+        <div class="small-frame"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><use href="#c4full"/></svg></div>
+        <div class="small-label">4</div>
+      </div>
+      <div class="small-item">
+        <div class="small-frame"><svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><use href="#c5full"/></svg></div>
+        <div class="small-label">5</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LIGHT MODE SECTION
+     ============================================================ -->
+<section class="section-light">
+  <p class="section-label">Light Mode Preview</p>
+  <div class="icons-row" id="light-icons"></div>
+  <div class="small-check">
+    <h3>Small Size Check (48px - Light Mode)</h3>
+    <div class="small-row" id="light-small"></div>
+  </div>
+</section>
+
+<script>
+// Clone icons into light mode section
+document.addEventListener('DOMContentLoaded', () => {
+  const darkIcons = document.querySelector('.section-dark .icons-row');
+  const lightIcons = document.getElementById('light-icons');
+  const lightSmall = document.getElementById('light-small');
+
+  // Clone icon cards
+  darkIcons.querySelectorAll('.icon-card').forEach((card, i) => {
+    const clone = card.cloneNode(true);
+    // Remap clip-path IDs to avoid conflicts
+    const svgContent = clone.querySelector('svg').innerHTML;
+    clone.querySelector('svg').innerHTML = svgContent
+      .replace(/id="c(\d)/g, 'id="lc$1')
+      .replace(/url\(#c(\d)/g, 'url(#lc$1');
+    lightIcons.appendChild(clone);
+
+    // Small version
+    const smallItem = document.createElement('div');
+    smallItem.className = 'small-item';
+    const smallFrame = document.createElement('div');
+    smallFrame.className = 'small-frame';
+    const smallSvg = clone.querySelector('svg').cloneNode(true);
+    const svgContent2 = smallSvg.innerHTML;
+    smallSvg.innerHTML = svgContent2
+      .replace(/id="lc(\d)/g, 'id="slc$1')
+      .replace(/url\(#lc(\d)/g, 'url(#slc$1');
+    smallFrame.appendChild(smallSvg);
+    smallItem.appendChild(smallFrame);
+    const label = document.createElement('div');
+    label.className = 'small-label';
+    label.textContent = (i + 1).toString();
+    smallItem.appendChild(label);
+    lightSmall.appendChild(smallItem);
+  });
+
+  // Also create small dark versions by duplicating inline SVGs
+  const darkSmallRow = document.querySelector('.section-dark .small-row');
+  darkSmallRow.innerHTML = '';
+  darkIcons.querySelectorAll('.icon-card').forEach((card, i) => {
+    const smallItem = document.createElement('div');
+    smallItem.className = 'small-item';
+    const smallFrame = document.createElement('div');
+    smallFrame.className = 'small-frame';
+    const svgClone = card.querySelector('svg').cloneNode(true);
+    const svgContent = svgClone.innerHTML;
+    svgClone.innerHTML = svgContent
+      .replace(/id="c(\d)/g, 'id="sc$1')
+      .replace(/url\(#c(\d)/g, 'url(#sc$1');
+    smallFrame.appendChild(svgClone);
+    smallItem.appendChild(smallFrame);
+    const label = document.createElement('div');
+    label.className = 'small-label';
+    label.textContent = (i + 1).toString();
+    smallItem.appendChild(label);
+    darkSmallRow.appendChild(smallItem);
+  });
+});
+</script>
+
+</body>
+</html>

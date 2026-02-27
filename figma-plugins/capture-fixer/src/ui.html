@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    /* ── Reset & Base ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #2D3B2E;
+      background: #FAFAF5;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E8E5DD;
+    }
+
+    .header-icon {
+      width: 24px;
+      height: 24px;
+      background: #6B8F71;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .header h1 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2D3B2E;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Description ── */
+    .description {
+      font-size: 11px;
+      color: #5C7260;
+      line-height: 1.6;
+    }
+
+    /* ── Fix list ── */
+    .fix-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .fix-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #5C7260;
+      padding: 4px 8px;
+      background: #F0EDE6;
+      border-radius: 6px;
+    }
+
+    .fix-item .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .fix-item:nth-child(1) .dot { background: #7E9AAB; }
+    .fix-item:nth-child(2) .dot { background: #B8956A; }
+    .fix-item:nth-child(3) .dot { background: #6B8F71; }
+    .fix-item:nth-child(4) .dot { background: #4A7051; }
+    .fix-item:nth-child(5) .dot { background: #E05577; }
+    .fix-item:nth-child(6) .dot { background: #F08C28; }
+
+    /* ── Buttons ── */
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: #6B8F71;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #4A7051;
+    }
+
+    .btn-secondary {
+      background: #F0EDE6;
+      color: #2D3B2E;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #E8E5DD;
+    }
+
+    /* ── Progress ── */
+    .progress-section {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-section.visible {
+      display: flex;
+    }
+
+    .progress-bar-wrapper {
+      width: 100%;
+      height: 6px;
+      background: #E8E5DD;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #6B8F71;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-label {
+      font-size: 11px;
+      color: #5C7260;
+      text-align: center;
+    }
+
+    /* ── Results ── */
+    .results-section {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .results-section.visible {
+      display: flex;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2D3B2E;
+    }
+
+    .results-header .check {
+      color: #6B8F71;
+      font-size: 14px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 8px;
+      font-size: 11px;
+      color: #5C7260;
+      background: #F0EDE6;
+      border-radius: 4px;
+    }
+
+    .result-count {
+      font-weight: 600;
+      color: #2D3B2E;
+      min-width: 28px;
+      text-align: right;
+    }
+
+    .result-count.error {
+      color: #D63E2F;
+    }
+
+    .result-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #2D3B2E;
+      background: #6B8F71;
+      color: white;
+      border-radius: 6px;
+      margin-top: 2px;
+    }
+
+    /* ── Error ── */
+    .error-message {
+      display: none;
+      padding: 8px 10px;
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #D63E2F;
+    }
+
+    .error-message.visible {
+      display: block;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #E8E5DD;
+      font-size: 10px;
+      color: #8A9E8C;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22c1-4 4-7 8-8-4-1-7-4-8-8-1 4-4 7-8 8 4 1 7 4 8 8z"/>
+      </svg>
+    </div>
+    <h1>CraftGarden Capture Fixer</h1>
+  </div>
+
+  <!-- Description -->
+  <p class="description">
+    Fixes common issues in Figma designs captured from craftgarden.studio
+    using the MCP <code>generate_figma_design</code> tool.
+  </p>
+
+  <!-- Fix list -->
+  <div class="fix-list">
+    <div class="fix-item"><span class="dot"></span> Backdrop blur on navigation</div>
+    <div class="fix-item"><span class="dot"></span> Radial gradient text protection</div>
+    <div class="fix-item"><span class="dot"></span> Button &amp; link componentization</div>
+    <div class="fix-item"><span class="dot"></span> Card Auto Layout structure</div>
+    <div class="fix-item"><span class="dot"></span> Shiori ribbon bookmarks</div>
+    <div class="fix-item"><span class="dot"></span> SVG vector replacement</div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="button-group" id="button-group">
+    <button class="btn-primary" id="btn-selection" onclick="fixSelection()">
+      Fix Selection
+    </button>
+    <button class="btn-secondary" id="btn-page" onclick="fixPage()">
+      Fix Entire Page
+    </button>
+  </div>
+
+  <!-- Error -->
+  <div class="error-message" id="error-message"></div>
+
+  <!-- Progress -->
+  <div class="progress-section" id="progress-section">
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Starting...</div>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section" id="results-section">
+    <div class="results-header">
+      <span class="check">&#10003;</span>
+      <span id="results-title">Fixes applied</span>
+    </div>
+    <div id="results-list"></div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    craftgarden.studio &middot; Capture Fixer v1.0
+  </div>
+
+  <script>
+    /* ── UI Actions ── */
+
+    function fixSelection() {
+      resetUI();
+      setButtonsDisabled(true);
+      parent.postMessage({ pluginMessage: { type: "fix-selection" } }, "*");
+    }
+
+    function fixPage() {
+      resetUI();
+      setButtonsDisabled(true);
+      parent.postMessage({ pluginMessage: { type: "fix-page" } }, "*");
+    }
+
+    function setButtonsDisabled(disabled) {
+      document.getElementById("btn-selection").disabled = disabled;
+      document.getElementById("btn-page").disabled = disabled;
+    }
+
+    function resetUI() {
+      document.getElementById("error-message").classList.remove("visible");
+      document.getElementById("results-section").classList.remove("visible");
+      document.getElementById("progress-section").classList.remove("visible");
+    }
+
+    /* ── Message handler ── */
+
+    onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+
+      switch (msg.type) {
+        case "started":
+          document.getElementById("progress-section").classList.add("visible");
+          document.getElementById("progress-label").textContent =
+            "Fixing: " + msg.target + "...";
+          break;
+
+        case "progress":
+          document.getElementById("progress-section").classList.add("visible");
+          const pct = Math.round((msg.step / msg.total) * 100);
+          document.getElementById("progress-bar").style.width = pct + "%";
+          document.getElementById("progress-label").textContent =
+            msg.step + "/" + msg.total + " — " + msg.label;
+          break;
+
+        case "results":
+          document.getElementById("progress-section").classList.remove("visible");
+          document.getElementById("results-section").classList.add("visible");
+
+          document.getElementById("results-title").textContent =
+            'Fixes applied to "' + msg.target + '"';
+
+          const listEl = document.getElementById("results-list");
+          listEl.innerHTML = "";
+
+          msg.results.forEach(function (r) {
+            const row = document.createElement("div");
+            row.className = "result-row";
+
+            const nameSpan = document.createElement("span");
+            nameSpan.textContent = r.name;
+
+            const countSpan = document.createElement("span");
+            countSpan.className = "result-count";
+            if (r.count < 0) {
+              countSpan.classList.add("error");
+              countSpan.textContent = "err";
+            } else {
+              countSpan.textContent = r.count.toString();
+            }
+
+            row.appendChild(nameSpan);
+            row.appendChild(countSpan);
+            listEl.appendChild(row);
+          });
+
+          // Total row
+          const totalRow = document.createElement("div");
+          totalRow.className = "result-total";
+          const totalLabel = document.createElement("span");
+          totalLabel.textContent = "Total fixes";
+          const totalCount = document.createElement("span");
+          totalCount.textContent = msg.totalFixes.toString();
+          totalRow.appendChild(totalLabel);
+          totalRow.appendChild(totalCount);
+          listEl.appendChild(totalRow);
+
+          setButtonsDisabled(false);
+          break;
+
+        case "error":
+          document.getElementById("progress-section").classList.remove("visible");
+          const errorEl = document.getElementById("error-message");
+          errorEl.textContent = msg.message;
+          errorEl.classList.add("visible");
+          setButtonsDisabled(false);
+          break;
+      }
+    };
+  </script>
+</body>
+</html>

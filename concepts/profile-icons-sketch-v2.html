@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ktlabworks — Hand-drawn Sketch Variations v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;color:#e7e9ea;line-height:1.6;background:#0e1117}
+
+.header{text-align:center;padding:48px 24px 12px}
+.header h1{font-family:'Nunito',system-ui,sans-serif;font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;letter-spacing:-0.02em}
+.header p{font-size:0.9rem;opacity:0.45;margin-top:4px}
+
+.section{padding:32px 24px 64px}
+.section-label{text-align:center;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.18em;opacity:0.3;margin-bottom:28px}
+
+.icons-row{display:flex;flex-wrap:wrap;justify-content:center;gap:36px;max-width:1400px;margin:0 auto}
+.icon-card{display:flex;flex-direction:column;align-items:center;gap:14px;width:260px}
+.icon-frame{width:260px;height:260px;border-radius:50%;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,0.4);flex-shrink:0;background:#F5F0E8}
+.icon-frame svg{width:100%;height:100%;display:block}
+.icon-label{font-weight:700;font-size:0.9rem;text-align:center}
+.icon-desc{font-size:0.78rem;opacity:0.45;text-align:center;max-width:240px;line-height:1.5}
+
+.small-check{margin-top:48px}
+.small-check h3{text-align:center;font-size:0.85rem;margin-bottom:18px;opacity:0.5;font-family:'Nunito',sans-serif}
+.small-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;align-items:flex-end}
+.small-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.small-frame{width:48px;height:48px;border-radius:50%;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,0.3);background:#F5F0E8}
+.small-frame svg{width:100%;height:100%;display:block}
+.small-label{font-size:0.6rem;opacity:0.4;text-align:center}
+
+.section-dark{background:#15202b}
+.section-light{background:#fff}
+.section-light *{color:#0f1419}
+.section-light .icon-desc{opacity:0.55}
+.section-light .small-label{opacity:0.45}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ktlabworks — Hand-drawn Sketch v2</h1>
+  <p>手描きスケッチ路線のバリエーション 5案</p>
+</div>
+
+<!-- ============================================================
+     DARK MODE
+     ============================================================ -->
+<section class="section section-dark">
+  <p class="section-label">Dark Mode Preview</p>
+  <div class="icons-row">
+
+    <!-- ======== A: Notebook Doodle Scene ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="aClip"><circle cx="130" cy="130" r="130"/></clipPath>
+            <filter id="aRough">
+              <feTurbulence type="turbulence" baseFrequency="0.035" numOctaves="3" seed="2" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="aPencil">
+              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="5" result="n"/>
+              <feComposite in="SourceGraphic" in2="n" operator="in"/>
+            </filter>
+          </defs>
+          <g clip-path="url(#aClip)">
+            <!-- Paper -->
+            <rect width="260" height="260" fill="#F5F0E8"/>
+            <!-- Paper grain -->
+            <filter id="aGrain"><feTurbulence baseFrequency="0.9" numOctaves="4" seed="8"/><feColorMatrix type="saturate" values="0"/><feBlend in="SourceGraphic" mode="multiply" result="g"/></filter>
+            <rect width="260" height="260" fill="#F5F0E8" filter="url(#aGrain)" opacity="0.06"/>
+            <!-- Grid dots -->
+            <g opacity="0.06">
+              <pattern id="aDots" width="18" height="18" patternUnits="userSpaceOnUse">
+                <circle cx="9" cy="9" r="0.6" fill="#8B7355"/>
+              </pattern>
+              <rect width="260" height="260" fill="url(#aDots)"/>
+            </g>
+
+            <!-- Main character: person sitting cross-legged with laptop -->
+            <g filter="url(#aRough)" stroke="#3D4A3D" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <!-- Laptop -->
+              <path d="M82,165 L82,132 Q82,128 86,128 L174,128 Q178,128 178,132 L178,165" stroke-width="2.2" opacity="0.55"/>
+              <!-- Screen content -->
+              <rect x="88" y="134" width="84" height="26" rx="2" fill="#E8F0E8" fill-opacity="0.4" stroke="none"/>
+              <line x1="94" y1="140" x2="130" y2="140" stroke="#5E9070" stroke-width="1.8" opacity="0.4"/>
+              <line x1="94" y1="147" x2="150" y2="147" stroke="#6B96A0" stroke-width="1.8" opacity="0.35"/>
+              <line x1="94" y1="154" x2="120" y2="154" stroke="#AB9058" stroke-width="1.8" opacity="0.3"/>
+              <!-- Laptop base -->
+              <path d="M72,165 Q75,170 130,172 Q185,170 188,165" stroke-width="2" opacity="0.5"/>
+
+              <!-- Body -->
+              <path d="M108,128 Q105,110 108,98" stroke-width="2.2" opacity="0.55"/>
+              <path d="M152,128 Q155,110 152,98" stroke-width="2.2" opacity="0.55"/>
+              <path d="M108,98 Q130,90 152,98" stroke-width="2" opacity="0.5"/>
+
+              <!-- Head -->
+              <ellipse cx="130" cy="66" rx="24" ry="28" stroke-width="2.5" opacity="0.6"/>
+
+              <!-- Hair -->
+              <path d="M106,58 Q105,38 118,30 Q130,25 142,30 Q155,38 154,58" stroke-width="2.8" opacity="0.55"/>
+              <path d="M108,50 Q106,42 112,35" stroke-width="2" opacity="0.4"/>
+              <path d="M152,50 Q154,42 148,35" stroke-width="2" opacity="0.4"/>
+              <path d="M122,30 Q120,22 124,18" stroke-width="1.8" opacity="0.35"/>
+              <path d="M138,29 Q140,22 136,17" stroke-width="1.8" opacity="0.35"/>
+              <path d="M130,27 Q128,18 132,14" stroke-width="1.5" opacity="0.3"/>
+
+              <!-- Face -->
+              <circle cx="120" cy="66" r="2.5" fill="#3D4A3D" stroke="none" opacity="0.55"/>
+              <circle cx="140" cy="66" r="2.5" fill="#3D4A3D" stroke="none" opacity="0.55"/>
+              <path d="M124,78 Q130,83 136,78" stroke-width="1.8" opacity="0.45"/>
+
+              <!-- Arms to laptop -->
+              <path d="M108,108 Q95,128 90,140 Q88,148 92,152" stroke-width="2" opacity="0.45"/>
+              <path d="M152,108 Q165,128 170,140 Q172,148 168,152" stroke-width="2" opacity="0.45"/>
+
+              <!-- Crossed legs -->
+              <path d="M110,165 Q100,180 85,190 Q78,195 80,200" stroke-width="2.2" opacity="0.45"/>
+              <path d="M150,165 Q160,180 175,190 Q182,195 180,200" stroke-width="2.2" opacity="0.45"/>
+              <path d="M110,165 Q130,178 150,165" stroke-width="1.8" opacity="0.35"/>
+            </g>
+
+            <!-- Doodles surrounding the character -->
+            <!-- Plant pot (left side) -->
+            <g stroke="#5E9070" stroke-linecap="round" fill="none" stroke-width="1.6" opacity="0.5">
+              <path d="M30,178 L28,162 L44,162 L42,178"/>
+              <rect x="26" y="160" width="20" height="4" rx="1" fill="#AB9058" fill-opacity="0.3" stroke="#AB9058" stroke-width="1"/>
+              <path d="M36,160 Q36,148 32,140"/>
+              <path d="M36,152 Q40,146 44,140"/>
+              <path d="M32,140 Q26,134 28,126" stroke-width="1.8"/>
+              <ellipse cx="27" cy="123" rx="5" ry="7" stroke-width="1.3" fill="#5E9070" fill-opacity="0.12"/>
+              <path d="M44,140 Q50,134 48,126" stroke-width="1.8"/>
+              <ellipse cx="49" cy="123" rx="5" ry="7" stroke-width="1.3" fill="#5E9070" fill-opacity="0.12"/>
+              <path d="M36,148 Q34,138 36,130" stroke-width="1.2"/>
+              <ellipse cx="35" cy="127" rx="4" ry="6" stroke-width="1.2" fill="#6B8F71" fill-opacity="0.1"/>
+            </g>
+
+            <!-- Coffee cup (right side) -->
+            <g stroke="#8B7355" stroke-linecap="round" fill="none" stroke-width="1.4" opacity="0.5">
+              <path d="M210,178 L212,160 L228,160 L230,178"/>
+              <path d="M228,164 Q234,164 234,170 Q234,176 228,174"/>
+              <path d="M216,158 Q214,150 217,144" stroke-width="1.1" opacity="0.4"/>
+              <path d="M222,158 Q224,148 221,142" stroke-width="1.1" opacity="0.4"/>
+              <path d="M219,156 Q218,146 220,140" stroke-width="1" opacity="0.35"/>
+            </g>
+
+            <!-- Floating code symbols -->
+            <g font-family="'Courier New',monospace" fill="#6B96A0" opacity="0.25" font-size="12">
+              <text x="18" y="50" transform="rotate(-15,18,50)">{ }</text>
+              <text x="215" y="42" transform="rotate(10,215,42)">&lt;/&gt;</text>
+              <text x="30" y="100" font-size="10" opacity="0.2">fn()</text>
+            </g>
+
+            <!-- Small flowers scattered -->
+            <g opacity="0.45">
+              <!-- Flower 1 -->
+              <g transform="translate(220,90)" stroke="#B47478" stroke-width="1.2" fill="none">
+                <ellipse cx="0" cy="-5" rx="3.5" ry="5"/>
+                <ellipse cx="-4.5" cy="0" rx="3.5" ry="5" transform="rotate(72)"/>
+                <ellipse cx="4.5" cy="0" rx="3.5" ry="5" transform="rotate(-72)"/>
+                <ellipse cx="-3" cy="4" rx="3.5" ry="5" transform="rotate(144)"/>
+                <ellipse cx="3" cy="4" rx="3.5" ry="5" transform="rotate(-144)"/>
+                <circle cx="0" cy="0" r="2.5" fill="#AB9058" fill-opacity="0.4" stroke="#AB9058" stroke-width="0.8"/>
+              </g>
+              <!-- Flower 2 -->
+              <g transform="translate(25,220)" stroke="#8E7EAD" stroke-width="1" fill="none">
+                <circle cx="0" cy="-4" r="3"/>
+                <circle cx="-4" cy="0" r="3"/>
+                <circle cx="4" cy="0" r="3"/>
+                <circle cx="-2" cy="4" r="3"/>
+                <circle cx="2" cy="4" r="3"/>
+                <circle cx="0" cy="0" r="2" fill="#8E7EAD" fill-opacity="0.25"/>
+              </g>
+            </g>
+
+            <!-- Small stars/sparkles -->
+            <g stroke="#AB9058" stroke-width="1" opacity="0.3" stroke-linecap="round">
+              <path d="M200,140 L200,134 M197,137 L203,137"/>
+              <path d="M50,42 L50,36 M47,39 L53,39"/>
+              <path d="M240,200 L240,196 M238,198 L242,198"/>
+            </g>
+
+            <!-- Vine accent -->
+            <path d="M55,210 Q70,205 85,210 Q100,215 110,208" fill="none" stroke="#5E9070" stroke-width="1.2" opacity="0.25" stroke-linecap="round"/>
+            <g transform="translate(75,207) rotate(-20)">
+              <path d="M0,0 Q3,-6 1,-10 Q5,-7 8,-3 Q5,0 0,0Z" fill="#5E9070" opacity="0.2"/>
+            </g>
+            <g transform="translate(95,212) rotate(15)">
+              <path d="M0,0 Q-3,-5 -1,-9 Q-4,-6 -7,-3 Q-4,0 0,0Z" fill="#6B8F71" opacity="0.18"/>
+            </g>
+
+            <!-- Heart doodle -->
+            <g transform="translate(210,210)" stroke="#B47478" stroke-width="1.2" fill="none" opacity="0.3">
+              <path d="M0,-4 Q0,-8 4,-8 Q8,-8 8,-4 Q8,0 0,6 Q-8,0 -8,-4 Q-8,-8 -4,-8 Q0,-8 0,-4Z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">A. Notebook Doodle</div>
+      <div class="icon-desc">ノートいっぱいの落書き。あぐらでコーディングする開発者を中心に植物・コーヒー・コードが散りばめられたシーン。</div>
+    </div>
+
+    <!-- ======== B: Colored Pencil Portrait ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="bClip"><circle cx="130" cy="130" r="130"/></clipPath>
+            <filter id="bTexture">
+              <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="5" seed="12" result="noise"/>
+              <feColorMatrix in="noise" type="saturate" values="0" result="bw"/>
+              <feBlend in="SourceGraphic" in2="bw" mode="multiply"/>
+            </filter>
+            <filter id="bSoft">
+              <feGaussianBlur stdDeviation="0.4"/>
+            </filter>
+            <linearGradient id="bBg" x1="0" y1="0" x2="0.3" y2="1">
+              <stop offset="0%" stop-color="#FDF8F0"/>
+              <stop offset="100%" stop-color="#F0E8D8"/>
+            </linearGradient>
+            <linearGradient id="bSkin" x1="0.3" y1="0" x2="0.7" y2="1">
+              <stop offset="0%" stop-color="#F5DCC8"/>
+              <stop offset="100%" stop-color="#EDDBC8"/>
+            </linearGradient>
+            <linearGradient id="bHair" x1="0" y1="0" x2="0.3" y2="1">
+              <stop offset="0%" stop-color="#3A3A40"/>
+              <stop offset="100%" stop-color="#2A2A30"/>
+            </linearGradient>
+            <linearGradient id="bShirt" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6B8F71"/>
+              <stop offset="40%" stop-color="#5E8268"/>
+              <stop offset="100%" stop-color="#4A7051"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#bClip)">
+            <!-- Background with warm gradient -->
+            <rect width="260" height="260" fill="url(#bBg)"/>
+            <!-- Pencil texture overlay -->
+            <rect width="260" height="260" fill="url(#bBg)" filter="url(#bTexture)" opacity="0.08"/>
+
+            <!-- Soft botanical background elements -->
+            <g opacity="0.12">
+              <path d="M20,50 Q30,20 50,10 Q35,30 25,55Z" fill="#6B8F71"/>
+              <path d="M10,80 Q25,55 40,50 Q28,65 15,85Z" fill="#5E9070"/>
+              <path d="M220,30 Q235,15 250,20 Q238,30 225,35Z" fill="#6B8F71"/>
+              <path d="M235,50 Q250,40 260,45 Q250,55 238,55Z" fill="#9BB09E"/>
+              <path d="M0,200 Q15,185 25,190 Q18,200 5,205Z" fill="#5E9070"/>
+              <path d="M240,220 Q255,210 260,215 Q255,225 242,225Z" fill="#6B8F71"/>
+            </g>
+
+            <!-- Neck -->
+            <path d="M112,180 L112,205 Q112,210 118,212 L142,212 Q148,210 148,205 L148,180" fill="url(#bSkin)" stroke="#C4A888" stroke-width="0.8" opacity="0.9"/>
+
+            <!-- Shirt/hoodie (visible from shoulders down) -->
+            <path d="M40,260 Q42,220 70,208 Q90,198 112,212 L148,212 Q170,198 190,208 Q218,220 220,260 Z" fill="url(#bShirt)" stroke="#3D6B45" stroke-width="1" opacity="0.85"/>
+            <!-- Shirt collar detail -->
+            <path d="M108,212 Q118,225 130,228 Q142,225 152,212" fill="none" stroke="#4A6050" stroke-width="1.5" opacity="0.4"/>
+            <!-- Hoodie strings -->
+            <line x1="116" y1="212" x2="112" y2="235" stroke="#4A7051" stroke-width="1" opacity="0.3"/>
+            <circle cx="112" cy="236" r="2" fill="#4A7051" opacity="0.25"/>
+            <line x1="144" y1="212" x2="148" y2="235" stroke="#4A7051" stroke-width="1" opacity="0.3"/>
+            <circle cx="148" cy="236" r="2" fill="#4A7051" opacity="0.25"/>
+            <!-- Shoulder wrinkle lines -->
+            <path d="M80,215 Q90,210 100,214" fill="none" stroke="#3D6B45" stroke-width="0.8" opacity="0.2"/>
+            <path d="M160,214 Q170,210 180,215" fill="none" stroke="#3D6B45" stroke-width="0.8" opacity="0.2"/>
+
+            <!-- Face -->
+            <path d="M86,120 Q84,88 92,70 Q102,50 130,47 Q158,50 168,70 Q176,88 174,120 Q172,152 158,170 Q148,180 130,184 Q112,180 102,170 Q88,152 86,120Z" fill="url(#bSkin)" stroke="#C4A888" stroke-width="1" opacity="0.95"/>
+
+            <!-- Ears -->
+            <ellipse cx="86" cy="125" rx="8" ry="12" fill="#EDDBC8" stroke="#D4B8A0" stroke-width="0.8"/>
+            <ellipse cx="87" cy="125" rx="4" ry="8" fill="#E5D0BC" opacity="0.5"/>
+            <ellipse cx="174" cy="125" rx="8" ry="12" fill="#EDDBC8" stroke="#D4B8A0" stroke-width="0.8"/>
+            <ellipse cx="173" cy="125" rx="4" ry="8" fill="#E5D0BC" opacity="0.5"/>
+
+            <!-- Eyes — expressive, warm -->
+            <!-- Left eye -->
+            <ellipse cx="112" cy="118" rx="12" ry="11" fill="#fff" stroke="#8B7355" stroke-width="0.8" opacity="0.9"/>
+            <ellipse cx="113" cy="119" rx="7.5" ry="8" fill="#4A5C52"/>
+            <ellipse cx="113" cy="119" rx="5" ry="5.5" fill="#2A3A30"/>
+            <circle cx="117" cy="115" r="3" fill="#fff" opacity="0.85"/>
+            <circle cx="109" cy="122" r="1.5" fill="#fff" opacity="0.35"/>
+            <!-- Left eyelid line -->
+            <path d="M100,110 Q108,106 124,110" fill="none" stroke="#6B5A48" stroke-width="1.2" opacity="0.35"/>
+            <!-- Left lower lash -->
+            <path d="M102,126 Q112,130 122,127" fill="none" stroke="#8B7355" stroke-width="0.6" opacity="0.2"/>
+
+            <!-- Right eye -->
+            <ellipse cx="148" cy="118" rx="12" ry="11" fill="#fff" stroke="#8B7355" stroke-width="0.8" opacity="0.9"/>
+            <ellipse cx="147" cy="119" rx="7.5" ry="8" fill="#4A5C52"/>
+            <ellipse cx="147" cy="119" rx="5" ry="5.5" fill="#2A3A30"/>
+            <circle cx="151" cy="115" r="3" fill="#fff" opacity="0.85"/>
+            <circle cx="143" cy="122" r="1.5" fill="#fff" opacity="0.35"/>
+            <!-- Right eyelid -->
+            <path d="M136,110 Q144,106 160,110" fill="none" stroke="#6B5A48" stroke-width="1.2" opacity="0.35"/>
+            <path d="M138,127 Q148,130 158,126" fill="none" stroke="#8B7355" stroke-width="0.6" opacity="0.2"/>
+
+            <!-- Eyebrows — relaxed, friendly -->
+            <path d="M98,104 Q108,98 122,102" fill="none" stroke="#3A3A40" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+            <path d="M138,102 Q152,98 162,104" fill="none" stroke="#3A3A40" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+
+            <!-- Nose -->
+            <path d="M126,138 Q128,142 130,142 Q132,142 134,138" fill="none" stroke="#C4A888" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+            <circle cx="126" cy="140" r="1.2" fill="#D4B8A0" opacity="0.3"/>
+
+            <!-- Mouth — warm gentle smile -->
+            <path d="M116,154 Q122,162 130,162 Q138,162 144,154" fill="none" stroke="#B47478" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <!-- Slight lip color -->
+            <path d="M118,154 Q124,160 130,160 Q136,160 142,154" fill="#C9838A" opacity="0.12"/>
+
+            <!-- Blush marks (colored pencil hatching style) -->
+            <g opacity="0.12" fill="#E8A0A0">
+              <ellipse cx="98" cy="142" rx="12" ry="7"/>
+              <ellipse cx="162" cy="142" rx="12" ry="7"/>
+            </g>
+
+            <!-- Hair — messy, textured, colored-pencil feel -->
+            <path d="M78,105 Q76,65 90,48 Q104,32 130,28 Q156,32 170,48 Q184,65 182,105 Q178,85 165,72 Q152,62 140,68 Q132,48 125,45 Q118,48 115,68 Q108,62 95,72 Q82,85 78,105Z" fill="url(#bHair)" stroke="#2A2A30" stroke-width="0.5" opacity="0.95"/>
+            <!-- Hair strands and texture -->
+            <path d="M88,72 Q82,55 88,38" fill="none" stroke="#3A3A40" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+            <path d="M172,72 Q178,55 172,38" fill="none" stroke="#3A3A40" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+            <path d="M98,55 Q95,42 100,34" fill="none" stroke="#33333A" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M162,55 Q165,42 160,34" fill="none" stroke="#33333A" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M120,32 Q118,20 122,12" fill="none" stroke="#3A3A40" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <path d="M140,32 Q142,22 138,14" fill="none" stroke="#33333A" stroke-width="2.2" stroke-linecap="round" opacity="0.5"/>
+            <path d="M130,28 Q128,16 132,8" fill="none" stroke="#3A3A40" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
+            <!-- Hair highlight streak -->
+            <path d="M110,38 Q120,32 130,34 Q140,32 150,38" fill="none" stroke="#5A5A64" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
+            <!-- Side hair -->
+            <path d="M82,80 Q78,95 80,110 Q82,118 86,120" fill="#2A2A30" stroke="none" opacity="0.8"/>
+            <path d="M178,80 Q182,95 180,110 Q178,118 174,120" fill="#2A2A30" stroke="none" opacity="0.8"/>
+
+            <!-- Small leaf doodle near ear -->
+            <g transform="translate(56,90) rotate(-20)" opacity="0.25">
+              <path d="M0,0 Q5,-14 3,-24 Q10,-16 16,-8 Q10,-2 0,0Z" fill="#5E9070" stroke="#5E9070" stroke-width="0.5"/>
+              <path d="M1,-2 Q5,-12 3,-20" fill="none" stroke="#3D6B45" stroke-width="0.5"/>
+            </g>
+            <g transform="translate(204,85) rotate(25)" opacity="0.2">
+              <path d="M0,0 Q-4,-12 -2,-20 Q-8,-14 -14,-7 Q-8,-1 0,0Z" fill="#6B8F71" stroke="#6B8F71" stroke-width="0.5"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">B. Colored Pencil Portrait</div>
+      <div class="icon-desc">色鉛筆タッチのバストアップ。セージグリーンのパーカー、柔らかい表情と温かみのある色合い。</div>
+    </div>
+
+    <!-- ======== C: Ink & Botanical Journal ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="cClip"><circle cx="130" cy="130" r="130"/></clipPath>
+            <filter id="cInk">
+              <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+          <g clip-path="url(#cClip)">
+            <!-- Warm cream paper -->
+            <rect width="260" height="260" fill="#F8F3EB"/>
+            <!-- Watercolor wash background -->
+            <ellipse cx="130" cy="130" rx="120" ry="120" fill="#E8F0E8" opacity="0.3"/>
+            <ellipse cx="90" cy="100" rx="80" ry="70" fill="#5E9070" opacity="0.05"/>
+            <ellipse cx="180" cy="170" rx="70" ry="60" fill="#6B96A0" opacity="0.04"/>
+
+            <!-- Botanical wreath frame -->
+            <g filter="url(#cInk)" stroke="#4A6B4A" stroke-linecap="round" fill="none" opacity="0.5">
+              <!-- Main wreath ring (made of curving vine) -->
+              <!-- Top arc -->
+              <path d="M55,90 Q60,50 90,35 Q120,22 150,28 Q180,35 200,60 Q210,80 208,100" stroke-width="2"/>
+              <!-- Right side -->
+              <path d="M208,100 Q215,130 210,155 Q205,180 185,200" stroke-width="1.8"/>
+              <!-- Bottom arc -->
+              <path d="M185,200 Q165,218 130,225 Q95,218 75,200" stroke-width="2"/>
+              <!-- Left side -->
+              <path d="M75,200 Q55,180 50,155 Q48,130 55,90" stroke-width="1.8"/>
+            </g>
+
+            <!-- Leaves along the wreath -->
+            <g fill="#5E9070" opacity="0.45">
+              <!-- Top leaves -->
+              <g transform="translate(75,42) rotate(30)">
+                <path d="M0,0 Q5,-14 3,-22 Q9,-15 15,-8 Q9,-2 0,0Z"/>
+              </g>
+              <g transform="translate(100,28) rotate(10)">
+                <path d="M0,0 Q4,-12 2,-20 Q8,-13 13,-6 Q8,-1 0,0Z"/>
+              </g>
+              <g transform="translate(155,28) rotate(-15)">
+                <path d="M0,0 Q-4,-13 -2,-21 Q-8,-14 -13,-7 Q-7,-1 0,0Z"/>
+              </g>
+              <g transform="translate(185,48) rotate(-35)">
+                <path d="M0,0 Q-5,-12 -3,-20 Q-9,-13 -14,-6 Q-9,-1 0,0Z"/>
+              </g>
+              <!-- Right leaves -->
+              <g transform="translate(212,120) rotate(-60)">
+                <path d="M0,0 Q-4,-12 -2,-18 Q-8,-12 -12,-5 Q-8,-1 0,0Z"/>
+              </g>
+              <g transform="translate(210,155) rotate(-75)">
+                <path d="M0,0 Q-5,-10 -2,-17 Q-8,-11 -13,-4 Q-7,0 0,0Z"/>
+              </g>
+              <!-- Bottom leaves -->
+              <g transform="translate(170,215) rotate(-155)">
+                <path d="M0,0 Q4,-12 2,-18 Q8,-12 12,-5 Q8,0 0,0Z"/>
+              </g>
+              <g transform="translate(130,228) rotate(180)">
+                <path d="M0,0 Q4,-11 2,-17 Q7,-11 12,-5 Q7,0 0,0Z"/>
+              </g>
+              <g transform="translate(90,215) rotate(155)">
+                <path d="M0,0 Q-4,-12 -2,-18 Q-7,-11 -12,-5 Q-7,0 0,0Z"/>
+              </g>
+              <!-- Left leaves -->
+              <g transform="translate(48,155) rotate(75)">
+                <path d="M0,0 Q5,-12 3,-18 Q8,-12 13,-5 Q8,0 0,0Z"/>
+              </g>
+              <g transform="translate(52,120) rotate(55)">
+                <path d="M0,0 Q4,-11 2,-17 Q7,-11 12,-5 Q7,0 0,0Z"/>
+              </g>
+            </g>
+
+            <!-- Small flowers on wreath -->
+            <g opacity="0.5">
+              <!-- Rose flower top-right -->
+              <g transform="translate(188,55)">
+                <circle cx="0" cy="0" r="6" fill="#B47478" opacity="0.4"/>
+                <circle cx="-4" cy="-3" r="4" fill="#C9838A" opacity="0.35"/>
+                <circle cx="3" cy="-4" r="3.5" fill="#D4979C" opacity="0.3"/>
+                <circle cx="0" cy="0" r="2.5" fill="#E8B5B9" opacity="0.5"/>
+              </g>
+              <!-- Violet flower bottom-left -->
+              <g transform="translate(68,205)">
+                <circle cx="0" cy="-4" r="3.5" fill="#8E7EAD" opacity="0.4"/>
+                <circle cx="-4" cy="1" r="3.5" fill="#A08DBF" opacity="0.35"/>
+                <circle cx="4" cy="1" r="3.5" fill="#8E7EAD" opacity="0.38"/>
+                <circle cx="0" cy="0" r="2" fill="#D4CBE5" opacity="0.5"/>
+              </g>
+              <!-- Small amber flower bottom-right -->
+              <g transform="translate(195,195)">
+                <circle cx="0" cy="-3" r="3" fill="#AB9058" opacity="0.35"/>
+                <circle cx="-3" cy="1" r="3" fill="#C4A66A" opacity="0.3"/>
+                <circle cx="3" cy="1" r="3" fill="#AB9058" opacity="0.32"/>
+                <circle cx="0" cy="0" r="1.8" fill="#DCC888" opacity="0.4"/>
+              </g>
+            </g>
+
+            <!-- Center: person bust sketch (ink style) -->
+            <g filter="url(#cInk)" stroke="#3A4A3A" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <!-- Shoulders/shirt hint -->
+              <path d="M85,220 Q90,195 105,188 Q115,184 125,192 L135,192 Q145,184 155,188 Q170,195 175,220" stroke-width="2.2" opacity="0.5"/>
+              <!-- Collar -->
+              <path d="M115,190 Q125,200 130,202 Q135,200 145,190" stroke-width="1.5" opacity="0.4"/>
+
+              <!-- Neck -->
+              <path d="M118,172 L118,190" stroke-width="1.8" opacity="0.45"/>
+              <path d="M142,172 L142,190" stroke-width="1.8" opacity="0.45"/>
+
+              <!-- Face shape -->
+              <path d="M96,118 Q94,90 100,72 Q110,52 130,50 Q150,52 160,72 Q166,90 164,118 Q162,148 152,162 Q144,172 130,175 Q116,172 108,162 Q96,148 96,118Z" stroke-width="2.5" opacity="0.55"/>
+
+              <!-- Eyes -->
+              <circle cx="115" cy="115" r="3" fill="#3A4A3A" stroke="none" opacity="0.5"/>
+              <circle cx="145" cy="115" r="3" fill="#3A4A3A" stroke="none" opacity="0.5"/>
+              <!-- Eye arcs -->
+              <path d="M106,110 Q115,106 124,110" stroke-width="1.5" opacity="0.3"/>
+              <path d="M136,110 Q145,106 154,110" stroke-width="1.5" opacity="0.3"/>
+
+              <!-- Smile -->
+              <path d="M120,142 Q125,148 130,148 Q135,148 140,142" stroke-width="2" opacity="0.4"/>
+
+              <!-- Hair (loose ink strokes) -->
+              <path d="M96,105 Q92,70 105,52 Q115,38 130,35 Q145,38 155,52 Q168,70 164,105" stroke-width="3" opacity="0.5"/>
+              <path d="M98,80 Q96,60 105,45" stroke-width="2.5" opacity="0.4"/>
+              <path d="M162,80 Q164,60 155,45" stroke-width="2.5" opacity="0.4"/>
+              <path d="M115,38 Q113,25 118,18" stroke-width="2" opacity="0.35"/>
+              <path d="M145,38 Q147,28 142,20" stroke-width="2" opacity="0.35"/>
+              <path d="M130,35 Q128,22 132,15" stroke-width="1.8" opacity="0.3"/>
+              <path d="M108,48 Q105,38 110,30" stroke-width="1.8" opacity="0.3"/>
+              <path d="M152,48 Q155,38 150,30" stroke-width="1.8" opacity="0.3"/>
+            </g>
+
+            <!-- Shirt color fill -->
+            <path d="M88,220 Q92,198 108,190 Q118,186 128,194 L132,194 Q142,186 152,190 Q168,198 172,220 Z" fill="#5E9070" opacity="0.2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">C. Botanical Wreath Portrait</div>
+      <div class="icon-desc">植物のリースに囲まれたインク画ポートレート。ジャーナル風の落ち着いた佇まい。</div>
+    </div>
+
+    <!-- ======== D: Watercolor Wash ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="dClip"><circle cx="130" cy="130" r="130"/></clipPath>
+            <filter id="dWash">
+              <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="15" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+              <feGaussianBlur stdDeviation="0.8"/>
+            </filter>
+            <filter id="dBlur">
+              <feGaussianBlur stdDeviation="2"/>
+            </filter>
+            <filter id="dEdge">
+              <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="2" seed="20" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <radialGradient id="dBg" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stop-color="#FDFBF5"/>
+              <stop offset="100%" stop-color="#F0E8D8"/>
+            </radialGradient>
+          </defs>
+          <g clip-path="url(#dClip)">
+            <!-- Paper background -->
+            <rect width="260" height="260" fill="url(#dBg)"/>
+
+            <!-- Watercolor washes (background atmosphere) -->
+            <g filter="url(#dBlur)" opacity="0.2">
+              <ellipse cx="80" cy="60" rx="60" ry="50" fill="#5E9070"/>
+              <ellipse cx="200" cy="80" rx="50" ry="45" fill="#6B96A0"/>
+              <ellipse cx="60" cy="200" rx="55" ry="40" fill="#8E7EAD"/>
+              <ellipse cx="200" cy="200" rx="45" ry="40" fill="#B47478"/>
+              <ellipse cx="130" cy="130" rx="90" ry="80" fill="#5E9070" opacity="0.3"/>
+            </g>
+
+            <!-- Watercolor person silhouette -->
+            <g filter="url(#dWash)">
+              <!-- Hair mass -->
+              <path d="M80,100 Q78,55 100,38 Q115,28 130,26 Q145,28 160,38 Q182,55 180,100 Q175,80 160,68 Q145,60 130,55 Q115,60 100,68 Q85,80 80,100Z" fill="#3A3A40" opacity="0.65"/>
+
+              <!-- Face -->
+              <ellipse cx="130" cy="115" rx="38" ry="45" fill="#F0D5C0" opacity="0.75"/>
+
+              <!-- Neck -->
+              <rect x="118" y="155" width="24" height="22" rx="4" fill="#EDD5C0" opacity="0.6"/>
+
+              <!-- Shirt -->
+              <path d="M55,260 Q60,210 85,198 Q105,190 118,200 L142,200 Q155,190 175,198 Q200,210 205,260 Z" fill="#5E9070" opacity="0.45"/>
+            </g>
+
+            <!-- Ink details on top of watercolor -->
+            <g filter="url(#dEdge)" stroke="#3D4A3D" stroke-linecap="round" fill="none">
+              <!-- Face outline -->
+              <path d="M92,115 Q90,80 100,65 Q112,48 130,46 Q148,48 160,65 Q170,80 168,115 Q166,145 155,160 Q146,170 130,173 Q114,170 105,160 Q94,145 92,115Z" stroke-width="1.8" opacity="0.35"/>
+
+              <!-- Eyes -->
+              <ellipse cx="115" cy="112" rx="8" ry="7" stroke-width="1.5" opacity="0.35"/>
+              <circle cx="116" cy="113" r="4" fill="#3D4A3D" opacity="0.4" stroke="none"/>
+              <circle cx="118" cy="110" r="1.8" fill="#fff" opacity="0.5" stroke="none"/>
+
+              <ellipse cx="145" cy="112" rx="8" ry="7" stroke-width="1.5" opacity="0.35"/>
+              <circle cx="144" cy="113" r="4" fill="#3D4A3D" opacity="0.4" stroke="none"/>
+              <circle cx="146" cy="110" r="1.8" fill="#fff" opacity="0.5" stroke="none"/>
+
+              <!-- Eyebrows -->
+              <path d="M104,102 Q112,98 122,101" stroke-width="1.8" opacity="0.25"/>
+              <path d="M138,101 Q148,98 156,102" stroke-width="1.8" opacity="0.25"/>
+
+              <!-- Nose hint -->
+              <path d="M128,128 Q130,132 132,128" stroke-width="1.2" opacity="0.25"/>
+
+              <!-- Smile -->
+              <path d="M118,140 Q124,147 130,147 Q136,147 142,140" stroke-width="1.8" opacity="0.35"/>
+
+              <!-- Hair strokes -->
+              <path d="M88,75 Q85,55 95,42" stroke-width="2.5" opacity="0.35"/>
+              <path d="M172,75 Q175,55 165,42" stroke-width="2.5" opacity="0.35"/>
+              <path d="M105,48 Q108,35 115,28" stroke-width="2" opacity="0.3"/>
+              <path d="M155,48 Q152,35 145,28" stroke-width="2" opacity="0.3"/>
+              <path d="M130,30 Q128,18 132,10" stroke-width="1.5" opacity="0.25"/>
+            </g>
+
+            <!-- Watercolor botanical splashes around edges -->
+            <g filter="url(#dWash)" opacity="0.35">
+              <!-- Leaf forms -->
+              <path d="M20,40 Q35,15 45,20 Q38,35 22,45Z" fill="#5E9070"/>
+              <path d="M10,60 Q28,40 35,48 Q25,60 12,65Z" fill="#6B8F71"/>
+              <path d="M230,35 Q248,18 252,28 Q242,40 232,40Z" fill="#5E9070"/>
+              <path d="M238,55 Q252,42 255,50 Q248,58 240,58Z" fill="#9BB09E"/>
+              <path d="M15,200 Q32,188 35,198 Q25,205 18,205Z" fill="#6B8F71"/>
+              <path d="M235,210 Q250,200 252,208 Q245,215 237,214Z" fill="#5E9070"/>
+            </g>
+
+            <!-- Watercolor flower accents -->
+            <g filter="url(#dBlur)" opacity="0.3">
+              <circle cx="35" cy="35" r="8" fill="#B47478"/>
+              <circle cx="240" cy="45" r="6" fill="#8E7EAD"/>
+              <circle cx="25" cy="210" r="7" fill="#AB9058"/>
+              <circle cx="240" cy="215" r="8" fill="#B47478"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">D. Watercolor Wash</div>
+      <div class="icon-desc">水彩のにじみで描いた柔らかなポートレート。ボタニカルカラーの淡いウォッシュが背景に広がる。</div>
+    </div>
+
+    <!-- ======== E: Minimal Ink with Plant Scene ======== -->
+    <div class="icon-card">
+      <div class="icon-frame">
+        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="eClip"><circle cx="130" cy="130" r="130"/></clipPath>
+            <filter id="eRough">
+              <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="3" seed="30" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+          <g clip-path="url(#eClip)">
+            <!-- Cream background -->
+            <rect width="260" height="260" fill="#F5F0E8"/>
+            <!-- Subtle warmth -->
+            <ellipse cx="130" cy="140" rx="110" ry="100" fill="#F0E8D8" opacity="0.4"/>
+
+            <!-- Window frame behind character -->
+            <g stroke="#C4B8A0" stroke-width="1.5" fill="none" opacity="0.25">
+              <rect x="60" y="15" width="140" height="130" rx="3"/>
+              <line x1="130" y1="15" x2="130" y2="145"/>
+              <line x1="60" y1="80" x2="200" y2="80"/>
+            </g>
+            <!-- Window light -->
+            <rect x="62" y="17" width="67" height="62" fill="#E8F0E8" opacity="0.15"/>
+            <rect x="131" y="17" width="68" height="62" fill="#E8F0E8" opacity="0.12"/>
+
+            <!-- Plant on windowsill -->
+            <g transform="translate(175,115)" filter="url(#eRough)">
+              <!-- Pot -->
+              <path d="M-12,0 L-10,-18 L10,-18 L12,0Z" fill="none" stroke="#AB9058" stroke-width="1.8" opacity="0.5"/>
+              <path d="M-14,-18 L14,-18" stroke="#C4A66A" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+              <!-- Main stem -->
+              <path d="M0,-18 Q-2,-35 0,-50" fill="none" stroke="#5E9070" stroke-width="1.5" opacity="0.5"/>
+              <!-- Leaves -->
+              <path d="M0,-30 Q-12,-38 -15,-50 Q-8,-42 0,-36" fill="#5E9070" opacity="0.3" stroke="#4A7051" stroke-width="0.8"/>
+              <path d="M0,-38 Q10,-45 15,-55 Q8,-48 0,-42" fill="#6B8F71" opacity="0.25" stroke="#4A7051" stroke-width="0.8"/>
+              <path d="M-1,-45 Q-8,-52 -10,-62 Q-5,-55 -1,-48" fill="#5E9070" opacity="0.28" stroke="#4A7051" stroke-width="0.8"/>
+              <!-- Small flower -->
+              <circle cx="4" cy="-55" r="4" fill="#B47478" opacity="0.3"/>
+              <circle cx="4" cy="-55" r="2" fill="#E8B5B9" opacity="0.3"/>
+            </g>
+
+            <!-- Small plant on other side of window -->
+            <g transform="translate(75,118)" filter="url(#eRough)">
+              <path d="M-8,0 L-6,-14 L6,-14 L8,0Z" fill="none" stroke="#AB9058" stroke-width="1.5" opacity="0.4"/>
+              <path d="M0,-14 Q0,-25 -3,-32" fill="none" stroke="#5E9070" stroke-width="1.3" opacity="0.4"/>
+              <path d="M-3,-25 Q-10,-30 -12,-38 Q-7,-32 -3,-28" fill="#6B8F71" opacity="0.25"/>
+              <path d="M0,-14 Q2,-22 5,-28" fill="none" stroke="#5E9070" stroke-width="1.2" opacity="0.35"/>
+              <path d="M4,-22 Q10,-26 12,-34 Q8,-28 4,-24" fill="#5E9070" opacity="0.22"/>
+            </g>
+
+            <!-- Character (minimal ink line drawing) -->
+            <g filter="url(#eRough)" stroke="#3A4A3A" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <!-- Desk surface -->
+              <path d="M25,195 L235,195" stroke-width="2" opacity="0.35"/>
+
+              <!-- Laptop on desk -->
+              <path d="M90,195 L90,170 Q90,167 93,167 L167,167 Q170,167 170,170 L170,195" stroke-width="1.8" opacity="0.4"/>
+              <path d="M95,167 L97,142 Q97,139 100,139 L160,139 Q163,139 163,142 L165,167" stroke-width="1.8" opacity="0.4"/>
+              <!-- Screen lines -->
+              <line x1="104" y1="146" x2="135" y2="146" stroke="#5E9070" stroke-width="1.5" opacity="0.3"/>
+              <line x1="104" y1="152" x2="148" y2="152" stroke="#6B96A0" stroke-width="1.5" opacity="0.25"/>
+              <line x1="104" y1="158" x2="125" y2="158" stroke="#AB9058" stroke-width="1.5" opacity="0.2"/>
+
+              <!-- Person sitting behind laptop -->
+              <!-- Body outline (simple) -->
+              <path d="M108,139 Q105,120 110,105" stroke-width="2" opacity="0.45"/>
+              <path d="M152,139 Q155,120 150,105" stroke-width="2" opacity="0.45"/>
+
+              <!-- Head -->
+              <ellipse cx="130" cy="82" rx="22" ry="26" stroke-width="2.2" opacity="0.5"/>
+
+              <!-- Hair (loose confident strokes) -->
+              <path d="M108,75 Q106,52 118,40 Q128,34 140,38 Q154,45 154,70" stroke-width="2.8" opacity="0.45"/>
+              <!-- Messy top strands -->
+              <path d="M115,42 Q113,30 118,22" stroke-width="2" opacity="0.35"/>
+              <path d="M135,40 Q138,28 133,20" stroke-width="2" opacity="0.35"/>
+              <path d="M125,36 Q124,24 128,16" stroke-width="1.8" opacity="0.3"/>
+              <!-- Side hair -->
+              <path d="M108,68 Q104,80 106,90" stroke-width="2" opacity="0.35"/>
+              <path d="M154,65 Q158,78 156,88" stroke-width="2" opacity="0.35"/>
+
+              <!-- Face features (minimal) -->
+              <circle cx="122" cy="80" r="2" fill="#3A4A3A" stroke="none" opacity="0.45"/>
+              <circle cx="138" cy="80" r="2" fill="#3A4A3A" stroke="none" opacity="0.45"/>
+              <path d="M124,92 Q130,97 136,92" stroke-width="1.5" opacity="0.35"/>
+
+              <!-- Arms reaching around laptop -->
+              <path d="M110,112 Q100,130 95,145 Q93,155 95,165" stroke-width="1.8" opacity="0.35"/>
+              <path d="M150,112 Q160,130 165,145 Q167,155 165,165" stroke-width="1.8" opacity="0.35"/>
+            </g>
+
+            <!-- Coffee cup on desk -->
+            <g filter="url(#eRough)" stroke="#8B7355" stroke-linecap="round" fill="none" stroke-width="1.4" opacity="0.4">
+              <path d="M42,195 L44,178 L58,178 L60,195"/>
+              <path d="M58,182 Q64,182 64,188 Q64,194 58,192"/>
+              <path d="M48,176 Q47,170 49,164" stroke-width="1" opacity="0.3"/>
+              <path d="M53,176 Q54,168 52,162" stroke-width="1" opacity="0.3"/>
+            </g>
+
+            <!-- Small notebook on desk -->
+            <g filter="url(#eRough)" stroke="#8B7355" fill="none" opacity="0.3">
+              <rect x="195" y="178" width="28" height="17" rx="1" stroke-width="1.3"/>
+              <line x1="200" y1="184" x2="218" y2="184" stroke-width="0.8"/>
+              <line x1="200" y1="189" x2="212" y2="189" stroke-width="0.8"/>
+            </g>
+
+            <!-- Subtle vine along bottom -->
+            <path d="M20,240 Q50,232 80,238 Q110,244 140,235 Q170,228 200,236 Q230,242 260,235" fill="none" stroke="#5E9070" stroke-width="1" opacity="0.15" stroke-linecap="round"/>
+            <g opacity="0.12">
+              <g transform="translate(60,236) rotate(-10)">
+                <path d="M0,0 Q3,-7 1,-12 Q5,-8 9,-3 Q5,0 0,0Z" fill="#5E9070"/>
+              </g>
+              <g transform="translate(140,232) rotate(15)">
+                <path d="M0,0 Q-3,-6 -1,-10 Q-4,-7 -8,-3 Q-4,0 0,0Z" fill="#6B8F71"/>
+              </g>
+              <g transform="translate(210,235) rotate(-8)">
+                <path d="M0,0 Q2,-6 1,-10 Q4,-7 7,-3 Q4,0 0,0Z" fill="#5E9070"/>
+              </g>
+            </g>
+
+            <!-- "kt" handwritten -->
+            <g opacity="0.15" filter="url(#eRough)">
+              <text x="28" y="230" font-family="Georgia,serif" font-size="13" fill="#3A4A3A" font-style="italic" transform="rotate(-8,28,230)">kt</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="icon-label">E. Window Desk Scene</div>
+      <div class="icon-desc">窓辺のデスクで作業する風景。植物の鉢植え、コーヒー、ノートが散りばめられた穏やかな日常。</div>
+    </div>
+
+  </div>
+
+  <!-- Small size check -->
+  <div class="small-check">
+    <h3>Small Size Check (48px — X timeline)</h3>
+    <div class="small-row" id="dark-small"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LIGHT MODE
+     ============================================================ -->
+<section class="section section-light">
+  <p class="section-label" style="opacity:0.3">Light Mode Preview</p>
+  <div class="icons-row" id="light-icons"></div>
+  <div class="small-check">
+    <h3 style="opacity:0.4">Small Size Check (48px — Light Mode)</h3>
+    <div class="small-row" id="light-small"></div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const darkIcons = document.querySelector('.section-dark .icons-row');
+
+  // Create small dark versions
+  const darkSmallRow = document.getElementById('dark-small');
+  darkIcons.querySelectorAll('.icon-card').forEach((card, i) => {
+    const smallItem = document.createElement('div');
+    smallItem.className = 'small-item';
+    const smallFrame = document.createElement('div');
+    smallFrame.className = 'small-frame';
+    const svgClone = card.querySelector('svg').cloneNode(true);
+    // Remap IDs for small versions
+    const labels = ['A','B','C','D','E'];
+    svgClone.innerHTML = svgClone.innerHTML
+      .replace(/id="([a-e])/gi, 'id="s$1')
+      .replace(/url\(#([a-e])/gi, 'url(#s$1');
+    smallFrame.appendChild(svgClone);
+    smallItem.appendChild(smallFrame);
+    const label = document.createElement('div');
+    label.className = 'small-label';
+    label.textContent = labels[i];
+    smallItem.appendChild(label);
+    darkSmallRow.appendChild(smallItem);
+  });
+
+  // Clone into light section
+  const lightIcons = document.getElementById('light-icons');
+  const lightSmall = document.getElementById('light-small');
+  const labels = ['A','B','C','D','E'];
+
+  darkIcons.querySelectorAll('.icon-card').forEach((card, i) => {
+    const clone = card.cloneNode(true);
+    clone.querySelector('svg').innerHTML = clone.querySelector('svg').innerHTML
+      .replace(/id="([a-e])/gi, 'id="l$1')
+      .replace(/url\(#([a-e])/gi, 'url(#l$1');
+    lightIcons.appendChild(clone);
+
+    // Small light
+    const smallItem = document.createElement('div');
+    smallItem.className = 'small-item';
+    const smallFrame = document.createElement('div');
+    smallFrame.className = 'small-frame';
+    const svgClone = clone.querySelector('svg').cloneNode(true);
+    svgClone.innerHTML = svgClone.innerHTML
+      .replace(/id="l([a-e])/gi, 'id="sl$1')
+      .replace(/url\(#l([a-e])/gi, 'url(#sl$1');
+    smallFrame.appendChild(svgClone);
+    smallItem.appendChild(smallFrame);
+    const label = document.createElement('div');
+    label.className = 'small-label';
+    label.textContent = labels[i];
+    smallItem.appendChild(label);
+    lightSmall.appendChild(smallItem);
+  });
+});
+</script>
+
+</body>
+</html>
